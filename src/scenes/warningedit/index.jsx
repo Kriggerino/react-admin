@@ -1,0 +1,123 @@
+import React, { useEffect, useState } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Header from "../../components/Header";
+import { Box, Button, TextField, MenuItem } from "@mui/material";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+const WarningEdit = ({access}) => {
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    message: "",
+    message_type: "",
+    contact: "",
+    status: "",
+  });
+
+  useEffect(() => {
+    if (!(access === "admin")) {
+      navigate("/denyaccess");
+    } else {
+      axios
+        .get("http://localhost:8001/getWarningEdit/" + id)
+        .then((res) => {
+          setData({
+            ...data,
+            message: res.data.Result[0].message,
+            message_type: res.data.Result[0].message_type,
+            contact: res.data.Result[0].contact,
+            status: res.data.Result[0].status,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .put("http://localhost:8001/updateWarning/" + id, data)
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          console.log("Data edited");
+          navigate("/warning");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  return (
+    <Box m="20px">
+      <Header title="Sửa cảnh báo" />
+
+      <form>
+        <Box
+          display="grid"
+          gap="30px"
+          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          sx={{
+            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+          }}
+        >
+          <TextField
+            fullWidth
+            variant="filled"
+            type="text"
+            label="Tên cảnh báo"
+            value={data.message}
+            onChange={(e) => setData({ ...data, message: e.target.value })}
+            sx={{ gridColumn: "span 2" }}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            select
+            label="Mức độ"
+            sx={{ gridColumn: "span 2" }}
+            defaultValue={1}
+            value={data.message_type}
+            onChange={(e) => setData({ ...data, message_type: e.target.value })}
+          >
+            <MenuItem value={1}>Khẩn cấp</MenuItem>
+            <MenuItem value={2}>Trung bình</MenuItem>
+            <MenuItem value={3}>Nhẹ</MenuItem>
+          </TextField>
+          <TextField
+            fullWidth
+            variant="filled"
+            type="text"
+            label="Liên lạc"
+            value={data.contact}
+            onChange={(e) => setData({ ...data, contact: e.target.value })}
+            sx={{ gridColumn: "span 2" }}
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            select
+            label="Trạng thái"
+            sx={{ gridColumn: "span 2" }}
+            defaultValue={0}
+            value={data.status}
+            onChange={(e) => setData({ ...data, status: e.target.value })}
+          >
+            <MenuItem value={0}>Chờ xử lý</MenuItem>
+            <MenuItem value={1}>Đã xử lý</MenuItem>
+          </TextField>
+        </Box>
+        <Box display="flex" justifyContent="end" mt="20px">
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            color="secondary"
+            variant="contained"
+          >
+            Cập nhật
+          </Button>
+        </Box>
+      </form>
+    </Box>
+  );
+};
+
+export default WarningEdit;

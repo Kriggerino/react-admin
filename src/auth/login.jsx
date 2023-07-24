@@ -1,4 +1,4 @@
-import { Box, FormControl, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Avatar from "@mui/material/Avatar";
@@ -8,20 +8,16 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { tokens } from "../theme";
-// import { Formik } from "formik";
-// import * as yup from "yup";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 //Backend
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+//Formik
+import { useFormik } from "formik";
+import * as yup from "yup";
 
-
-
-
-const Login = ({setIsLoggedIn}) => {
-    //Stylings
+const Login = () => {
+  //Stylings
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const textFieldStyle = {
@@ -34,33 +30,52 @@ const Login = ({setIsLoggedIn}) => {
       },
     },
   };
-  //Mobile sizings
-  const isNotMobile = useMediaQuery("(min-width: 600px)");
-
-  //Functions on call
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
   const navigate = useNavigate();
+  //Minimum eight characters, at least one letter and one number:
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  //Email regex from https://regexr.com/3e48o
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const basicSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email("Please enter a valid email")
+      .matches(emailRegex, {message: "Invalid email"})
+      .required("Required"),
+    password: yup
+      .string()
+      .min(8)
+      .matches(passwordRegex, { message: "Please create stronger password" })
+      .required("Required"),
+  });
 
-  const handleInput = (event) =>{
-    setValues(values =>({...values,[event.target.value]:[event.target.name]}));
-  }
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    setIsLoggedIn(true);
-    navigate("/dashboard");
+  const onSubmit = (values, actions) => {
+    axios
+      .post("http://localhost:8001/login", values)
+      .then(async (res) => {
+        if (res.data.valid) {
+          actions.resetForm();
+          localStorage.setItem("token", res.data.token);
+          navigate("/dashboard");
+        } else {
+          console.log("Incorrect data");
+        }
+      })
+      .catch((err) => console.log(err));
   };
+  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: basicSchema,
+    validateOnBlur: true,
+    validateOnChange: true,
+    onSubmit,
+  });
+  //onSubmit
+
   return (
     <Box
-      m="20px"
       sx={{
         height: "100%",
         alignItems: "center",
@@ -68,52 +83,43 @@ const Login = ({setIsLoggedIn}) => {
         display: "flex",
       }}
     >
-      
-        <Grid container component="main" sx={{ height: "100vh" }}>
-          <CssBaseline />
-          <Grid
-            item
-            xs={false}
-            sm={4}
-            md={7}
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage:
+              "url(https://source.unsplash.com/random?wallpapers)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
             sx={{
-              backgroundImage:
-                "url(https://source.unsplash.com/random?wallpapers)",
-              backgroundRepeat: "no-repeat",
-              backgroundColor: (t) =>
-                t.palette.mode === "light"
-                  ? t.palette.grey[50]
-                  : t.palette.grey[900],
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
-          />
-          <Grid
-            item
-            xs={12}
-            sm={8}
-            md={5}
-            component={Paper}
-            elevation={6}
-            square
           >
-            
-            <Box
-              sx={{
-                my: 8,
-                mx: 4,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Sign in
-              </Typography>
-              <Box component="form" onSubmit={handleFormSubmit} noValidate sx={{ mt: 1 }}>
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form autoComplete="off" onSubmit={handleSubmit}>
+              <Box noValidate sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
@@ -123,6 +129,9 @@ const Login = ({setIsLoggedIn}) => {
                   name="email"
                   autoFocus
                   sx={textFieldStyle}
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <TextField
                   margin="normal"
@@ -133,6 +142,9 @@ const Login = ({setIsLoggedIn}) => {
                   type="password"
                   id="password"
                   sx={textFieldStyle}
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
@@ -167,10 +179,10 @@ const Login = ({setIsLoggedIn}) => {
                   </Grid>
                 </Grid>
               </Box>
-            </Box>
-          </Grid>
+            </form>
+          </Box>
         </Grid>
-      
+      </Grid>
     </Box>
   );
 };

@@ -1,5 +1,6 @@
 import { Box, IconButton, useTheme } from "@mui/material";
-import { useContext } from "react";
+import Paper from '@mui/material/Paper';
+import { useContext, useState } from "react";
 import { ColorModeContext, tokens } from "../../theme";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -13,11 +14,13 @@ const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* SEARCH BAR */}
-      {/* <Box
+      <Box
         display="flex"
         backgroundColor={colors.primary[400]}
         borderRadius="3px"
@@ -26,10 +29,10 @@ const Topbar = () => {
         <IconButton type="button" sx={{ p: 1 }}>
           <SearchIcon />
         </IconButton>
-      </Box> */}
+      </Box>
 
       {/* ICONS */}
-      <Box display="flex">
+      <Box display="flex" marginLeft="auto" marginRight="0">
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
@@ -43,9 +46,10 @@ const Topbar = () => {
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={handleOpen}>
           <PersonOutlinedIcon />
         </IconButton>
+        
       </Box>
     </Box>
   );
