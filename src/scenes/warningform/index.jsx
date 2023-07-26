@@ -75,10 +75,13 @@ const WarningForm = (props) => {
           />
           
         </Box>
-        <Box display="flex" justifyContent="end" mt="20px">
-          <Button type="submit" onClick={handleSubmit} color="secondary" variant="contained">
+        <Box display="flex" justifyContent="space-between" mt="20px">
+          <Button type="submit" onClick={handleSubmit} color="secondary" variant="contained" sx={{p:1}}>
             Tạo mới
           </Button>
+          <Button onClick={props.handleClose} color="secondary" variant="contained" sx={{p:1}}>
+              Đóng
+            </Button>
         </Box>
       </form>
     </Box>

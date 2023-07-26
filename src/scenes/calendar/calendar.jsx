@@ -21,11 +21,11 @@ const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
   const formatDate = (date) => {
     return new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     }).format(date);
-};
+  };
   const handleDateClick = (selected) => {
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
@@ -77,11 +77,7 @@ const Calendar = () => {
               >
                 <ListItemText
                   primary={event.title}
-                  secondary={
-                    <Typography>
-                      {formatDate(event.start)}
-                    </Typography>
-                  }
+                  secondary={<Typography>{formatDate(event.start)}</Typography>}
                 />
               </ListItem>
             ))}
@@ -103,6 +99,13 @@ const Calendar = () => {
               center: "title",
               right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
             }}
+            buttonText={{
+              today: "Hôm nay",
+              month: "Tháng",
+              week: "Tuần",
+              day: "Ngày",
+              list: "Danh sách",
+            }}
             initialView="dayGridMonth"
             editable={true}
             selectable={true}
@@ -115,12 +118,12 @@ const Calendar = () => {
               {
                 id: "12315",
                 title: "All-day event",
-                date: "2022-09-14",
+                date: "2023-06-14",
               },
               {
                 id: "5123",
                 title: "Timed event",
-                date: "2022-09-28",
+                date: "2023-06-28",
               },
             ]}
           />

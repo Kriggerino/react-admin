@@ -7,7 +7,6 @@ import Dashboard from "./scenes/dashboard";
 import User from "./scenes/user";
 import Warning from "./scenes/warning";
 import Bar from "./scenes/bar";
-import Form from "./scenes/form";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
@@ -17,7 +16,6 @@ import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import Login from "./auth/login.jsx";
 import "./index.css";
-import WarningForm from "./scenes/warningform";
 import UserEdit from "./scenes/useredit";
 import WarningEdit from "./scenes/warningedit";
 import DenyAccess from "./scenes/denyaccess";
@@ -27,58 +25,85 @@ function App() {
   const [isSidebar, setIsSidebar] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userdata, setUserdata] = useState({
-    id: '',
-    username: '',
-    access: '',
-  })
-  
-  const handleUserData = (data) =>{
-    setUserdata({...data, 
-      id: data.id, 
+    id: "",
+    username: "",
+    access: "",
+  });
+
+  const handleUserData = (data) => {
+    setUserdata({
+      ...data,
+      id: data.id,
       username: data.username,
       access: data.access,
-    })
-  }
-
-  useEffect(() =>{
-    axios.get("http://localhost:8001/authcheck", {
-      headers:{
-        'access-token': localStorage.getItem("token")
-      }
-    }).then((res) => {
-      if (res.data.valid) {
-        setIsLoggedIn(true);
-        console.log(res.data.result);
-        handleUserData(res.data.result);
-      } else {
-        navigate("/");
-      }
     });
+  };
 
-    if(localStorage.getItem("token") === null){
+  useEffect(() => {
+    axios
+      .get("http://localhost:8001/authcheck", {
+        headers: {
+          "access-token": localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        if (res.data.valid) {
+          setIsLoggedIn(true);
+          console.log(res.data.result);
+          handleUserData(res.data.result);
+        } else {
+          navigate("/");
+        }
+      });
+
+    if (localStorage.getItem("token") === null) {
       setIsLoggedIn(false);
       navigate("/");
     }
-  },[])
+  }, []);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {isLoggedIn && <Sidebar isSidebar={isSidebar} username={userdata.username} access={userdata.access} setIsLoggedIn={setIsLoggedIn} />}
+          {isLoggedIn && (
+            <Sidebar
+              isSidebar={isSidebar}
+              username={userdata.username}
+              access={userdata.access}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          )}
           <main className="content">
             {isLoggedIn && <Topbar />}
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/pages/login" element={<Login/>} />
-              <Route path="/dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} handleUserData={handleUserData} />} />
+              <Route path="/pages/login" element={<Login />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <Dashboard
+                    setIsLoggedIn={setIsLoggedIn}
+                    handleUserData={handleUserData}
+                  />
+                }
+              />
               <Route path="/user" element={<User access={userdata.access} />} />
-              <Route path="/user/userEdit/:id" element={<UserEdit access={userdata.access} />} />
-              <Route path="/warning" element={<Warning userid ={userdata.id} access={userdata.access} />} />
-              <Route path="/warning/warningEdit/:id" element={<WarningEdit access={userdata.access} />} />
-              <Route path="/warningform" element={<WarningForm userid ={userdata.id} access={userdata.access} />}  />
-              <Route path="/form" element={<Form access={userdata.access} />} />
+              <Route
+                path="/user/userEdit/:id"
+                element={<UserEdit access={userdata.access} />}
+              />
+              <Route
+                path="/warning"
+                element={
+                  <Warning userid={userdata.id} access={userdata.access} />
+                }
+              />
+              <Route
+                path="/warning/warningEdit/:id"
+                element={<WarningEdit access={userdata.access} />}
+              />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />

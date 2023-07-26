@@ -33,7 +33,7 @@ const UserEdit = ({access}) => {
           lastname: res.data.Result[0].lastname,
           email: res.data.Result[0].email,
           address: res.data.Result[0].address,
-          password: res.data.Result[0].password,
+          password: "",
           contact: res.data.Result[0].phone,
           access: res.data.Result[0].access,
         });

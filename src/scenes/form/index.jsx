@@ -3,26 +3,28 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-const Form = ({access}) => {
+const Form = ({ access, handleClose }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleFormSubmit = (values) => {
-    axios.post("http://localhost:8001/signup", values)
-    .then((res) => {
-      console.log(res);
-      navigate("/user");
-    }).catch(err => console.log(err));
+    axios
+      .post("http://localhost:8001/signup", values)
+      .then((res) => {
+        console.log(res);
+        navigate("/user");
+      })
+      .catch((err) => console.log(err));
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     if (!(access === "admin")) {
       navigate("/denyaccess");
     }
-  }, [])
-  
+  }, []);
+
   return (
     <Box m="20px">
       <Header title="Tạo mới người dùng" subtitle="Create a New User Profile" />
@@ -57,7 +59,7 @@ const Form = ({access}) => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.username}
-                name="username"
+                name="Tên người dùng"
                 error={!!touched.username && !!errors.username}
                 helperText={touched.username && errors.username}
                 sx={{ gridColumn: "span 4" }}
@@ -66,7 +68,7 @@ const Form = ({access}) => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="First Name"
+                label="Họ thật"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.firstName}
@@ -79,7 +81,7 @@ const Form = ({access}) => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Last Name"
+                label="Tên thật"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.lastName}
@@ -118,7 +120,7 @@ const Form = ({access}) => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Contact Number"
+                label="Liên lạc"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.contact}
@@ -131,7 +133,7 @@ const Form = ({access}) => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Address"
+                label="Địa chỉ"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.address}
@@ -144,7 +146,7 @@ const Form = ({access}) => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Access"
+                label="Quyền truy cậps"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.access}
@@ -154,9 +156,22 @@ const Form = ({access}) => {
                 sx={{ gridColumn: "span 4" }}
               />
             </Box>
-            <Box display="flex" justifyContent="end" mt="20px" >
-              <Button type="submit" color="secondary" variant="contained" sx={{p:1}}>
+            <Box display="flex" justifyContent="space-between" mt="20px">
+              <Button
+                type="submit"
+                color="secondary"
+                variant="contained"
+                sx={{ p: 1 }}
+              >
                 Tạo người dùng mới
+              </Button>
+              <Button
+                onClick={handleClose}
+                color="secondary"
+                variant="contained"
+                sx={{ p: 1 }}
+              >
+                Đóng
               </Button>
             </Box>
           </form>
@@ -166,14 +181,11 @@ const Form = ({access}) => {
   );
 };
 
-
 const checkoutSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .required("required"),
+  contact: yup.string().required("required"),
   address: yup.string().required("required"),
   access: yup.string().required("required"),
 });
