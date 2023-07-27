@@ -1,22 +1,42 @@
 import {
   Box,
+  IconButton,
   Typography,
   useTheme,
+  Modal,
+  Button,
 } from "@mui/material";
-import Modal from "@mui/material/Modal";
-import {
-  DataGrid,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import CustomWarningToolbar from "../../components/CustomWarningToolbar";
+import WarningEdit from "../warningedit";
+//Icons
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import BuildIcon from "@mui/icons-material/Build";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 500,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 const Warning = ({ userid, access }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [apiData, setApiData] = useState({
     id: "",
     message: "",
@@ -70,19 +90,21 @@ const Warning = ({ userid, access }) => {
       })
       .catch((err) => console.log(err));
   };
+
   //Datagrid columns
+
   const columns = [
     {
       field: "message",
       headerName: "Cảnh báo",
-      width: 400 ,
+      width: 350,
       cellClassName: "name-column--cell",
     },
     {
       field: "message_info",
       headerName: "Mức độ cảnh báo",
       headerAlign: "center",
-      flex: 1,
+      width: 150,
       renderCell: ({ row: { message_info } }) => {
         return (
           <Box
@@ -102,9 +124,10 @@ const Warning = ({ userid, access }) => {
           >
             <Typography
               color={
-                message_info === "Khẩn cấp" 
-                ? colors.grey[200]
-                : colors.grey[500]}
+                message_info === "Khẩn cấp"
+                  ? colors.grey[200]
+                  : colors.grey[500]
+              }
               alignSelf="center"
               sx={{ ml: "5px" }}
             >
@@ -117,22 +140,22 @@ const Warning = ({ userid, access }) => {
     {
       field: "status_info",
       headerName: "Trạng thái",
-      flex: 1,
+      width: 80,
     },
     {
       field: "contact",
       headerName: "Mối liên lạc",
-      flex: 1,
+      width: 220,
     },
     {
       field: "created_time",
       headerName: "Thời gian khởi tạo",
-      flex: 1,
+      width: 150,
     },
     {
       field: "updated_time",
       headerName: "Thời gian cập nhật",
-      flex: 1,
+      width: 150,
     },
     {
       field: "action",
@@ -141,22 +164,43 @@ const Warning = ({ userid, access }) => {
       flex: 1,
       renderCell: (params) => {
         return (
-          <div>
-            <Button>
+          <Box
+            sx={{
+              display: "flex",
+              WebkitBoxAlign: "center",
+              alignItems: "center",
+              width: "100%",
+              justifyContent: "center",
+              gap: "10px",
+            }}
+          >
+            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>
               <Link
                 to={`/warning/warningEdit/` + params.row.id}
-                className="btn"
+                style={{ textDecoration: "none", color: "#423f3f" }}
               >
-                Sửa
+                <BuildIcon />
               </Link>
-            </Button>
-            <Button
+            </IconButton>
+            <IconButton
               onClick={(e) => handleDelete(params.row.id)}
               className="btn"
+              sx={{ padding: "5px", m: 0, minWidth: 0, color: "#423f3f" }}
             >
-              Xóa
-            </Button>
-          </div>
+              <Link style={{ textDecoration: "none", color: "#423f3f" }}>
+                <DeleteIcon />
+              </Link>
+            </IconButton>
+            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>
+              <Link
+                to={`/warning/warningDetails/` + params.row.id}
+                className="btn"
+                style={{ textDecoration: "none", color: "#423f3f" }}
+              >
+                <VisibilityIcon />
+              </Link>
+            </IconButton>
+          </Box>
         );
       },
     },
@@ -173,7 +217,6 @@ const Warning = ({ userid, access }) => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
-            borderRight: "1px grey solid",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
@@ -200,6 +243,7 @@ const Warning = ({ userid, access }) => {
           rows={apiData}
           getRowId={apiData.id}
           columns={columns}
+          checkboxSelection
           slots={{ toolbar: CustomWarningToolbar }}
           slotProps={{
             toolbar: {
@@ -208,7 +252,6 @@ const Warning = ({ userid, access }) => {
               access: access,
               userid: userid,
               warningSearch: warningSearch,
-
             },
           }}
           localeText={{

@@ -30,7 +30,7 @@ const Dashboard = ({
     }).then((res) => {
       if (res.data.valid) {
         setIsLoggedIn(true);
-        handleUserData(res.data.result);
+        handleUserData(res.data.Result);
       } else {
         navigate("/");
       }

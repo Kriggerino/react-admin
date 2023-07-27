@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import image from '../../assets/oil-spill.png';
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -14,6 +15,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import SecurityIcon from '@mui/icons-material/Security';
 import axios from "axios";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -94,9 +96,13 @@ const Sidebar = (props) => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={`#e0e0e0`}>
-                  Project Title
-                </Typography>
+                <img
+                  alt="logo"
+                  width="50px"
+                  height="50px"
+                  src={image}
+                  style={{ cursor: "pointer" }}
+                />
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon style={{ color: `#e0e0e0` }} />
                 </IconButton>
@@ -111,7 +117,7 @@ const Sidebar = (props) => {
                   variant="h2"
                   color={`#e0e0e0`}
                   fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
+                  sx={{ m: "10px 0 0 0", pb: 2 }}
                 >
                   {props.username}
                 </Typography>
@@ -149,6 +155,13 @@ const Sidebar = (props) => {
               title="Warning"
               to="/warning"
               icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Permissions"
+              to="/permission"
+              icon={<SecurityIcon />}
               selected={selected}
               setSelected={setSelected}
             />

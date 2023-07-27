@@ -28,6 +28,7 @@ const DDMenu = styled(Menu)(({ theme }) => ({
   "& .MuiMenu-paper": {
     width: 380,
     overflow: "hidden",
+    fontSize: "12px",
     marginTop: theme.spacing(4),
     [theme.breakpoints.down("sm")]: {
       width: "100%",

@@ -19,16 +19,32 @@ import "./index.css";
 import UserEdit from "./scenes/useredit";
 import WarningEdit from "./scenes/warningedit";
 import DenyAccess from "./scenes/denyaccess";
+import WarningDetails from "./scenes/warningdetails";
+import Permissions from "./scenes/permissions";
 function App() {
   const navigate = useNavigate();
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+ 
   const [userdata, setUserdata] = useState({
     id: "",
     username: "",
     access: "",
   });
+
+  const [permission , setPermission] = useState({
+    access_name: "",
+    user_create: 0,
+    user_read: 0,
+    user_write: 0,
+    warning_create:0,
+    warning_read:0,
+    warning_write: 0,
+    permission_create: 0,
+    permission_read: 0,
+    permission_write: 0,
+  })
 
   const handleUserData = (data) => {
     setUserdata({
@@ -49,8 +65,9 @@ function App() {
       .then((res) => {
         if (res.data.valid) {
           setIsLoggedIn(true);
-          console.log(res.data.result);
-          handleUserData(res.data.result);
+          console.log(res.data.Result);
+          handleUserData(res.data.Result);
+          setPermission(res.data.Permission);
         } else {
           navigate("/");
         }
@@ -100,9 +117,17 @@ function App() {
                   <Warning userid={userdata.id} access={userdata.access} />
                 }
               />
+              {/* <Route
+                path="/warning/warningEdit"
+                element={<WarningEdit access={userdata.access} id={id}/>}
+              /> */}
               <Route
                 path="/warning/warningEdit/:id"
                 element={<WarningEdit access={userdata.access} />}
+              />
+              <Route
+                path="/warning/warningDetails/:id"
+                element={<WarningDetails />}
               />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
@@ -110,6 +135,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
+              <Route path="/permission" element={<Permissions />} />
               <Route path="/denyaccess" element={<DenyAccess />} />
             </Routes>
           </main>

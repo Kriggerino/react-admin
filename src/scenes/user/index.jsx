@@ -158,7 +158,6 @@ const User = ({ access }) => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
-            borderRight: "1px grey solid",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
