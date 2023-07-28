@@ -15,6 +15,7 @@ import axios from "axios";
 //Formik
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useEffect } from "react";
 
 const Login = () => {
   //Stylings
@@ -47,6 +48,12 @@ const Login = () => {
       .matches(passwordRegex, { message: "Please create stronger password" })
       .required("Required"),
   });
+
+  useEffect(() =>{
+    if((localStorage.getItem("token") !== null)){
+      navigate("/dashboard");
+    }
+  }, [])
 
   const onSubmit = (values, actions) => {
     axios
