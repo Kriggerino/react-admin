@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6a68dd29.css",
+    "main.js": "/static/js/main.a7840ce3.js",
+    "static/media/oil-spill.png": "/static/media/oil-spill.a5615581f8e224c7aa3f.png",
+    "index.html": "/index.html",
+    "main.6a68dd29.css.map": "/static/css/main.6a68dd29.css.map",
+    "main.a7840ce3.js.map": "/static/js/main.a7840ce3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6a68dd29.css",
+    "static/js/main.a7840ce3.js"
+  ]
+}
