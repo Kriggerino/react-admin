@@ -129,12 +129,8 @@ function App() {
                 path="/warning/warningDetails/:id"
                 element={<WarningDetails />}
               />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} />
               <Route path="/permission" element={<Permissions />} />
               <Route path="/denyaccess" element={<DenyAccess />} />
             </Routes>
