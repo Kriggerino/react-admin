@@ -40,7 +40,7 @@ const Sidebar = (props) => {
 
   const handleLogout = () => {
     axios
-      .get("http://localhost:8001/logout")
+      .get("https://node-service-ihr4.onrender.com/logout")
       .then((res) => {
         localStorage.clear();
         navigate("/");

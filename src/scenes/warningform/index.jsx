@@ -17,7 +17,7 @@ const WarningForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(data);
-    axios.post("http://localhost:8001/insertWarning", data)
+    axios.post("https://node-service-ihr4.onrender.com/insertWarning", data)
     .then((res) =>{
       navigate("/warning");
     })

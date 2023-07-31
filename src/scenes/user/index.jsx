@@ -24,7 +24,7 @@ const User = ({ access }) => {
   });
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:8001/delete/" + id)
+      .delete("https://node-service-ihr4.onrender.com/delete/" + id)
       .then((res) => {
         if (res.data.Status === "Success") {
           window.location.reload();
@@ -37,7 +37,7 @@ const User = ({ access }) => {
 
   const handleSearch = () => {
     axios
-      .post("http://localhost:8001/getUserfilter", filter)
+      .post("https://node-service-ihr4.onrender.com/getUserfilter", filter)
       .then((res) => {
         if (res.data.Status === "Success") {
           setApiData(res.data.Result);
@@ -135,7 +135,7 @@ const User = ({ access }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8001/getUser")
+      .get("https://node-service-ihr4.onrender.com/getUser")
       .then((res) => {
         if (res.data.Status === "Success") {
           setApiData(res.data.Result);

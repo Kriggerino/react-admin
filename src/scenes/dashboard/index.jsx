@@ -23,7 +23,7 @@ const Dashboard = ({
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:8001/authcheck", {
+    axios.get("https://node-service-ihr4.onrender.com/authcheck", {
       headers:{
         'access-token': localStorage.getItem("token")
       }

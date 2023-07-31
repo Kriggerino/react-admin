@@ -25,7 +25,7 @@ const WarningDetails = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8001/getWarningDetail/" + id)
+      .get("https://node-service-ihr4.onrender.com/getWarningDetail/" + id)
       .then((res) => {
         setData({
           ...data,

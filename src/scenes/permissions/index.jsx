@@ -17,7 +17,7 @@ const Permissions = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8001/getPermissions")
+      .get("https://node-service-ihr4.onrender.com/getPermissions")
       .then((res) => {
         if (res.data.Status === "Success") {
           setPermissionTable(res.data.Result);
