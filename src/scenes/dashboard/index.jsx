@@ -21,7 +21,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("https://node-service-ihr4.onrender.com /authcheck", {
+      .get(" https://node-service-ihr4.onrender.com/authcheck", {
         headers: {
           "access-token": localStorage.getItem("token"),
         },

@@ -29,7 +29,7 @@ const WarningDetails = ({permission}) => {
     }
     else{
     axios
-      .get("https://node-service-ihr4.onrender.com /getWarningDetail/" + id)
+      .get(" https://node-service-ihr4.onrender.com/getWarningDetail/" + id)
       .then((res) => {
         setData({
           ...data,

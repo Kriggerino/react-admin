@@ -24,7 +24,7 @@ const UserEdit = ({access}) => {
       navigate("/denyaccess")
     } else {
       axios
-      .get("https://node-service-ihr4.onrender.com /get/" + id)
+      .get(" https://node-service-ihr4.onrender.com/get/" + id)
       .then((res) => {
         setData({
           ...data,
@@ -45,7 +45,7 @@ const UserEdit = ({access}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put("https://node-service-ihr4.onrender.com /update/" + id, data)
+      .put(" https://node-service-ihr4.onrender.com/update/" + id, data)
       .then((res) => {
         if (res.data.Status === "Success") {
           console.log("Data edited");
