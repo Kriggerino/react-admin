@@ -11,7 +11,7 @@ const Form = ({ permission, handleClose }) => {
   const navigate = useNavigate();
   const handleFormSubmit = (values) => {
     axios
-      .post(" https://node-service-ihr4.onrender.com/signup", values)
+      .post(" http://localhost:8001/signup", values)
       .then((res) => {
         console.log(res);
         handleClose();
