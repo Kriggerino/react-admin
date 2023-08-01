@@ -116,7 +116,7 @@ const Topbar = () => {
 
   const handleLogout = () => {
     axios
-      .get("http://localhost:8001/logout")
+      .get("https://node-service-ihr4.onrender.com /logout")
       .then((res) => {
         localStorage.clear();
         navigate("/");
@@ -128,13 +128,13 @@ const Topbar = () => {
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* ICONS */}
       <Box display="flex" marginLeft="auto" marginRight="0">
-        <IconButton onClick={colorMode.toggleColorMode}>
+        {/* <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
           ) : (
             <LightModeOutlinedIcon />
           )}
-        </IconButton>
+        </IconButton> */}
         <IconButton onClick={handleDropdownOpen}>
           <NotificationsOutlinedIcon />
         </IconButton>

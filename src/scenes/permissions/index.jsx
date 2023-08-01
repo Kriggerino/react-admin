@@ -17,7 +17,7 @@ const Permissions = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8001/getPermissions")
+      .get("https://node-service-ihr4.onrender.com /getPermissions")
       .then((res) => {
         if (res.data.Status === "Success") {
           setPermissionTable(res.data.Result);
@@ -27,6 +27,19 @@ const Permissions = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleDelete = (id) => {
+    axios
+    .delete("https://node-service-ihr4.onrender.com /deletePerm/" + id)
+    .then((res) => {
+      if (res.data.Status === "Success") {
+        window.location.reload();
+      } else {
+        alert("Error");
+      }
+    })
+    .catch((err) => console.log(err));
+  }
 
   const [permissionTable, setPermissionTable] = useState({
     id: 0,
@@ -159,6 +172,7 @@ const Permissions = () => {
             <IconButton
               className="btn"
               sx={{ padding: "5px", m: 0, minWidth: 0, color: "#423f3f" }}
+              onClick = {handleDelete}
             >
               <Link style={{ textDecoration: "none", color: "#423f3f" }}>
                 <DeleteIcon />
@@ -213,6 +227,8 @@ const Permissions = () => {
       children: [{ field: "action" }],
     },
   ];
+
+  
   return (
     <Box m="20px">
       <Header title="Phân quyền" />

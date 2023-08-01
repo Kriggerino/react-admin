@@ -33,7 +33,7 @@ const CustomPermToolbar = () => {
       sx={{ justifyContent: "space-between", display: "inline-flex", p: 0 }}
     >
       <Container
-        disableGutters="true"
+        disableGutters={true}
         sx={{ display: "flex", gap: "50px", ml: 0, mr: 0, width: "75%" }}
       >
         <TextField
@@ -43,7 +43,7 @@ const CustomPermToolbar = () => {
         ></TextField>
       </Container>
       <Container
-        disableGutters="true"
+        disableGutters={true}
         sx={{
           display: "flex",
           width: "20%",
@@ -52,6 +52,7 @@ const CustomPermToolbar = () => {
           pt: 2,
           pb: 2,
           justifyContent: "end",
+          gap:"30px",
         }}
       >
         <Button color="secondary" variant="contained" sx={{pt: 1, pb: 1}}>

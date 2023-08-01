@@ -20,7 +20,7 @@ const WarningEdit = ({permission}) => {
       navigate("/denyaccess");
     } else {
       axios
-        .get("http://localhost:8001/getWarningEdit/" + id)
+        .get("https://node-service-ihr4.onrender.com /getWarningEdit/" + id)
         .then((res) => {
           setData({
             ...data,
@@ -37,7 +37,7 @@ const WarningEdit = ({permission}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put("http://localhost:8001/updateWarning/" + id, data)
+      .put("https://node-service-ihr4.onrender.com /updateWarning/" + id, data)
       .then((res) => {
         if (res.data.Status === "Success") {
           console.log("Data edited");

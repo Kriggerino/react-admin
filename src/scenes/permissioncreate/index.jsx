@@ -29,7 +29,7 @@ const PermCreate = () => {
   const submitPerm = () => {
     console.log(newPermission);
     axios
-      .post("http://localhost:8001/newPermission", newPermission)
+      .post("https://node-service-ihr4.onrender.com /newPermission", newPermission)
       .then((res) => {
         console.log(res);
         navigate("/permission");
