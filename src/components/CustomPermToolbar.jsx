@@ -70,7 +70,7 @@ const CustomPermToolbar = () => {
       >
         <Box sx={style}>
             <Box sx={{display: "flex", width: "100%", mx: "auto"}}>
-              <PermCreate/>
+              <PermCreate handleClose={handleClose}/>
             </Box>
             <Box sx={{display: "flex", justifyContent:"center", p:1, gap: "20px" }}>
                 <Button color="secondary" variant="contained" onClick={handleClose} >
