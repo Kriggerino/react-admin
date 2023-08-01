@@ -30,7 +30,7 @@ const Permissions = () => {
 
   const handleDelete = (id) => {
     axios
-    .delete(" https://node-service-ihr4.onrender.com/deletePerm/" + id)
+    .delete(" https://node-service-ihr4.onrender.com/deletePerm/", id)
     .then((res) => {
       if (res.data.Status === "Success") {
         window.location.reload();
@@ -172,7 +172,7 @@ const Permissions = () => {
             <IconButton
               className="btn"
               sx={{ padding: "5px", m: 0, minWidth: 0, color: "#423f3f" }}
-              onClick = {handleDelete}
+              onClick = {handleDelete(params.row.id)}
             >
               <Link style={{ textDecoration: "none", color: "#423f3f" }}>
                 <DeleteIcon />

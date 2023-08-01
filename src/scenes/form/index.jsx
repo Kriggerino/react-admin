@@ -55,11 +55,11 @@ const Form = ({ permission, handleClose }) => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Username"
+                label="Tên người dùng"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.username}
-                name="Tên người dùng"
+                name="username"
                 error={!!touched.username && !!errors.username}
                 helperText={touched.username && errors.username}
                 sx={{ gridColumn: "span 4" }}
@@ -185,8 +185,6 @@ const checkoutSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  contact: yup.string().required("required"),
-  address: yup.string().required("required"),
   access: yup.string().required("required"),
 });
 const initialValues = {
