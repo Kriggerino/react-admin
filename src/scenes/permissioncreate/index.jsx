@@ -32,7 +32,7 @@ const PermCreate = () => {
       .post(" https://node-service-ihr4.onrender.com/newPermission", newPermission)
       .then((res) => {
         console.log(res);
-        navigate("/permission");
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
