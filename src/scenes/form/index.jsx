@@ -14,7 +14,7 @@ const Form = ({ permission, handleClose }) => {
       .post(" https://node-service-ihr4.onrender.com/signup", values)
       .then((res) => {
         console.log(res);
-        navigate("/user");
+        handleClose();
       })
       .catch((err) => console.log(err));
   };
