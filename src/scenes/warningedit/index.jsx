@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import { Box, Button, TextField, MenuItem } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-const WarningEdit = ({access}) => {
+const WarningEdit = ({permission}) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const WarningEdit = ({access}) => {
   });
 
   useEffect(() => {
-    if (!(access === "admin")) {
+    if (!(permission.warning_write === 1)) {
       navigate("/denyaccess");
     } else {
       axios

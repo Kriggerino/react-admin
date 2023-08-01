@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const WarningDetails = () => {
+const WarningDetails = ({permission}) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -24,6 +24,10 @@ const WarningDetails = () => {
   });
 
   useEffect(() => {
+    if(permission.warning_read !== 1){
+      navigate("/denyaccess");
+    }
+    else{
     axios
       .get("http://localhost:8001/getWarningDetail/" + id)
       .then((res) => {
@@ -39,6 +43,7 @@ const WarningDetails = () => {
         console.log(data);
       })
       .catch((err) => console.log(err));
+    }
   }, []);
   return (
     <Box m="20px">

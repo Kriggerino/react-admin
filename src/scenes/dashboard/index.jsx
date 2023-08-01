@@ -15,26 +15,25 @@ import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const Dashboard = ({
-  setIsLoggedIn,
-  handleUserData
-}) => {
+const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:8001/authcheck", {
-      headers:{
-        'access-token': localStorage.getItem("token")
-      }
-    }).then((res) => {
-      if (res.data.valid) {
-        setIsLoggedIn(true);
-        handleUserData(res.data.Result);
-      } else {
-        navigate("/");
-      }
-    });
+    axios
+      .get("http://localhost:8001/authcheck", {
+        headers: {
+          "access-token": localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        if (res.data.valid) {
+          setIsLoggedIn(true);
+          handleUserData(res.data.Result);
+        } else {
+          navigate("/");
+        }
+      });
   }, []);
   return (
     <Box m="20px">
@@ -54,6 +53,18 @@ const Dashboard = ({
           >
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
             Download Reports
+          </Button>
+          <Button
+            sx={{
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[100],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px",
+            }}
+            onClick={() => {console.log(permission)}}
+          >
+            Check Permission
           </Button>
         </Box>
       </Box>

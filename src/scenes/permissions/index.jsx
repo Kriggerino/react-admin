@@ -251,6 +251,7 @@ const Permissions = () => {
         <DataGrid
           experimentalFeatures={{ columnGrouping: true }}
           disableRowSelectionOnClick
+          disableGutters={true}
           rows={permissionTable}
           getRowId={permissionTable.id}
           columns={dgColumns}

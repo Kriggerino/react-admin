@@ -35,15 +35,15 @@ function App() {
 
   const [permission , setPermission] = useState({
     access_name: "",
-    user_create: 0,
-    user_read: 0,
-    user_write: 0,
-    warning_create:0,
-    warning_read:0,
-    warning_write: 0,
-    permission_create: 0,
-    permission_read: 0,
-    permission_write: 0,
+    user_create: false,
+    user_read: false,
+    user_write: false,
+    warning_create:false,
+    warning_read:false,
+    warning_write: false,
+    permission_create: false,
+    permission_read: false,
+    permission_write: false,
   })
 
   const handleUserData = (data) => {
@@ -67,7 +67,7 @@ function App() {
           setIsLoggedIn(true);
           console.log(res.data.Result);
           handleUserData(res.data.Result);
-          setPermission(res.data.Permission);
+          setPermission(res.data.Permission[0]);
         } else {
           navigate("/");
         }
@@ -103,18 +103,19 @@ function App() {
                   <Dashboard
                     setIsLoggedIn={setIsLoggedIn}
                     handleUserData={handleUserData}
+                    permission={permission}
                   />
                 }
               />
-              <Route path="/user" element={<User access={userdata.access} />} />
+              <Route path="/user" element={<User permission={permission} />} />
               <Route
                 path="/user/userEdit/:id"
-                element={<UserEdit access={userdata.access} />}
+                element={<UserEdit permission={permission} />}
               />
               <Route
                 path="/warning"
                 element={
-                  <Warning userid={userdata.id} access={userdata.access} />
+                  <Warning userid={userdata.id} permission={permission} />
                 }
               />
               {/* <Route
@@ -123,11 +124,11 @@ function App() {
               /> */}
               <Route
                 path="/warning/warningEdit/:id"
-                element={<WarningEdit access={userdata.access} />}
+                element={<WarningEdit permission={permission} />}
               />
               <Route
                 path="/warning/warningDetails/:id"
-                element={<WarningDetails />}
+                element={<WarningDetails permission={permission} />}
               />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />

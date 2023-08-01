@@ -1,42 +1,19 @@
-import {
-  Box,
-  IconButton,
-  Typography,
-  useTheme,
-  Modal,
-  Button,
-} from "@mui/material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomWarningToolbar from "../../components/CustomWarningToolbar";
-import WarningEdit from "../warningedit";
 //Icons
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
-const Warning = ({ userid, access }) => {
+const Warning = ({ userid, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const [apiData, setApiData] = useState({
     id: "",
     message: "",
@@ -50,18 +27,23 @@ const Warning = ({ userid, access }) => {
     status: "",
     name: "",
   });
+  const navigate = useNavigate();
   //On load, get data
   useEffect(() => {
-    axios
-      .get("http://localhost:8001/getWarning")
-      .then((res) => {
-        if (res.data.Status === "Success") {
-          setApiData(res.data.Result);
-        } else {
-          alert("Error");
-        }
-      })
-      .catch((err) => console.log(err));
+    if (permission.warning_read !== 1) {
+      navigate("/denyaccess");
+    } else {
+      axios
+        .get("http://localhost:8001/getWarning")
+        .then((res) => {
+          if (res.data.Status === "Success") {
+            setApiData(res.data.Result);
+          } else {
+            alert("Error");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   const warningSearch = () => {
@@ -249,7 +231,7 @@ const Warning = ({ userid, access }) => {
             toolbar: {
               filter: filter,
               setFilter: setFilter,
-              access: access,
+              permission: permission,
               userid: userid,
               warningSearch: warningSearch,
             },

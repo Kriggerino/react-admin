@@ -1,8 +1,4 @@
-import {
-  Box,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -12,11 +8,14 @@ import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomToolbar from "../../components/CustomToolbar";
-const User = ({ access }) => {
+import DeleteIcon from "@mui/icons-material/Delete";
+import BuildIcon from "@mui/icons-material/Build";
+const User = ({ permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
   const [apiData, setApiData] = useState([]);
   const [filter, setFilter] = useState({
     accessFilter: "",
@@ -115,15 +114,17 @@ const User = ({ access }) => {
         return (
           <div>
             <Button>
-              <Link to={`/user/userEdit/` + params.row._id} className="btn">
-                Sửa
+              <Link  style={{ textDecoration: "none", color: "#423f3f" }} to={`/user/userEdit/` + params.row._id} className="btn">
+                <BuildIcon />
               </Link>
             </Button>
             <Button
               onClick={(e) => handleDelete(params.row._id)}
               className="btn"
             >
-              Xóa
+              <Link style={{ textDecoration: "none", color: "#423f3f" }}>
+                <DeleteIcon />
+              </Link>
             </Button>
           </div>
         );
@@ -131,19 +132,21 @@ const User = ({ access }) => {
     },
   ];
 
-  
-
   useEffect(() => {
-    axios
-      .get("http://localhost:8001/getUser")
-      .then((res) => {
-        if (res.data.Status === "Success") {
-          setApiData(res.data.Result);
-        } else {
-          alert("Error");
-        }
-      })
-      .catch((err) => console.log(err));
+    if (permission.user_read !== 1) {
+      navigate("/denyaccess");
+    } else {
+      axios
+        .get("http://localhost:8001/getUser")
+        .then((res) => {
+          if (res.data.Status === "Success") {
+            setApiData(res.data.Result);
+          } else {
+            alert("Error");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   return (
@@ -189,7 +192,7 @@ const User = ({ access }) => {
             toolbar: {
               handleSearch: handleSearch,
               filter: filter,
-              access: access,
+              permission: permission,
               setFilter: setFilter,
             },
           }}

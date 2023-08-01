@@ -25,7 +25,7 @@ const WarningForm = (props) => {
   };
 
   useEffect(() => {
-    if (!(props.access === "admin")) {
+    if (!(props.permission.warning_write === 1)) {
       navigate("/denyaccess");
     }
   }, []);

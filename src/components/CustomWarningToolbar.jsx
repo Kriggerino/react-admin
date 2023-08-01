@@ -7,7 +7,7 @@ import WarningForm from "../scenes/warningform";
 const CustomWarningToolbar = ({
   filter,
   setFilter,
-  access,
+  permission,
   userid,
   warningSearch,
 }) => {
@@ -122,7 +122,7 @@ const CustomWarningToolbar = ({
         <Box sx={style}>
           <WarningForm
             userid={userid}
-            access={access}
+            permission={permission}
             handleClose={handleClose}
           />
         </Box>

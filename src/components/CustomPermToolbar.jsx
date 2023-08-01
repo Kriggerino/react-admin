@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { GridToolbarContainer } from "@mui/x-data-grid";
+import PermCreate from "../scenes/permissioncreate";
 const style = {
   position: "absolute",
   top: "50%",
@@ -53,6 +54,9 @@ const CustomPermToolbar = () => {
           justifyContent: "end",
         }}
       >
+        <Button color="secondary" variant="contained" sx={{pt: 1, pb: 1}}>
+          Tìm kiếm
+        </Button>
         <Button color="secondary" variant="contained" onClick={handleOpen} sx={{ pt: 1, pb: 1 }}>
           Tạo mới
         </Button>
@@ -64,22 +68,11 @@ const CustomPermToolbar = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <Box sx={{ display: "flex", justifyContent: "center", pb: 2 }}>
-            <Typography variant="h4">
-                Thêm quyền mới 
-            </Typography>
+            <Box sx={{display: "flex", width: "100%", mx: "auto"}}>
+              <PermCreate/>
             </Box>
-            <Box sx={{display: "flex" , justifyContent: "center", width: "70%", mx: "auto"}}>
-            <TextField
-                fullWidth
-                label="Tên quyền mới "
-            />
-            </Box>
-            <Box sx={{display: "flex", p:2, justifyContent:"center", m: 2, gap: "20px" }}>
-                <Button color="secondary" variant="contained">
-                    Thêm
-                </Button>
-                <Button color="secondary" variant="contained">
+            <Box sx={{display: "flex", justifyContent:"center", p:1, gap: "20px" }}>
+                <Button color="secondary" variant="contained" onClick={handleClose} >
                     Hủy
                 </Button>
             </Box>

@@ -104,7 +104,7 @@ const CustomToolbar = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Form access={props.access} handleClose={handleClose} />
+          <Form permission={props.permission} handleClose={handleClose} />
         </Box>
       </Modal>
     </GridToolbarContainer>

@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-const Form = ({ access, handleClose }) => {
+const Form = ({ permission, handleClose }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const handleFormSubmit = (values) => {
@@ -20,7 +20,7 @@ const Form = ({ access, handleClose }) => {
   };
 
   useEffect(() => {
-    if (!(access === "admin")) {
+    if (permission.user_create !== 1) {
       navigate("/denyaccess");
     }
   }, []);

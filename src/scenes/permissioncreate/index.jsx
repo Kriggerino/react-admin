@@ -1,25 +1,183 @@
-import { Box, Checkbox, Typography } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  Checkbox,
+  Typography,
+  Button,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+} from "@mui/material";
+import React, { useState } from "react";
 import Header from "../../components/Header";
-const PermCreate = () => {
-  return (
-    <Box>
-      <Header title="Tạo quyền" />
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-      <form>
+const PermCreate = () => {
+  const [newPermission, setNewPermission] = useState({
+    access_name: "Quyền mới",
+    user_create: false,
+    user_read: false,
+    user_write: false,
+    warning_create: false,
+    warning_read: false,
+    warning_write: false,
+    permission_create: false,
+    permission_read: false,
+    permission_write: false,
+  });
+  const navigate = useNavigate();
+  const submitPerm = () => {
+    console.log(newPermission);
+    axios
+      .post("http://localhost:8001/newPermission", newPermission)
+      .then((res) => {
+        console.log(res);
+        navigate("/permission");
+      })
+      .catch((err) => console.log(err));
+  };
+  return (
+    <Box sx={{ width: "100%", justifyContent: "center", display: "flex" }}>
+      <Header title="Tạo quyền" />
+      <Box sx={{ p: 1, mt: 2, width: "100%" }}>
+        <TextField
+          variant="filled"
+          type="text"
+          label="Tên quyền"
+          value={newPermission.access_name}
+          onChange={(e) =>
+            setNewPermission({ ...newPermission, access_name: e.target.value })
+          }
+          sx={{ width: "100%" }}
+        />
+        <Typography variant="h6" sx={{ pt: 2 }}>
+          Người dùng
+        </Typography>
+        <Box display="flex">
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Đọc"
+              checked={newPermission.user_read}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  user_read: e.target.checked,
+                });
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Thay đổi thông tin"
+              checked={newPermission.user_write}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  user_write: e.target.checked,
+                });
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Tạo mới"
+              checked={newPermission.user_create}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  user_create: e.target.checked,
+                });
+              }}
+            />
+          </FormGroup>
+        </Box>
+        <Typography variant="h6">Cảnh báo</Typography>
+        <Box display="flex">
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Đọc"
+              checked={newPermission.warning_read}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  warning_read: e.target.checked,
+                });
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Thay đổi thông tin"
+              checked={newPermission.warning_write}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  warning_write: e.target.checked,
+                });
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Tạo mới"
+              checked={newPermission.warning_create}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  warning_create: e.target.checked,
+                });
+              }}
+            />
+          </FormGroup>
+        </Box>
+        <Typography variant="h6">Phân quyền</Typography>
+        <Box display="flex">
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Đọc"
+              checked={newPermission.permission_read}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  permission_read: e.target.checked,
+                });
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Thay đổi thông tin"
+              checked={newPermission.permission_write}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  permission_write: e.target.checked,
+                });
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Tạo mới"
+              checked={newPermission.permission_create}
+              onChange={(e) => {
+                setNewPermission({
+                  ...newPermission,
+                  permission_create: e.target.checked,
+                });
+              }}
+            />
+          </FormGroup>
+        </Box>
         <Box
-          display="grid"
-          gap="30px"
-          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
           sx={{
-            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+            display: "flex",
+            p: 1,
+            justifyContent: "center",
           }}
         >
-            <Box>
-
-            </Box>
+          <Button color="secondary" variant="contained" onClick={submitPerm}>
+            Thêm
+          </Button>
         </Box>
-      </form>
+      </Box>
     </Box>
   );
 };
