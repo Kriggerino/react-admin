@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { Box, Button, TextField, MenuItem } from "@mui/material";
@@ -8,26 +8,27 @@ const WarningForm = (props) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const [data, setData] = useState({
-    message:'',
+    message: "",
     message_type: 1,
-    contact: '',
+    contact: "",
     status: 0,
     creatorid: props.userid,
-  })
+  });
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(data);
-    axios.post("https://node-service-ihr4.onrender.com/insertWarning", data)
-    .then((res) =>{
-      navigate("/warning");
-    })
+    axios
+      .post("http://localhost:8001/insertWarning", data)
+      .then((res) => {
+        navigate("/warning");
+      });
   };
 
   useEffect(() => {
     if (!(props.access === "admin")) {
       navigate("/denyaccess");
     }
-  }, [])
+  }, []);
   return (
     <Box m="20px">
       <Header title="Tạo cảnh báo" />
@@ -47,7 +48,7 @@ const WarningForm = (props) => {
             type="text"
             label="Tên cảnh báo"
             value={data.message}
-            onChange={(e) => setData({...data, message: e.target.value })}
+            onChange={(e) => setData({ ...data, message: e.target.value })}
             sx={{ gridColumn: "span 2" }}
           />
           <TextField
@@ -58,11 +59,11 @@ const WarningForm = (props) => {
             sx={{ gridColumn: "span 2" }}
             defaultValue={1}
             value={data.message_type}
-            onChange={(e) => setData({...data, message_type: e.target.value })}
+            onChange={(e) => setData({ ...data, message_type: e.target.value })}
           >
-            <MenuItem value={1} >Khẩn cấp</MenuItem>
-            <MenuItem value={2} >Trung bình</MenuItem>
-            <MenuItem value={3} >Nhẹ</MenuItem>
+            <MenuItem value={1}>Khẩn cấp</MenuItem>
+            <MenuItem value={2}>Trung bình</MenuItem>
+            <MenuItem value={3}>Nhẹ</MenuItem>
           </TextField>
           <TextField
             fullWidth
@@ -70,18 +71,28 @@ const WarningForm = (props) => {
             type="text"
             label="Liên lạc"
             value={data.contact}
-            onChange={(e) => setData({...data, contact: e.target.value })}
+            onChange={(e) => setData({ ...data, contact: e.target.value })}
             sx={{ gridColumn: "span 4" }}
           />
-          
         </Box>
         <Box display="flex" justifyContent="space-between" mt="20px">
-          <Button type="submit" onClick={handleSubmit} color="secondary" variant="contained" sx={{p:1}}>
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            color="secondary"
+            variant="contained"
+            sx={{ p: 1 }}
+          >
             Tạo mới
           </Button>
-          <Button onClick={props.handleClose} color="secondary" variant="contained" sx={{p:1}}>
-              Đóng
-            </Button>
+          <Button
+            onClick={props.handleClose}
+            color="secondary"
+            variant="contained"
+            sx={{ p: 1 }}
+          >
+            Đóng
+          </Button>
         </Box>
       </form>
     </Box>

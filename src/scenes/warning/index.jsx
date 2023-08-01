@@ -53,7 +53,7 @@ const Warning = ({ userid, access }) => {
   //On load, get data
   useEffect(() => {
     axios
-      .get("https://node-service-ihr4.onrender.com/getWarning")
+      .get("http://localhost:8001/getWarning")
       .then((res) => {
         if (res.data.Status === "Success") {
           setApiData(res.data.Result);
@@ -67,7 +67,7 @@ const Warning = ({ userid, access }) => {
   const warningSearch = () => {
     console.log(filter);
     axios
-      .post("https://node-service-ihr4.onrender.com/getWarningfilter", filter)
+      .post("http://localhost:8001/getWarningfilter", filter)
       .then((res) => {
         if (res.data.Status === "Success") {
           setApiData(res.data.Result);
@@ -80,7 +80,7 @@ const Warning = ({ userid, access }) => {
 
   const handleDelete = (id) => {
     axios
-      .delete("https://node-service-ihr4.onrender.com/deleteWarning/" + id)
+      .delete("http://localhost:8001/deleteWarning/" + id)
       .then((res) => {
         if (res.data.Status === "Success") {
           window.location.reload();
