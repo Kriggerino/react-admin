@@ -30,7 +30,7 @@ const Permissions = () => {
 
   const handleDelete = (id) => {
     axios
-    .delete(" http://localhost:8001/deletePerm/", id)
+    .delete(" http://localhost:8001/deletePerm/"+ id)
     .then((res) => {
       if (res.data.Status === "Success") {
         window.location.reload();

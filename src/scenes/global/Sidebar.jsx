@@ -17,6 +17,7 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SecurityIcon from "@mui/icons-material/Security";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import GppMaybeIcon from '@mui/icons-material/GppMaybe';
 import axios from "axios";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -24,6 +25,24 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       active={selected === title}
       style={{
         color: `#e0e0e0`,
+      }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+    >
+      <Typography>{title}</Typography>
+      <Link to={to} />
+    </MenuItem>
+  );
+};
+
+
+const SubItem = ({ title, to, icon, selected, setSelected }) => {
+  return (
+    <MenuItem
+      active={selected === title}
+      style={{
+        color: `#e0e0e0`,
+        paddingLeft: "20px"
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -57,7 +76,9 @@ const Sidebar = (props) => {
     }
   };
 
-  const handleChange = () => {};
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -164,14 +185,21 @@ const Sidebar = (props) => {
               setSelected={setSelected}
             />
             <IconButton onClick={handleChange}>
-              <KeyboardArrowDownIcon/>
+              <KeyboardArrowDownIcon  style={{ color: `#e0e0e0` }} />
             </IconButton>
             </Box>
             <Collapse in={checked}>
-              <Item
-                title="Manage User"
-                to="/user"
-                icon={<PeopleOutlinedIcon />}
+              <SubItem
+                title="VOS"
+                to=""
+                icon={<GppMaybeIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <SubItem
+                title="Hardware"
+                to=""
+                icon={<GppMaybeIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
