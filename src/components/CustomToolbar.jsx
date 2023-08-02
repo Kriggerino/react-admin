@@ -84,7 +84,7 @@ const CustomToolbar = (props) => {
           color="secondary"
           variant="contained"
           onClick={props.handleSearch}
-          sx={{ pt: 1, pb: 1 }}
+          sx={{ pt: 2, pb: 2 }}
         >
           Tìm kiếm
         </Button>
@@ -92,7 +92,7 @@ const CustomToolbar = (props) => {
           color="secondary"
           variant="contained"
           onClick={handleOpen}
-          sx={{ pt: 1, pb: 1 }}
+          sx={{ pt: 2, pb: 2 }}
         >
           Tạo người dùng
         </Button>

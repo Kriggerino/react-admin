@@ -32,7 +32,7 @@ const PermCreate = ({handleClose}) => {
       .post(" http://localhost:8001/newPermission", newPermission)
       .then((res) => {
         console.log(res);
-        handleClose();
+        handleClose().then(window.location.reload());
       })
       .catch((err) => console.log(err));
   };

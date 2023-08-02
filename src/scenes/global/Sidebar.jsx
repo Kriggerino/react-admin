@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography, Collapse } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import image from '../../assets/oil-spill.png';
+import image from "../../assets/oil-spill.png";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -15,7 +15,8 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import SecurityIcon from '@mui/icons-material/Security';
+import SecurityIcon from "@mui/icons-material/Security";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import axios from "axios";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -36,6 +37,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = (props) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -54,6 +56,8 @@ const Sidebar = (props) => {
       setIsCollapsed(true);
     }
   };
+
+  const handleChange = () => {};
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -151,6 +155,7 @@ const Sidebar = (props) => {
               selected={selected}
               setSelected={setSelected}
             />
+            <Box sx={{display:"flex"}}>
             <Item
               title="Warning"
               to="/warning"
@@ -158,6 +163,20 @@ const Sidebar = (props) => {
               selected={selected}
               setSelected={setSelected}
             />
+            <IconButton onClick={handleChange}>
+              <KeyboardArrowDownIcon/>
+            </IconButton>
+            </Box>
+            <Collapse in={checked}>
+              <Item
+                title="Manage User"
+                to="/user"
+                icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </Collapse>
+
             <Item
               title="Permissions"
               to="/permission"
@@ -196,8 +215,6 @@ const Sidebar = (props) => {
             >
               <Typography>Logout</Typography>
             </MenuItem>
-
-            
           </Box>
         </Menu>
       </ProSidebar>

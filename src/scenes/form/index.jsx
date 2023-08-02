@@ -14,7 +14,7 @@ const Form = ({ permission, handleClose }) => {
       .post(" http://localhost:8001/signup", values)
       .then((res) => {
         console.log(res);
-        handleClose();
+        handleClose().then(window.location.reload());
       })
       .catch((err) => console.log(err));
   };

@@ -96,7 +96,7 @@ const CustomWarningToolbar = ({
           color="secondary"
           variant="contained"
           onClick={warningSearch}
-          sx={{  pt: 1, pb: 1 }}
+          sx={{  pt: 2, pb: 2 }}
         >
           Tìm kiếm
         </Button>
@@ -106,7 +106,7 @@ const CustomWarningToolbar = ({
         <GridToolbarExport
           color="secondary"
           variant="contained"
-          sx={{  pt: 1, pb: 1  }}
+          sx={{  pt: 2, pb: 2  }}
           csvOptions={{
             fileName: "CB",
             utf8WithBom: true,
