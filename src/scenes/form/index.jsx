@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-const Form = ({ permission, handleClose }) => {
+const Form = ({ permission, handleClose, setTableUpdate }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const handleFormSubmit = (values) => {
@@ -14,7 +14,8 @@ const Form = ({ permission, handleClose }) => {
       .post(" http://localhost:8001/signup", values)
       .then((res) => {
         console.log(res);
-        handleClose().then(window.location.reload());
+        handleClose();
+        setTableUpdate(true);
       })
       .catch((err) => console.log(err));
   };

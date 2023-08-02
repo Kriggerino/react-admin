@@ -14,26 +14,27 @@ import CustomPermToolbar from "../../components/CustomPermToolbar";
 const Permissions = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  const [tableUpdate, setTableUpdate] = useState(false);
   useEffect(() => {
     axios
       .get(" http://localhost:8001/getPermissions")
       .then((res) => {
         if (res.data.Status === "Success") {
           setPermissionTable(res.data.Result);
+          setTableUpdate(false);
         } else {
           alert("Error");
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [tableUpdate]);
 
   const handleDelete = (id) => {
     axios
     .delete(" http://localhost:8001/deletePerm/"+ id)
     .then((res) => {
       if (res.data.Status === "Success") {
-        window.location.reload();
+        alert("Success");
       } else {
         alert("Error");
       }
@@ -172,7 +173,7 @@ const Permissions = () => {
             <IconButton
               className="btn"
               sx={{ padding: "5px", m: 0, minWidth: 0, color: "#423f3f" }}
-              onClick = {handleDelete(params.row.id)}
+              //onClick = {handleDelete(params.row.id)}
             >
               <Link style={{ textDecoration: "none", color: "#423f3f" }}>
                 <DeleteIcon />
@@ -273,6 +274,11 @@ const Permissions = () => {
           columns={dgColumns}
           columnGroupingModel={dgColumnsGroup}
           slots={{ toolbar: CustomPermToolbar }}
+          slotProps={{
+            toolbar:{
+              setTableUpdate: setTableUpdate,
+            }
+          }}
         />
       </Box>
     </Box>

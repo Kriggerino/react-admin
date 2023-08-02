@@ -21,6 +21,7 @@ const User = ({ permission }) => {
     accessFilter: "",
     usernameFilter: "",
   });
+  const [tableUpdate, setTableUpdate] = useState(false);
   const handleDelete = (id) => {
     axios
       .delete(" http://localhost:8001/delete/" + id)
@@ -141,13 +142,14 @@ const User = ({ permission }) => {
         .then((res) => {
           if (res.data.Status === "Success") {
             setApiData(res.data.Result);
+            setTableUpdate(false);
           } else {
             alert("Error");
           }
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [tableUpdate]);
 
   return (
     <Box m="20px">
@@ -196,6 +198,7 @@ const User = ({ permission }) => {
               filter: filter,
               permission: permission,
               setFilter: setFilter,
+              setTableUpdate: setTableUpdate,
             },
           }}
           localeText={{

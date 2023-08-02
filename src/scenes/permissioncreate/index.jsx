@@ -12,7 +12,7 @@ import Header from "../../components/Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const PermCreate = ({handleClose}) => {
+const PermCreate = ({handleClose, setTableUpdate}) => {
   const [newPermission, setNewPermission] = useState({
     access_name: "Quyền mới",
     user_create: false,
@@ -32,7 +32,8 @@ const PermCreate = ({handleClose}) => {
       .post(" http://localhost:8001/newPermission", newPermission)
       .then((res) => {
         console.log(res);
-        handleClose().then(window.location.reload());
+        handleClose();
+        setTableUpdate(true);
       })
       .catch((err) => console.log(err));
   };

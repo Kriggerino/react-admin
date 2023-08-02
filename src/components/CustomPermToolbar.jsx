@@ -23,7 +23,7 @@ const style = {
   p: 4,
 };
 
-const CustomPermToolbar = () => {
+const CustomPermToolbar = ({setTableUpdate}) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -70,7 +70,7 @@ const CustomPermToolbar = () => {
       >
         <Box sx={style}>
             <Box sx={{display: "flex", width: "100%", mx: "auto"}}>
-              <PermCreate handleClose={handleClose}/>
+              <PermCreate handleClose={handleClose} setTableUpdate={setTableUpdate}/>
             </Box>
             <Box sx={{display: "flex", justifyContent:"center", p:1, gap: "20px" }}>
                 <Button color="secondary" variant="contained" onClick={handleClose} >
