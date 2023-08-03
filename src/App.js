@@ -65,9 +65,9 @@ function App() {
       .then((res) => {
         if (res.data.valid) {
           setIsLoggedIn(true);
-          console.log(res.data.Result);
           handleUserData(res.data.Result);
           setPermission(res.data.Permission[0]);
+          console.log(permission);
         } else {
           navigate("/");
         }
