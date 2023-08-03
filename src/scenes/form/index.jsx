@@ -26,7 +26,6 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
       .then((res) => {
         handleClose();
         setTableUpdate(true);
-        navigate("/user");
       })
       .catch((err) => console.log(err));
   };
