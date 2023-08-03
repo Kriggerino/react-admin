@@ -27,7 +27,6 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
       .then((res) => {
         console.log(res);
         handleClose();
-        setTableUpdate(true);
       })
       .catch((err) => console.log(err));
   };
