@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, MenuItem, TextField } from "@mui/material";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
@@ -128,8 +128,9 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
           />
           <Box>
             <label htmlFor="email">Quyền truy cập</label>
-            <select
+            <TextField
               fullWidth
+              select
               variant="filled"
               type="text"
               label="Quyền truy cập"
@@ -139,11 +140,11 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
               sx={{ gridColumn: "span 4" }}
             >
               {permDDList.map(({ access_name }) => (
-                <option key={access_name} value={access_name}>
+                <MenuItem key={access_name} value={access_name}>
                   {access_name}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </TextField>
           </Box>
         </Box>
         <Box display="flex" justifyContent="space-between" mt="20px">
