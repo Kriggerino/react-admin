@@ -1,5 +1,4 @@
 import { Box, Button, TextField } from "@mui/material";
-
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
@@ -25,10 +24,9 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
     axios
       .post("https://node-service-ihr4.onrender.com/signup", values)
       .then((res) => {
-        console.log(res);
         handleClose();
         setTableUpdate(true);
-        console.log(permission);
+        navigate("/user")
       })
       .catch((err) => console.log(err));
   };
@@ -172,21 +170,21 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
   );
 };
 
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  access: yup.string().required("required"),
-});
-const initialValues = {
-  username: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  contact: "",
-  address: "",
-  access: "",
-};
+// const checkoutSchema = yup.object().shape({
+//   firstName: yup.string().required("required"),
+//   lastName: yup.string().required("required"),
+//   email: yup.string().email("invalid email").required("required"),
+//   access: yup.string().required("required"),
+// });
+// const initialValues = {
+//   username: "",
+//   firstName: "",
+//   lastName: "",
+//   email: "",
+//   password: "",
+//   contact: "",
+//   address: "",
+//   access: "",
+// };
 
 export default Form;
