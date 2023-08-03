@@ -5,10 +5,11 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Form = ({ permission, handleClose, setTableUpdate }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
+  const [permDDList, setPermDDList] = useState([]);
   const handleFormSubmit = (values) => {
     axios
       .post(" http://localhost:8001/signup", values)
@@ -23,6 +24,12 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
   useEffect(() => {
     if (permission.user_create !== 1) {
       navigate("/denyaccess");
+    } else {
+      axios.get("http://localhost:8001/getPermDDList").then((res) => {
+        //const resultArray = res.data.Result.map((obj) => obj.access_name);
+        setPermDDList(res.data.Result);
+        console.log(permDDList);
+      });
     }
   }, []);
 
@@ -143,11 +150,15 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
                 helperText={touched.address && errors.address}
                 sx={{ gridColumn: "span 4" }}
               />
-              <TextField
+              <Box>
+              <label htmlFor="email">
+                Quyền truy cập
+              </label>
+              <select
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Quyền truy cậps"
+                label="Quyền truy cập"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.access}
@@ -155,7 +166,14 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
                 error={!!touched.access && !!errors.access}
                 helperText={touched.access && errors.access}
                 sx={{ gridColumn: "span 4" }}
-              />
+              >
+                {permDDList.map(({ access_name }) => (
+                  <option key={access_name} value={access_name}>
+                    {access_name}
+                  </option>
+                ))}
+              </select>
+              </Box>
             </Box>
             <Box display="flex" justifyContent="space-between" mt="20px">
               <Button

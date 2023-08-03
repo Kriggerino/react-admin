@@ -34,7 +34,7 @@ const CustomToolbar = (props) => {
         <GridToolbarFilterButton />
         <GridToolbarExport /> */}
       <Container
-        disableGutters="true"
+        disableGutters={true}
         sx={{ display: "flex", gap: "50px", ml: 0, mr: 0, width: "75%" }}
       >
         <TextField
@@ -69,7 +69,7 @@ const CustomToolbar = (props) => {
         /> */}
       </Container>
       <Container
-        disableGutters="true"
+        disableGutters={true}
         sx={{
           display: "flex",
           width: "20%",
