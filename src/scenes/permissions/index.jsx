@@ -17,7 +17,7 @@ const Permissions = () => {
   const [tableUpdate, setTableUpdate] = useState(false);
   useEffect(() => {
     axios
-      .get(" http://localhost:8001/getPermissions")
+      .get(" https://node-service-ihr4.onrender.com/getPermissions")
       .then((res) => {
         if (res.data.Status === "Success") {
           setPermissionTable(res.data.Result);
@@ -31,7 +31,7 @@ const Permissions = () => {
 
   const handleDelete = (id) => {
     axios
-    .delete(" http://localhost:8001/deletePerm/"+ id)
+    .delete(" https://node-service-ihr4.onrender.com/deletePerm/"+ id)
     .then((res) => {
       if (res.data.Status === "Success") {
         alert("Success");

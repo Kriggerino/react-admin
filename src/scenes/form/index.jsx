@@ -12,7 +12,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
   const [permDDList, setPermDDList] = useState([]);
   const handleFormSubmit = (values) => {
     axios
-      .post(" http://localhost:8001/signup", values)
+      .post(" https://node-service-ihr4.onrender.com/signup", values)
       .then((res) => {
         console.log(res);
         handleClose();
@@ -25,7 +25,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
     if (permission.user_create !== 1) {
       navigate("/denyaccess");
     } else {
-      axios.get("http://localhost:8001/getPermDDList").then((res) => {
+      axios.get("https://node-service-ihr4.onrender.com/getPermDDList").then((res) => {
         //const resultArray = res.data.Result.map((obj) => obj.access_name);
         setPermDDList(res.data.Result);
         console.log(permDDList);
