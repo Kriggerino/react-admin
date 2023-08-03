@@ -67,7 +67,7 @@ function App() {
           setIsLoggedIn(true);
           console.log(res.data.Result);
           handleUserData(res.data.Result);
-          setPermission(res.data.Permission);
+          setPermission(res.data.Permission[0]);
         } else {
           navigate("/");
         }
