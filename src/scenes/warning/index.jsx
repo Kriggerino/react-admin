@@ -14,6 +14,7 @@ import BuildIcon from "@mui/icons-material/Build";
 const Warning = ({ userid, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [tableUpdate, setTableUpdate] = useState(false);
   const [apiData, setApiData] = useState({
     id: "",
     message: "",
@@ -21,6 +22,7 @@ const Warning = ({ userid, permission }) => {
     status_info: "",
     contact: "",
     username: "",
+    system: "",
   });
   const [filter, setFilter] = useState({
     type: "",
@@ -38,13 +40,14 @@ const Warning = ({ userid, permission }) => {
         .then((res) => {
           if (res.data.Status === "Success") {
             setApiData(res.data.Result);
+            setTableUpdate(false);
           } else {
             alert("Error");
           }
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [tableUpdate]);
 
   const warningSearch = () => {
     console.log(filter);
@@ -65,7 +68,7 @@ const Warning = ({ userid, permission }) => {
       .delete(" http://localhost:8001/deleteWarning/" + id)
       .then((res) => {
         if (res.data.Status === "Success") {
-          window.location.reload();
+          setTableUpdate(true);
         } else {
           alert("Error");
         }
@@ -125,8 +128,8 @@ const Warning = ({ userid, permission }) => {
       width: 80,
     },
     {
-      field: "contact",
-      headerName: "Mối liên lạc",
+      field: "system_name",
+      headerName: "Hệ thống liên quan",
       width: 220,
     },
     {
