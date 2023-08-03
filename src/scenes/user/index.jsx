@@ -134,9 +134,6 @@ const User = ({ permission }) => {
   ];
 
   useEffect(() => {
-    if (permission.user_read !== 1) {
-      navigate("/denyaccess");
-    } else {
       axios
         .get(" https://node-service-ihr4.onrender.com/getUser")
         .then((res) => {
@@ -148,7 +145,6 @@ const User = ({ permission }) => {
           }
         })
         .catch((err) => console.log(err));
-    }
   }, [tableUpdate]);
 
   return (
