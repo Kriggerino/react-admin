@@ -12,7 +12,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
   const [permDDList, setPermDDList] = useState([]);
   const handleFormSubmit = (values) => {
     axios
-      .post(" https://node-service-ihr4.onrender.com/signup", values)
+      .post("https://node-service-ihr4.onrender.com/signup", values)
       .then((res) => {
         console.log(res);
         handleClose();
