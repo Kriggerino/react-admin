@@ -152,7 +152,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
         </Box>
         <Box display="flex" justifyContent="space-between" mt="20px">
           <Button
-            onClick={handleSubmit}
+            onClick={handleFormSubmit}
             type="submit"
             color="secondary"
             variant="contained"
