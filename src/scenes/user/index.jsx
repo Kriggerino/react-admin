@@ -115,7 +115,11 @@ const User = ({ permission }) => {
         return (
           <div>
             <Button>
-              <Link  style={{ textDecoration: "none", color: "#423f3f" }} to={`/user/userEdit/` + params.row._id} className="btn">
+              <Link
+                style={{ textDecoration: "none", color: "#423f3f" }}
+                to={`/user/userEdit/` + params.row._id}
+                className="btn"
+              >
                 <BuildIcon />
               </Link>
             </Button>
@@ -134,6 +138,9 @@ const User = ({ permission }) => {
   ];
 
   useEffect(() => {
+    if (permission.user_read !== 1) {
+      navigate("/denyaccess");
+    } else {
       axios
         .get(" https://node-service-ihr4.onrender.com/getUser")
         .then((res) => {
@@ -145,6 +152,7 @@ const User = ({ permission }) => {
           }
         })
         .catch((err) => console.log(err));
+    }
   }, [tableUpdate]);
 
   return (
@@ -159,7 +167,7 @@ const User = ({ permission }) => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
-            fontSize:"0.85rem",
+            fontSize: "0.85rem",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
@@ -167,7 +175,7 @@ const User = ({ permission }) => {
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "rgba(244, 245, 250, 0.78)",
             borderBottom: "1px grey solid",
-            fontSize:"0.85rem",
+            fontSize: "0.85rem",
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],

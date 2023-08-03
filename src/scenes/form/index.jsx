@@ -26,19 +26,23 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
       .then((res) => {
         handleClose();
         setTableUpdate(true);
-        navigate("/user")
+        navigate("/user");
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    axios
-      .get("https://node-service-ihr4.onrender.com/getPermDDList")
-      .then((res) => {
-        //const resultArray = res.data.Result.map((obj) => obj.access_name);
-        setPermDDList(res.data.Result);
-        console.log(permDDList);
-      });
+    if (permission.user_create !== 1) {
+      navigate("/denyaccess");
+    } else {
+      axios
+        .get("https://node-service-ihr4.onrender.com/getPermDDList")
+        .then((res) => {
+          //const resultArray = res.data.Result.map((obj) => obj.access_name);
+          setPermDDList(res.data.Result);
+          console.log(permDDList);
+        });
+    }
   }, []);
 
   return (
