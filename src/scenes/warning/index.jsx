@@ -28,6 +28,7 @@ const Warning = ({ userid, permission }) => {
     type: "",
     status: "",
     name: "",
+    system: "",
   });
   const navigate = useNavigate();
   //On load, get data

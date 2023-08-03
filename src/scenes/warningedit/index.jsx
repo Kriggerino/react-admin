@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import { Box, Button, TextField, MenuItem } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-const WarningEdit = ({permission}) => {
+const WarningEdit = ({ permission }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const { id } = useParams();
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ const WarningEdit = ({permission}) => {
     message_type: "",
     contact: "",
     status: "",
+    system: "",
   });
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const WarningEdit = ({permission}) => {
             message_type: res.data.Result[0].message_type,
             contact: res.data.Result[0].contact,
             status: res.data.Result[0].status,
+            system: res.data.Result[0].system_id,
           });
         })
         .catch((err) => console.log(err));
@@ -103,6 +105,20 @@ const WarningEdit = ({permission}) => {
           >
             <MenuItem value={0}>Chờ xử lý</MenuItem>
             <MenuItem value={1}>Đã xử lý</MenuItem>
+          </TextField>
+          <TextField
+            fullWidth
+            variant="filled"
+            select
+            label="Hệ thống"
+            sx={{ gridColumn: "span 2" }}
+            defaultValue={0}
+            value={data.system}
+            onChange={(e) => setData({ ...data, system: e.target.value })}
+          >
+            <MenuItem value={1}>VO Service</MenuItem>
+            <MenuItem value={2}>Hardware</MenuItem>
+            <MenuItem value={3}>Network</MenuItem>
           </TextField>
         </Box>
         <Box display="flex" justifyContent="end" mt="20px">

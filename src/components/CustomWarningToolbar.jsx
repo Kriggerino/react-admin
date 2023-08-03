@@ -40,7 +40,7 @@ const CustomWarningToolbar = ({
           gap: "50px",
           ml: 0,
           mr: 0,
-          width: "60%",
+          width: "75%",
           justifyContent: "space-between",
         }}
         maxWidth="false"
@@ -73,6 +73,19 @@ const CustomWarningToolbar = ({
         </TextField>
         <TextField
           type="text"
+          select
+          label="Hệ thống"
+          name="system"
+          sx={{ width: "25%", mt: 2, mb: 2, p: 0 }}
+          value={filter.system}
+          onChange={(e) => setFilter({ ...filter, system: e.target.value })}
+        >
+          <MenuItem value={1}>VO Service</MenuItem>
+          <MenuItem value={2}>Hardware</MenuItem>
+          <MenuItem value={3}>Network</MenuItem>
+        </TextField>
+        <TextField
+          type="text"
           label="Tên cảnh báo"
           name="name"
           sx={{ width: "25%", mt: 2, mb: 2, p: 0 }}
@@ -83,10 +96,10 @@ const CustomWarningToolbar = ({
       <Container
         sx={{
           display: "flex",
-          width: "30%",
+          width: "20%",
           ml: 0,
           mr: 0,
-          gap: "30px",
+          gap: "20px",
           pt: 2,
           pb: 2,
           justifyContent: "end",
@@ -96,7 +109,7 @@ const CustomWarningToolbar = ({
           color="secondary"
           variant="contained"
           onClick={warningSearch}
-          sx={{  pt: 2, pb: 2 }}
+          sx={{  pt: 1.5, pb: 1.5 }}
         >
           Tìm kiếm
         </Button>
@@ -106,7 +119,7 @@ const CustomWarningToolbar = ({
         <GridToolbarExport
           color="secondary"
           variant="contained"
-          sx={{  pt: 2, pb: 2  }}
+          sx={{  pt: 1.25, pb: 1.25  }}
           csvOptions={{
             fileName: "CB",
             utf8WithBom: true,
