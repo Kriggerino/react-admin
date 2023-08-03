@@ -18,10 +18,9 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
     password: "",
     contact: "",
     address: "",
-    access:"",
-  })
+    access: "",
+  });
 
-  
   const handleFormSubmit = () => {
     axios
       .post("https://node-service-ihr4.onrender.com/signup", values)
@@ -34,17 +33,13 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
   };
 
   useEffect(() => {
-    if (permission.user_create !== 1) {
-      navigate("/denyaccess");
-    } else {
-      axios
-        .get("https://node-service-ihr4.onrender.com/getPermDDList")
-        .then((res) => {
-          //const resultArray = res.data.Result.map((obj) => obj.access_name);
-          setPermDDList(res.data.Result);
-          console.log(permDDList);
-        });
-    }
+    axios
+      .get("https://node-service-ihr4.onrender.com/getPermDDList")
+      .then((res) => {
+        //const resultArray = res.data.Result.map((obj) => obj.access_name);
+        setPermDDList(res.data.Result);
+        console.log(permDDList);
+      });
   }, []);
 
   return (
@@ -75,7 +70,9 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             variant="filled"
             type="text"
             label="Họ thật"
-            onChange={(e) => setValues({ ...values, firstName: e.target.value })}
+            onChange={(e) =>
+              setValues({ ...values, firstName: e.target.value })
+            }
             value={values.firstName}
             name="firstName"
             sx={{ gridColumn: "span 2" }}
