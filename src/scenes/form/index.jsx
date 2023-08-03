@@ -50,7 +50,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
           handleChange,
           handleSubmit,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form>
             <Box
               display="grid"
               gap="30px"
@@ -177,6 +177,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             </Box>
             <Box display="flex" justifyContent="space-between" mt="20px">
               <Button
+                onClick={handleSubmit}
                 type="submit"
                 color="secondary"
                 variant="contained"
