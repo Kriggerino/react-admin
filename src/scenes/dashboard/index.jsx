@@ -20,20 +20,11 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get(" https://node-service-ihr4.onrender.com/authcheck", {
-        headers: {
-          "access-token": localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        if (res.data.valid) {
-          setIsLoggedIn(true);
-          handleUserData(res.data.Result);
-        } else {
-          navigate("/");
-        }
-      });
+    if (permission) {
+      setIsLoggedIn(true);
+    } else {
+      navigate("/");
+    }
   }, []);
   return (
     <Box m="20px">
@@ -62,7 +53,9 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
               fontWeight: "bold",
               padding: "10px 20px",
             }}
-            onClick={() => {console.log(permission)}}
+            onClick={() => {
+              console.log(permission);
+            }}
           >
             Check Permission
           </Button>
