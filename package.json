@@ -24,6 +24,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "atomic-spinner": "^1.2.8",
     "axios": "^1.4.0",
     "formik": "^2.4.2",
     "gh-pages": "^5.0.0",

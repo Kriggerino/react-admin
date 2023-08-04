@@ -21,6 +21,7 @@ import WarningEdit from "./scenes/warningedit";
 import DenyAccess from "./scenes/denyaccess";
 import WarningDetails from "./scenes/warningdetails";
 import Permissions from "./scenes/permissions";
+import LoadingPage from "./components/LoadingPage";
 function App() {
   const navigate = useNavigate();
   const [theme, colorMode] = useMode();
@@ -85,7 +86,7 @@ function App() {
       <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <div className="app">
-          Loading...
+          <LoadingPage/>
         </div>
       </ThemeProvider>
       </ColorModeContext.Provider>
