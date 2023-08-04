@@ -22,7 +22,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
 
   const handleFormSubmit = () => {
     axios
-      .post("http://localhost:8001/signup", values)
+      .post("https://node-service-ihr4.onrender.com/signup", values)
       .then((res) => {
         handleClose();
         setTableUpdate(true);
@@ -35,7 +35,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
       navigate("/denyaccess");
     } else {
       axios
-        .get("http://localhost:8001/getPermDDList")
+        .get("https://node-service-ihr4.onrender.com/getPermDDList")
         .then((res) => {
           //const resultArray = res.data.Result.map((obj) => obj.access_name);
           setPermDDList(res.data.Result);
