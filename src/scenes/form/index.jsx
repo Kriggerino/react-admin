@@ -129,8 +129,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             name="address"
             sx={{ gridColumn: "span 4" }}
           />
-          <Box>
-            <label htmlFor="email">Quyền truy cập</label>
+          <Box sx={{width: "100%"}}>
             <TextField
               fullWidth
               select
