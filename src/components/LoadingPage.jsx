@@ -5,9 +5,15 @@ const LoadingPage = () => {
   return (
     <Box sx={{ justifyContent: "center", mx: "auto", my: "auto" }}>
       <AtomicSpinner />
-      <Typography variant="h2" color={`#e0e0e0`} sx={{ justifyContent: "center", mx: "auto" }}>
-        Loading...
-      </Typography>
+      <Box sx={{display: "flex", justifyContent: "center", mx: "auto"}}>
+        <Typography
+          variant="h2"
+          color={`#e0e0e0`}
+          sx={{ pt: 3 }}
+        >
+          Loading...
+        </Typography>
+      </Box>
     </Box>
   );
 };
