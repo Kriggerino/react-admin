@@ -53,33 +53,39 @@ const User = ({ permission }) => {
       headerName: "Tên người dùng",
       flex: 1,
       cellClassName: "name-column--cell",
+      headerAlign: "center",
     },
     {
       field: "firstname",
       headerName: "Họ",
       flex: 1,
       cellClassName: "name-column--cell",
+      headerAlign: "center",
     },
     {
       field: "lastname",
       headerName: "Tên",
       flex: 1,
       cellClassName: "name-column--cell",
+      headerAlign: "center",
     },
     {
       field: "phone",
       headerName: "Số điện thoại",
       flex: 1,
+      headerAlign: "center",
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
+      headerAlign: "center",
     },
     {
       field: "accessLevel",
       headerName: "Quyền truy cập",
       flex: 1,
+      headerAlign: "center",
       renderCell: ({ row: { access } }) => {
         return (
           <Box
