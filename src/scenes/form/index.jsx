@@ -129,25 +129,24 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             name="address"
             sx={{ gridColumn: "span 4" }}
           />
-          <Box sx={{width: "100%"}}>
-            <TextField
-              fullWidth
-              select
-              variant="filled"
-              type="text"
-              label="Quyền truy cập"
-              onChange={(e) => setValues({ ...values, access: e.target.value })}
-              value={values.access}
-              name="access"
-              sx={{ gridColumn: "span 4" }}
-            >
-              {permDDList.map(({ access_name }) => (
-                <MenuItem key={access_name} value={access_name}>
-                  {access_name}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Box>
+
+          <TextField
+            fullWidth
+            select
+            variant="filled"
+            type="text"
+            label="Quyền truy cập"
+            onChange={(e) => setValues({ ...values, access: e.target.value })}
+            value={values.access}
+            name="access"
+            sx={{ gridColumn: "span 4" }}
+          >
+            {permDDList.map(({ access_name }) => (
+              <MenuItem key={access_name} value={access_name}>
+                {access_name}
+              </MenuItem>
+            ))}
+          </TextField>
         </Box>
         <Box display="flex" justifyContent="space-between" mt="20px">
           <Button
