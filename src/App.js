@@ -26,7 +26,7 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
- 
+  const [loadingState, setLoadingState]  = useState(true);
   const [userdata, setUserdata] = useState({
     id: "",
     username: "",
@@ -68,8 +68,10 @@ function App() {
           handleUserData(res.data.Result);
           setPermission(res.data.Permission[0]);
           console.log(permission);
+          setLoadingState(false);
         } else {
           navigate("/");
+          setLoadingState(false);
         }
       });
 
@@ -78,6 +80,17 @@ function App() {
       navigate("/");
     }
   }, []);
+  if(loadingState){
+    return (
+      <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <div className="app">
+          Loading...
+        </div>
+      </ThemeProvider>
+      </ColorModeContext.Provider>
+    );
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>
