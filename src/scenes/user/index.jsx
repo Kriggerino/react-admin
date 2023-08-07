@@ -54,6 +54,7 @@ const User = ({ permission }) => {
       flex: 1,
       cellClassName: "name-column--cell",
       headerAlign: "center",
+      align: "center",
     },
     {
       field: "firstname",
@@ -61,6 +62,7 @@ const User = ({ permission }) => {
       flex: 1,
       cellClassName: "name-column--cell",
       headerAlign: "center",
+      align: "center",
     },
     {
       field: "lastname",
@@ -68,18 +70,21 @@ const User = ({ permission }) => {
       flex: 1,
       cellClassName: "name-column--cell",
       headerAlign: "center",
+      align: "center",
     },
     {
       field: "phone",
       headerName: "Số điện thoại",
       flex: 1,
       headerAlign: "center",
+      align: "center",
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
       headerAlign: "center",
+      align: "center",
     },
     {
       field: "accessLevel",
@@ -117,6 +122,8 @@ const User = ({ permission }) => {
       field: "action",
       headerName: "Thao tác",
       flex: 1,
+      align: "center",
+      headerAlign: "center",
       renderCell: (params) => {
         return (
           <div>
