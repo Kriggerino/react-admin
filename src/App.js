@@ -23,6 +23,7 @@ import WarningDetails from "./scenes/warningdetails";
 import Permissions from "./scenes/permissions";
 import LoadingPage from "./components/LoadingPage";
 import VOS from "./scenes/vos";
+import Email from "./scenes/mail";
 function App() {
   const navigate = useNavigate();
   const [theme, colorMode] = useMode();
@@ -151,6 +152,7 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/permission" element={<Permissions />} />
               <Route path="/denyaccess" element={<DenyAccess />} />
+              <Route path="/mailing" element={<Email/>} />
             </Routes>
           </main>
         </div>

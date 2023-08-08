@@ -18,6 +18,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SecurityIcon from "@mui/icons-material/Security";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import GppMaybeIcon from "@mui/icons-material/GppMaybe";
+import EmailIcon from '@mui/icons-material/Email';
 import axios from "axios";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -229,6 +230,13 @@ const Sidebar = (props) => {
               title="FAQ Page"
               to="/faq"
               icon={<HelpOutlineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item 
+              title="Email"
+              to="/mailing"
+              icon={<EmailIcon />}
               selected={selected}
               setSelected={setSelected}
             />
