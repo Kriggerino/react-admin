@@ -16,8 +16,8 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SecurityIcon from "@mui/icons-material/Security";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import GppMaybeIcon from '@mui/icons-material/GppMaybe';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import GppMaybeIcon from "@mui/icons-material/GppMaybe";
 import axios from "axios";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -29,12 +29,11 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       onClick={() => setSelected(title)}
       icon={icon}
     >
-      <Typography>{title}</Typography>
+      <Typography variant="h5">{title}</Typography>
       <Link to={to} />
     </MenuItem>
   );
 };
-
 
 const SubItem = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -42,7 +41,6 @@ const SubItem = ({ title, to, icon, selected, setSelected }) => {
       active={selected === title}
       style={{
         color: `#e0e0e0`,
-        paddingLeft: "20px"
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -176,17 +174,17 @@ const Sidebar = (props) => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Box sx={{display:"flex"}}>
-            <Item
-              title="Warning"
-              to="/warning"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <IconButton onClick={handleChange}>
-              <KeyboardArrowDownIcon  style={{ color: `#e0e0e0` }} />
-            </IconButton>
+            <Box sx={{ display: "flex" }}>
+              <Item
+                title={ isCollapsed ? "" : "Warning" }
+                to="/warning"
+                icon={<ReceiptOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <IconButton onClick={handleChange}>
+                <KeyboardArrowDownIcon style={{ color: `#e0e0e0` }} />
+              </IconButton>
             </Box>
             <Collapse in={checked}>
               <SubItem
@@ -241,7 +239,7 @@ const Sidebar = (props) => {
               onClick={handleLogout}
               icon={<ExitToAppIcon />}
             >
-              <Typography>Logout</Typography>
+              <Typography variant="h5">Logout</Typography>
             </MenuItem>
           </Box>
         </Menu>

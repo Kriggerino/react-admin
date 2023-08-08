@@ -22,6 +22,7 @@ import DenyAccess from "./scenes/denyaccess";
 import WarningDetails from "./scenes/warningdetails";
 import Permissions from "./scenes/permissions";
 import LoadingPage from "./components/LoadingPage";
+import VOS from "./scenes/vos";
 function App() {
   const navigate = useNavigate();
   const [theme, colorMode] = useMode();
@@ -132,13 +133,15 @@ function App() {
                   <Warning userid={userdata.id} permission={permission} />
                 }
               />
-              {/* <Route
-                path="/warning/warningEdit"
-                element={<WarningEdit access={userdata.access} id={id}/>}
-              /> */}
               <Route
                 path="/warning/warningEdit/:id"
                 element={<WarningEdit permission={permission} />}
+              />
+              <Route 
+                path="/warning/VOS"
+                element={
+                  <VOS permission={permission} />
+                }
               />
               <Route
                 path="/warning/warningDetails/:id"
