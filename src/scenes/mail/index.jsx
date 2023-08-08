@@ -3,7 +3,9 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const Email = () => {
-  const [targetMail, setTargetMail] = useState("");
+  const [targetMail, setTargetMail] = useState({
+    targetMail: "",
+  });
   const handleEmail = () => {
     axios
       .post(" https://node-service-ihr4.onrender.com/mail", targetMail)
@@ -22,8 +24,8 @@ const Email = () => {
         variant="filled"
         type="text"
         label="Địa chỉ"
-        onChange={(e) => setTargetMail(e.target.value)}
-        value={targetMail}
+        onChange={(e) => setTargetMail({...targetMail, targetMail: e.target.value})}
+        value={targetMail.targetMail}
         name="targetMail"
       />
 
