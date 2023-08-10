@@ -20,7 +20,6 @@ const Email = () => {
   return (
     <Box>
       <TextField
-        fullWidth
         variant="filled"
         type="text"
         label="Địa chỉ"
@@ -29,7 +28,7 @@ const Email = () => {
         name="targetMail"
       />
 
-      <Button onClick={handleEmail}>Email check</Button>
+      <Button  variant="contained" color="secondary" onClick={handleEmail}>Email check</Button>
     </Box>
   );
 };
