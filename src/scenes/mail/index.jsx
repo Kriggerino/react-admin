@@ -19,16 +19,28 @@ const Email = () => {
   };
   return (
     <Box>
-      <TextField
-        variant="filled"
-        type="text"
-        label="Địa chỉ"
-        onChange={(e) => setTargetMail({...targetMail, targetMail: e.target.value})}
-        value={targetMail.targetMail}
-        name="targetMail"
-      />
+      <Box sx={{ width: "100%",  p:2 }}>
+        <TextField
+          sx={{ width: "50%", mx: "auto", display: "flex" }}
+          variant="filled"
+          type="text"
+          label="Địa chỉ"
+          onChange={(e) =>
+            setTargetMail({ ...targetMail, targetMail: e.target.value })
+          }
+          value={targetMail.targetMail}
+          name="targetMail"
+        />
+      </Box>
 
-      <Button  variant="contained" color="secondary" onClick={handleEmail}>Email check</Button>
+      <Button
+        sx={{ mx: "auto", display: "flex" }}
+        variant="contained"
+        color="secondary"
+        onClick={handleEmail}
+      >
+        Email check
+      </Button>
     </Box>
   );
 };
