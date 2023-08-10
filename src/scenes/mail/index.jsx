@@ -3,12 +3,12 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const Email = () => {
-  const [targetMail, setTargetMail] = useState({
+  const [data, setData] = useState({
     targetMail: "",
   });
   const handleEmail = () => {
     axios
-      .post(" https://node-service-ihr4.onrender.com/mail", targetMail)
+      .post(" https://node-service-ihr4.onrender.com/mail", data)
       .then((res) => {
         if (res.msg === "Success") {
           console.log("success");
@@ -26,9 +26,9 @@ const Email = () => {
           type="text"
           label="Địa chỉ"
           onChange={(e) =>
-            setTargetMail({ ...targetMail, targetMail: e.target.value })
+            setData({ ...data, targetMail: e.target.value })
           }
-          value={targetMail.targetMail}
+          value={data.targetMail}
           name="targetMail"
         />
       </Box>
