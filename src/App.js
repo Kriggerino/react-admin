@@ -70,7 +70,6 @@ function App() {
           setIsLoggedIn(true);
           handleUserData(res.data.Result);
           setPermission(res.data.Permission[0]);
-          console.log(permission);
           setLoadingState(false);
         } else {
           navigate("/");
