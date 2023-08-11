@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
@@ -15,6 +15,7 @@ const Warning = ({ userid, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableUpdate, setTableUpdate] = useState(false);
+  const [selectedId, setSelectedId] = useState([]);
   const [apiData, setApiData] = useState({
     id: "",
     message: "",
@@ -76,6 +77,10 @@ const Warning = ({ userid, permission }) => {
       })
       .catch((err) => console.log(err));
   };
+
+  const handleDeleteMultiple = (selectedId) => {
+    console.log(selectedId);
+  }
 
   //Datagrid columns
 
@@ -229,11 +234,18 @@ const Warning = ({ userid, permission }) => {
           },
         }}
       >
+        <Button onClick={handleDeleteMultiple} variant="contained" color="error">
+          Delete Selected
+        </Button>
         <DataGrid
           rows={apiData}
           getRowId={apiData.id}
           columns={columns}
           checkboxSelection
+          disableRowSelectionOnClick
+          onRowSelectionModelChange={(ids) =>{
+            setSelectedId(ids);
+          }}
           slots={{ toolbar: CustomWarningToolbar }}
           slotProps={{
             toolbar: {
