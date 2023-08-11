@@ -41,7 +41,7 @@ const WarningEdit = ({ permission }) => {
     axios
       .put(" https://node-service-ihr4.onrender.com/updateWarning/" + id, data)
       .then((res) => {
-        if (res.data.Status === "Success") {
+        if (res.data.Status === "success") {
           console.log("Data edited");
           navigate("/warning");
         }
