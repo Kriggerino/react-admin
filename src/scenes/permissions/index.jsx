@@ -173,7 +173,7 @@ const Permissions = () => {
             <IconButton
               className="btn"
               sx={{ padding: "5px", m: 0, minWidth: 0, color: "#423f3f" }}
-              //onClick = {handleDelete(params.row.id)}
+              onClick = {(e) => handleDelete(params.row.id)}
             >
               <Link style={{ textDecoration: "none", color: "#423f3f" }}>
                 <DeleteIcon />
