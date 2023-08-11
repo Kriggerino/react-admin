@@ -60,7 +60,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .post("https://node-service-ihr4.onrender.com/authcheck", {
+      .get("https://node-service-ihr4.onrender.com/authcheck", {
         headers: {
           "access-token": localStorage.getItem("token"),
         },
