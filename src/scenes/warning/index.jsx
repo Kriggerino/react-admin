@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import CustomWarningToolbar from "../../components/CustomWarningToolbar";
+import Modal from "@mui/material/Modal";
 //Icons
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,6 +17,20 @@ const Warning = ({ userid, permission }) => {
   const colors = tokens(theme.palette.mode);
   const [tableUpdate, setTableUpdate] = useState(false);
   const [selectedId, setSelectedId] = useState([]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 500,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
   const [apiData, setApiData] = useState({
     id: "",
     message: "",
@@ -38,7 +53,7 @@ const Warning = ({ userid, permission }) => {
       navigate("/denyaccess");
     } else {
       axios
-        .get(" https://node-service-ihr4.onrender.com/getWarning")
+        .get("http://localhost:8001/getWarning")
         .then((res) => {
           if (res.data.Status === "Success") {
             setApiData(res.data.Result);
@@ -54,7 +69,7 @@ const Warning = ({ userid, permission }) => {
   const warningSearch = () => {
     console.log(filter);
     axios
-      .post(" https://node-service-ihr4.onrender.com/getWarningfilter", filter)
+      .post("http://localhost:8001/getWarningfilter", filter)
       .then((res) => {
         if (res.data.Status === "Success") {
           setApiData(res.data.Result);
@@ -67,7 +82,7 @@ const Warning = ({ userid, permission }) => {
 
   const handleDelete = (id) => {
     axios
-      .delete(" https://node-service-ihr4.onrender.com/deleteWarning/" + id)
+      .delete("http://localhost:8001/deleteWarning/" + id)
       .then((res) => {
         if (res.data.Status === "Success") {
           setTableUpdate(true);
@@ -80,7 +95,7 @@ const Warning = ({ userid, permission }) => {
 
   const handleDeleteMultiple = (selectedId) => {
     console.log(selectedId);
-  }
+  };
 
   //Datagrid columns
 
@@ -137,8 +152,8 @@ const Warning = ({ userid, permission }) => {
       field: "system_name",
       headerName: "Hệ thống liên quan",
       width: 220,
-      headerAlign: 'center',
-      align: 'center',
+      headerAlign: "center",
+      align: "center",
     },
     {
       field: "created_time",
@@ -210,7 +225,7 @@ const Warning = ({ userid, permission }) => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
-            fontSize:"0.85rem",
+            fontSize: "0.85rem",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
@@ -218,7 +233,7 @@ const Warning = ({ userid, permission }) => {
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "rgba(244, 245, 250, 0.78)",
             borderBottom: "1px grey solid",
-            fontSize:"0.85rem",
+            fontSize: "0.85rem",
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
@@ -234,16 +249,41 @@ const Warning = ({ userid, permission }) => {
           },
         }}
       >
-        <Button onClick={handleDeleteMultiple} variant="contained" color="error">
+        <Button onClick={handleOpen} variant="contained" color="error">
           Delete Selected
         </Button>
+
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Box sx={{ display: "flex", width: "100%", justifyContent: "center", py:2 }}>
+              <Typography variant="h5">Chắc chắn xóa?</Typography>
+            </Box>
+            <Box sx={{ justifyContent: "space-around", display: "flex", py:2 }}>
+              <Button variant="contained" color="secondary" onClick={handleDeleteMultiple}>
+                Xác nhận
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleClose}
+                color="secondary"
+              >
+                Đóng
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
         <DataGrid
           rows={apiData}
           getRowId={apiData.id}
           columns={columns}
           checkboxSelection
           disableRowSelectionOnClick
-          onRowSelectionModelChange={(ids) =>{
+          onRowSelectionModelChange={(ids) => {
             setSelectedId(ids);
           }}
           slots={{ toolbar: CustomWarningToolbar }}
