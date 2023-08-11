@@ -29,25 +29,25 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loadingState, setLoadingState] = useState(true);
+  const [loadingState, setLoadingState]  = useState(true);
   const [userdata, setUserdata] = useState({
     id: "",
     username: "",
     access: "",
   });
 
-  const [permission, setPermission] = useState({
+  const [permission , setPermission] = useState({
     access_name: "",
     user_create: false,
     user_read: false,
     user_write: false,
-    warning_create: false,
-    warning_read: false,
+    warning_create:false,
+    warning_read:false,
     warning_write: false,
     permission_create: false,
     permission_read: false,
     permission_write: false,
-  });
+  })
 
   const handleUserData = (data) => {
     setUserdata({
@@ -69,9 +69,8 @@ function App() {
         if (res.data.valid) {
           setIsLoggedIn(true);
           handleUserData(res.data.Result);
-          setPermission(res.data.Permission[0]).then(() => {
-            setLoadingState(false);
-          });
+          setPermission(res.data.Permission[0]);
+          setLoadingState(false);
         } else {
           navigate("/");
           setLoadingState(false);
@@ -83,14 +82,14 @@ function App() {
       navigate("/");
     }
   }, []);
-  if (loadingState) {
+  if(loadingState){
     return (
       <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <div className="app">
-            <LoadingPage />
-          </div>
-        </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <div className="app">
+          <LoadingPage/>
+        </div>
+      </ThemeProvider>
       </ColorModeContext.Provider>
     );
   }
@@ -138,9 +137,11 @@ function App() {
                 path="/warning/warningEdit/:id"
                 element={<WarningEdit permission={permission} />}
               />
-              <Route
+              <Route 
                 path="/warning/VOS"
-                element={<VOS permission={permission} />}
+                element={
+                  <VOS permission={permission} />
+                }
               />
               <Route
                 path="/warning/warningDetails/:id"
@@ -150,7 +151,7 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/permission" element={<Permissions />} />
               <Route path="/denyaccess" element={<DenyAccess />} />
-              <Route path="/mailing" element={<Email />} />
+              <Route path="/mailing" element={<Email/>} />
             </Routes>
           </main>
         </div>
