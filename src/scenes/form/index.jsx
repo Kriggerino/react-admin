@@ -102,7 +102,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="password"
             label="Password"
             onChange={(e) => setValues({ ...values, password: e.target.value })}
             value={values.password}
