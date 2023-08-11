@@ -132,6 +132,8 @@ const Warning = ({ userid, permission }) => {
       field: "system_name",
       headerName: "Hệ thống liên quan",
       width: 220,
+      headerAlign: 'center',
+      align: 'center',
     },
     {
       field: "created_time",
