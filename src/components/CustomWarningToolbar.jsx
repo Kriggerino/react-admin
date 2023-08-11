@@ -96,12 +96,11 @@ const CustomWarningToolbar = ({
       <Container
         sx={{
           display: "flex",
-          width: "20%",
+          width: "23%",
           ml: 0,
           mr: 0,
+          p: 0,
           gap: "20px",
-          pt: 2,
-          pb: 2,
           justifyContent: "end",
         }}
       >
@@ -109,7 +108,7 @@ const CustomWarningToolbar = ({
           color="secondary"
           variant="contained"
           onClick={warningSearch}
-          sx={{ pt: 2, pb: 2 }}
+          sx={{  fontSize: 12, fontWeight: "bold", py: 2 }}
         >
           Tìm kiếm
         </Button>
@@ -119,7 +118,7 @@ const CustomWarningToolbar = ({
         <GridToolbarExport
           color="secondary"
           variant="contained"
-          sx={{ pt: 2, pb: 2 }}
+          sx={{  fontSize: 12, fontWeight: "bold", py: 2 }}
           csvOptions={{
             fileName: "Cảnh báo",
             utf8WithBom: true,
