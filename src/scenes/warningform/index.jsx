@@ -31,7 +31,6 @@ const WarningForm = (props) => {
   }, []);
   return (
     <Box m="20px">
-      <Header title="Tạo cảnh báo" />
 
       <form>
         <Box

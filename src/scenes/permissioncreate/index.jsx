@@ -39,7 +39,6 @@ const PermCreate = ({handleClose, setTableUpdate}) => {
   };
   return (
     <Box sx={{ width: "100%", justifyContent: "center", display: "flex" }}>
-      <Header title="Tạo quyền" />
       <Box sx={{ p: 1, mt: 2, width: "100%" }}>
         <TextField
           variant="filled"

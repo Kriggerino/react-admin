@@ -94,7 +94,16 @@ const Warning = ({ userid, permission }) => {
   };
 
   const handleDeleteMultiple = (selectedId) => {
-    console.log(selectedId);
+    axios
+      .delete("https://node-service-ihr4.onrender.com/deleteMultipleWarning/", selectedId)
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          setTableUpdate(true);
+        } else {
+          alert("Error");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   //Datagrid columns
@@ -215,7 +224,6 @@ const Warning = ({ userid, permission }) => {
   ];
   return (
     <Box m="20px">
-      <Header title="Cảnh báo" subtitle="Danh sách cảnh báo" />
       <Box
         m="10px 0 0 0"
         height="85vh"

@@ -47,7 +47,6 @@ const WarningDetails = ({permission}) => {
   }, []);
   return (
     <Box m="20px">
-      <Header title="Chi tiết" />
 
       <form>
         <Card

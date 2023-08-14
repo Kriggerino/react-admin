@@ -232,7 +232,6 @@ const Permissions = () => {
   
   return (
     <Box m="20px">
-      <Header title="Phân quyền" />
       <Box
         m="10px 0 0 0"
         height="85vh"

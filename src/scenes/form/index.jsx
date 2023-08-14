@@ -46,7 +46,6 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
 
   return (
     <Box m="20px">
-      <Header title="Tạo mới người dùng" subtitle="Create a New User Profile" />
 
       <form>
         <Box

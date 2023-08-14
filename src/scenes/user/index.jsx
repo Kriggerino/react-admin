@@ -170,7 +170,6 @@ const User = ({ permission }) => {
 
   return (
     <Box m="20px">
-      <Header title="Người dùng" subtitle="Danh sách người dùng" />
       <Box
         m="10px 0 0 0"
         height="85vh"

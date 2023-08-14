@@ -56,7 +56,6 @@ const UserEdit = ({access}) => {
   };
   return (
     <Box m="20px">
-      <Header title="Edit User" />
 
       <form onSubmit={handleSubmit}>
         <Box

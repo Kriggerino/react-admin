@@ -50,7 +50,6 @@ const WarningEdit = ({ permission }) => {
   };
   return (
     <Box m="20px">
-      <Header title="Sửa cảnh báo" />
 
       <form>
         <Box
