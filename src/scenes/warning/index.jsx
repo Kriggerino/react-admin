@@ -94,10 +94,13 @@ const Warning = ({ userid, permission }) => {
   };
 
   const handleDeleteMultiple = (selectedId) => {
+    console.log(selectedId);
     axios
-      .delete("https://node-service-ihr4.onrender.com/deleteMultipleWarning/", selectedId)
+      .post("https://node-service-ihr4.onrender.com/deleteMultipleWarning/", selectedId)
       .then((res) => {
+        setSelectedId([]);
         if (res.data.Status === "Success") {
+          handleClose();
           setTableUpdate(true);
         } else {
           alert("Error");
@@ -272,7 +275,7 @@ const Warning = ({ userid, permission }) => {
               <Typography variant="h5">Chắc chắn xóa?</Typography>
             </Box>
             <Box sx={{ justifyContent: "space-around", display: "flex", py:2 }}>
-              <Button variant="contained" color="secondary" onClick={handleDeleteMultiple}>
+              <Button variant="contained" color="secondary" onClick={(e) => {handleDeleteMultiple(selectedId)}}>
                 Xác nhận
               </Button>
               <Button
