@@ -5,6 +5,7 @@ import React, { useState } from "react";
 const Email = () => {
   const [data, setData] = useState({
     targetMail: "",
+    message: "",
   });
   const handleEmail = () => {
     axios
@@ -30,6 +31,17 @@ const Email = () => {
           }
           value={data.targetMail}
           name="targetMail"
+        />
+        <TextField
+          sx={{ width: "70%", mx: "auto", display: "flex", minHeight: "300px" }}
+          variant="filled"
+          type="text"
+          label="Tin nhắn"
+          onChange={(e) =>
+            setData({ ...data, message: e.target.value })
+          }
+          value={data.message}
+          name="message"
         />
       </Box>
 
