@@ -36,7 +36,6 @@ const Email = () => {
           sx={{ width: "50%", mx: "auto", display: "flex", minHeight: "300px", pt: 8 }}
           variant="filled"
           type="text"
-          label="Tin nhắn"
           multiline
           minRows={5}
           onChange={(e) =>
