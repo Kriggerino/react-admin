@@ -74,7 +74,7 @@ const Login = () => {
       email: "",
       password: "",
     },
-    validationSchema: basicSchema,
+
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit,
