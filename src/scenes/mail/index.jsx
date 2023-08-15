@@ -38,7 +38,7 @@ const Email = () => {
           type="text"
           label="Tin nhắn"
           multiline
-          rows={5}
+          minRows={5}
           onChange={(e) =>
             setData({ ...data, message: e.target.value })
           }
