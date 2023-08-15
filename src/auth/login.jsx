@@ -61,7 +61,7 @@ const Login = () => {
       .then(async (res) => {
         if (res.data.valid) {
           actions.resetForm();
-          localStorage.setItem("token", res.data.token);
+          await localStorage.setItem("token", res.data.token);
           navigate("/dashboard");
         } else {
           console.log("Incorrect data");
