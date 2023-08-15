@@ -65,6 +65,23 @@ const Sidebar = (props) => {
         localStorage.clear();
         navigate("/");
         props.setIsLoggedIn(false);
+        props.setUserdata({
+          id: "",
+          username: "",
+          access: "",
+        })
+        props.setPermission({
+          access_name: "",
+          user_create: false,
+          user_read: false,
+          user_write: false,
+          warning_create:false,
+          warning_read:false,
+          warning_write: false,
+          permission_create: false,
+          permission_read: false,
+          permission_write: false,
+        });
       })
       .catch((err) => console.log(err));
   };

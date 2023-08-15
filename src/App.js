@@ -105,6 +105,8 @@ function App() {
               username={userdata.username}
               access={userdata.access}
               setIsLoggedIn={setIsLoggedIn}
+              setUserdata={setUserdata}
+              setPermission={setPermission}
             />
           )}
           <main className="content">
