@@ -33,8 +33,9 @@ const Email = () => {
           name="targetMail"
         />
         <TextField
-          sx={{ width: "50%", mx: "auto", display: "flex", minHeight: "300px", pt: 8 }}
+          sx={{ width: "50%", mx: "auto", display: "flex", minHeight: "300px", mt: 8 }}
           variant="filled"
+          label="Tin nhắn"
           type="text"
           multiline
           minRows={5}
