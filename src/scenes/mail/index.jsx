@@ -33,10 +33,12 @@ const Email = () => {
           name="targetMail"
         />
         <TextField
-          sx={{ width: "70%", mx: "auto", display: "flex", minHeight: "300px" }}
+          sx={{ width: "70%", mx: "auto", display: "flex", minHeight: "300px", pt: 6 }}
           variant="filled"
           type="text"
           label="Tin nhắn"
+          multiline
+          maxRows={7}
           onChange={(e) =>
             setData({ ...data, message: e.target.value })
           }
