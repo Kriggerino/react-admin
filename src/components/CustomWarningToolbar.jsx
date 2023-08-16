@@ -3,7 +3,7 @@ import Modal from "@mui/material/Modal";
 import { GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import WarningForm from "../scenes/warningform";
+import WarningForm from "../scenes/warning/warningform";
 const CustomWarningToolbar = ({
   filter,
   setFilter,

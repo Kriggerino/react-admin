@@ -185,7 +185,7 @@ const Sidebar = (props) => {
             >
               Data
             </Typography>
-            {(permission.access_name === "admin") &&
+            {(props.permission.access_name === "admin") &&
               (<Item
                 title="Manage User"
                 to="/user"
@@ -194,6 +194,18 @@ const Sidebar = (props) => {
                 setSelected={setSelected}
               />
             )}
+            {(props.permission.access_name !== "admin") &&
+            (
+              <Item 
+                title="User Profile"
+                to="/"
+                icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            )
+
+            }
             <Box sx={{ display: "flex" }}>
               <Item
                 title={isCollapsed ? "" : "Warning"}
@@ -222,15 +234,15 @@ const Sidebar = (props) => {
                 setSelected={setSelected}
               />
             </Collapse>
-
-            <Item
+          {(props.permission.access_name === "admin") &&
+            (<Item
               title="Permissions"
               to="/permission"
               icon={<SecurityIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-
+            />)
+          }
             <Typography
               variant="h6"
               color={"#a3a3a3"}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, TextField } from "@mui/material";
-import Header from "../../components/Header";
+import Header from "../../../components/Header";
 import axios from "axios";
 const UserEdit = ({access}) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
