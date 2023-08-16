@@ -4,9 +4,8 @@ import Header from "../../components/Header";
 import { Box, Button, TextField, MenuItem } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-const WarningEdit = ({ permission }) => {
+const WarningEdit = ({ permission, id }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const { id } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState({
     message: "",

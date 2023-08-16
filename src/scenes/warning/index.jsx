@@ -11,15 +11,22 @@ import Modal from "@mui/material/Modal";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
+import WarningEdit from "../warningedit";
 
 const Warning = ({ userid, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableUpdate, setTableUpdate] = useState(false);
   const [selectedId, setSelectedId] = useState([]);
+  //Create modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  //Edit Modal
+  const [editOpen, setEditOpen] = useState(false);
+  const handleEditOpen = () => setEditOpen(true);
+  const handleEditClose = () => setEditOpen(false);
+  const [editId, setEditId] = useState(0);
   const style = {
     position: "absolute",
     top: "50%",
@@ -194,13 +201,13 @@ const Warning = ({ userid, permission }) => {
               gap: "10px",
             }}
           >
-            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>
-              <Link
-                to={`/warning/warningEdit/` + params.row.id}
-                style={{ textDecoration: "none", color: "#423f3f" }}
-              >
+            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}
+              onClick={(e) => {
+                setEditId(params.row.id);
+                setEditOpen(true);
+              }}
+            >             
                 <BuildIcon />
-              </Link>
             </IconButton>
             <IconButton
               onClick={(e) => handleDelete(params.row.id)}
@@ -211,14 +218,8 @@ const Warning = ({ userid, permission }) => {
                 <DeleteIcon />
               </Link>
             </IconButton>
-            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>
-              <Link
-                to={`/warning/warningDetails/` + params.row.id}
-                className="btn"
-                style={{ textDecoration: "none", color: "#423f3f" }}
-              >
+            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>       
                 <VisibilityIcon />
-              </Link>
             </IconButton>
           </Box>
         );
@@ -286,6 +287,16 @@ const Warning = ({ userid, permission }) => {
                 Đóng
               </Button>
             </Box>
+          </Box>
+        </Modal>
+        <Modal
+          open={editOpen}
+          onClose={handleEditClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <WarningEdit id={editId} permission={permission}/>
           </Box>
         </Modal>
         <DataGrid
