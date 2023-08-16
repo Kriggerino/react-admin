@@ -18,7 +18,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SecurityIcon from "@mui/icons-material/Security";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import GppMaybeIcon from "@mui/icons-material/GppMaybe";
-import EmailIcon from '@mui/icons-material/Email';
+import EmailIcon from "@mui/icons-material/Email";
 import axios from "axios";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -69,14 +69,14 @@ const Sidebar = (props) => {
           id: "",
           username: "",
           access: "",
-        })
+        });
         props.setPermission({
           access_name: "",
           user_create: false,
           user_read: false,
           user_write: false,
-          warning_create:false,
-          warning_read:false,
+          warning_create: false,
+          warning_read: false,
           warning_write: false,
           permission_create: false,
           permission_read: false,
@@ -185,16 +185,18 @@ const Sidebar = (props) => {
             >
               Data
             </Typography>
-            <Item
-              title="Manage User"
-              to="/user"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            {(permission.access_name === "admin") &&
+              (<Item
+                title="Manage User"
+                to="/user"
+                icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            )}
             <Box sx={{ display: "flex" }}>
               <Item
-                title={ isCollapsed ? "" : "Warning" }
+                title={isCollapsed ? "" : "Warning"}
                 to="/warning"
                 icon={<ReceiptOutlinedIcon />}
                 selected={selected}
@@ -250,7 +252,7 @@ const Sidebar = (props) => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item 
+            <Item
               title="Email"
               to="/mailing"
               icon={<EmailIcon />}
