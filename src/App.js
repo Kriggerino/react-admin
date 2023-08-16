@@ -12,13 +12,13 @@ import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import Login from "./auth/login.jsx";
 import "./index.css";
-import UserEdit from "./scenes/useredit";
+import UserEdit from "./scenes/user/useredit";
 import WarningEdit from "./scenes/warningedit";
-import DenyAccess from "./scenes/denyaccess";
-import WarningDetails from "./scenes/warningdetails";
+import DenyAccess from "./scenes/global/denyaccess";
+import WarningDetails from "./scenes/warning/warningdetails";
 import Permissions from "./scenes/permissions";
 import LoadingPage from "./components/LoadingPage";
-import VOS from "./scenes/vos";
+import VOS from "./scenes/warning/vos";
 import Email from "./scenes/mail";
 function App() {
   const navigate = useNavigate();
@@ -100,6 +100,7 @@ function App() {
               isSidebar={isSidebar}
               username={userdata.username}
               access={userdata.access}
+              permission={permission}
               setIsLoggedIn={setIsLoggedIn}
               setUserdata={setUserdata}
               setPermission={setPermission}
