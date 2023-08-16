@@ -119,7 +119,7 @@ const WarningEdit = ({ permission, id, handleEditClose }) => {
             <MenuItem value={3}>Network</MenuItem>
           </TextField>
         </Box>
-        <Box display="flex" justifyContent="space-between"  mt="20px">
+        <Box display="flex" justifyContent="space-between"  mt="30px">
           <Button
             type="submit"
             onClick={handleSubmit}
