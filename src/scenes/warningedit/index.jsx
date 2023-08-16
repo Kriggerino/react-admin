@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import { Box, Button, TextField, MenuItem } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-const WarningEdit = ({ permission, id }) => {
+const WarningEdit = ({ permission, id, handleEditClose }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -53,7 +53,7 @@ const WarningEdit = ({ permission, id }) => {
       <form>
         <Box
           display="grid"
-          gap="30px"
+          gap="50px"
           gridTemplateColumns="repeat(4, minmax(0, 1fr))"
           sx={{
             "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
@@ -119,7 +119,7 @@ const WarningEdit = ({ permission, id }) => {
             <MenuItem value={3}>Network</MenuItem>
           </TextField>
         </Box>
-        <Box display="flex" justifyContent="end" mt="20px">
+        <Box display="flex" justifyContent="space-between"  mt="20px">
           <Button
             type="submit"
             onClick={handleSubmit}
@@ -127,6 +127,13 @@ const WarningEdit = ({ permission, id }) => {
             variant="contained"
           >
             Cập nhật
+          </Button>
+          <Button
+            onClick={handleEditClose}
+            color="secondary"
+            variant="contained"
+          >
+            Đóng
           </Button>
         </Box>
       </form>

@@ -38,6 +38,18 @@ const Warning = ({ userid, permission }) => {
     boxShadow: 24,
     p: 4,
   };
+  const editStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 800,
+    height: 500,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
   const [apiData, setApiData] = useState({
     id: "",
     message: "",
@@ -295,8 +307,8 @@ const Warning = ({ userid, permission }) => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
-            <WarningEdit id={editId} permission={permission}/>
+          <Box sx={editStyle}>
+            <WarningEdit id={editId} permission={permission} handleEditClose={handleEditClose}/>
           </Box>
         </Modal>
         <DataGrid
