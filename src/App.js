@@ -59,7 +59,6 @@ function App() {
   };
 
   useEffect(() => {
-    window.location.reload();
     axios
       .get("https://node-service-ihr4.onrender.com/authcheck", {
         headers: {

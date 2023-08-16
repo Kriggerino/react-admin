@@ -62,7 +62,7 @@ const Login = () => {
         if (res.data.valid) {
           actions.resetForm();
           await localStorage.setItem("token", res.data.token);
-          navigate("/dashboard");
+          await navigate("/dashboard");
         } else {
           console.log("Incorrect data");
         }
