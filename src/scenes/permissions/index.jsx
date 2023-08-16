@@ -4,43 +4,48 @@ import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //Icons and toolbar
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 import CustomPermToolbar from "../../components/CustomPermToolbar";
-const Permissions = () => {
+const Permissions = ({ permission }) => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableUpdate, setTableUpdate] = useState(false);
   useEffect(() => {
+    if (!permission.permission_read) {
+      navigate("/denyaccess");
+    } else {
+      axios
+        .get(" https://node-service-ihr4.onrender.com/getPermissions")
+        .then((res) => {
+          if (res.data.Status === "Success") {
+            setPermissionTable(res.data.Result);
+            setTableUpdate(false);
+          } else {
+            alert("Error");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [tableUpdate]);
+
+  const handleDelete = (id) => {
     axios
-      .get(" https://node-service-ihr4.onrender.com/getPermissions")
+      .delete(" https://node-service-ihr4.onrender.com/deletePerm/" + id)
       .then((res) => {
         if (res.data.Status === "Success") {
-          setPermissionTable(res.data.Result);
-          setTableUpdate(false);
+          alert("Success");
         } else {
           alert("Error");
         }
       })
       .catch((err) => console.log(err));
-  }, [tableUpdate]);
-
-  const handleDelete = (id) => {
-    axios
-    .delete(" https://node-service-ihr4.onrender.com/deletePerm/"+ id)
-    .then((res) => {
-      if (res.data.Status === "Success") {
-        alert("Success");
-      } else {
-        alert("Error");
-      }
-    })
-    .catch((err) => console.log(err));
-  }
+  };
 
   const [permissionTable, setPermissionTable] = useState({
     id: 0,
@@ -173,7 +178,7 @@ const Permissions = () => {
             <IconButton
               className="btn"
               sx={{ padding: "5px", m: 0, minWidth: 0, color: "#423f3f" }}
-              onClick = {(e) => handleDelete(params.row.id)}
+              onClick={(e) => handleDelete(params.row.id)}
             >
               <Link style={{ textDecoration: "none", color: "#423f3f" }}>
                 <DeleteIcon />
@@ -229,7 +234,6 @@ const Permissions = () => {
     },
   ];
 
-  
   return (
     <Box m="20px">
       <Box
@@ -274,9 +278,10 @@ const Permissions = () => {
           columnGroupingModel={dgColumnsGroup}
           slots={{ toolbar: CustomPermToolbar }}
           slotProps={{
-            toolbar:{
+            toolbar: {
               setTableUpdate: setTableUpdate,
-            }
+              permission: permission,
+            },
           }}
         />
       </Box>

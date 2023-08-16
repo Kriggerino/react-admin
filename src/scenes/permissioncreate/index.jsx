@@ -7,12 +7,12 @@ import {
   FormGroup,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const PermCreate = ({handleClose, setTableUpdate}) => {
+const PermCreate = ({handleClose, setTableUpdate, permission}) => {
   const [newPermission, setNewPermission] = useState({
     access_name: "Quyền mới",
     user_create: false,
@@ -26,6 +26,12 @@ const PermCreate = ({handleClose, setTableUpdate}) => {
     permission_write: false,
   });
   const navigate = useNavigate();
+
+  useEffect(() =>{
+    if(!(permission.permission_create)){
+      navigate("/denyaccess");
+    }
+  }, []);
   const submitPerm = () => {
     console.log(newPermission);
     axios

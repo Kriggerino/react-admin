@@ -151,7 +151,7 @@ function App() {
               />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
-              <Route path="/permission" element={<Permissions />} />
+              <Route path="/permission" element={<Permissions permission={permission} />} />
               <Route path="/denyaccess" element={<DenyAccess />} />
               <Route path="/mailing" element={<Email/>} />
             </Routes>
