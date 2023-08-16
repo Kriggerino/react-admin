@@ -81,7 +81,7 @@ function App() {
       setIsLoggedIn(false);
       navigate("/");
     }
-  }, []);
+  }, [isLoggedIn]);
   if(loadingState){
     return (
       <ColorModeContext.Provider value={colorMode}>
