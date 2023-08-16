@@ -224,11 +224,9 @@ const Warning = ({ userid, permission }) => {
             <IconButton
               onClick={(e) => handleDelete(params.row.id)}
               className="btn"
-              sx={{ padding: "5px", m: 0, minWidth: 0, color: "#423f3f" }}
-            >
-              <Link style={{ textDecoration: "none", color: "#423f3f" }}>
+              sx={{ padding: "5px", m: 0, minWidth: 0, }}
+            >    
                 <DeleteIcon />
-              </Link>
             </IconButton>
             <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>       
                 <VisibilityIcon />
