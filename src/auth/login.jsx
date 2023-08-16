@@ -32,8 +32,7 @@ const Login = () => {
     },
   };
   const navigate = useNavigate();
-  //Minimum eight characters, at least one letter and one number:
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  
   //Email regex from https://regexr.com/3e48o
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const basicSchema = yup.object().shape({
