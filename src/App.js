@@ -6,11 +6,7 @@ import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import User from "./scenes/user";
 import Warning from "./scenes/warning";
-import Bar from "./scenes/bar";
-import Line from "./scenes/line";
-import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
-import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
@@ -29,25 +25,25 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loadingState, setLoadingState]  = useState(true);
+  const [loadingState, setLoadingState] = useState(true);
   const [userdata, setUserdata] = useState({
     id: "",
     username: "",
     access: "",
   });
 
-  const [permission , setPermission] = useState({
+  const [permission, setPermission] = useState({
     access_name: "",
     user_create: false,
     user_read: false,
     user_write: false,
-    warning_create:false,
-    warning_read:false,
+    warning_create: false,
+    warning_read: false,
     warning_write: false,
     permission_create: false,
     permission_read: false,
     permission_write: false,
-  })
+  });
 
   const handleUserData = (data) => {
     setUserdata({
@@ -82,14 +78,14 @@ function App() {
       navigate("/");
     }
   }, [isLoggedIn]);
-  if(loadingState){
+  if (loadingState) {
     return (
       <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <div className="app">
-          <LoadingPage/>
-        </div>
-      </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <div className="app">
+            <LoadingPage />
+          </div>
+        </ThemeProvider>
       </ColorModeContext.Provider>
     );
   }
@@ -124,11 +120,12 @@ function App() {
                   />
                 }
               />
-              <Route path="/user" element={<User permission={permission} />} />
-              <Route
-                path="/user/userEdit/:id"
-                element={<UserEdit permission={permission} />}
-              />
+              
+                <Route
+                  path="/user"
+                  element={<User permission={permission} />}
+                />
+              
               <Route
                 path="/warning"
                 element={
@@ -136,14 +133,8 @@ function App() {
                 }
               />
               <Route
-                path="/warning/warningEdit/:id"
-                element={<WarningEdit permission={permission} />}
-              />
-              <Route 
                 path="/warning/VOS"
-                element={
-                  <VOS permission={permission} />
-                }
+                element={<VOS permission={permission} />}
               />
               <Route
                 path="/warning/warningDetails/:id"
@@ -151,9 +142,12 @@ function App() {
               />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
-              <Route path="/permission" element={<Permissions permission={permission} />} />
+              <Route
+                path="/permission"
+                element={<Permissions permission={permission} />}
+              />
               <Route path="/denyaccess" element={<DenyAccess />} />
-              <Route path="/mailing" element={<Email/>} />
+              <Route path="/mailing" element={<Email />} />
             </Routes>
           </main>
         </div>
