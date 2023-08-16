@@ -34,19 +34,19 @@ const Login = () => {
   const navigate = useNavigate();
   
   //Email regex from https://regexr.com/3e48o
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-  const basicSchema = yup.object().shape({
-    email: yup
-      .string()
-      .email("Please enter a valid email")
-      .matches(emailRegex, {message: "Invalid email"})
-      .required("Required"),
-    password: yup
-      .string()
-      .min(8)
-      .matches(passwordRegex, { message: "Please create stronger password" })
-      .required("Required"),
-  });
+  // const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  // const basicSchema = yup.object().shape({
+  //   email: yup
+  //     .string()
+  //     .email("Please enter a valid email")
+  //     .matches(emailRegex, {message: "Invalid email"})
+  //     .required("Required"),
+  //   password: yup
+  //     .string()
+  //     .min(8)
+  //     .matches(passwordRegex, { message: "Please create stronger password" })
+  //     .required("Required"),
+  // });
 
   useEffect(() =>{
     if((localStorage.getItem("token") !== null)){

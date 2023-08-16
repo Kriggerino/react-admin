@@ -9,6 +9,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const [permDDList, setPermDDList] = useState([]);
+  const [valid, setValid] = useState(false);
   const [values, setValues] = useState({
     username: "",
     firstName: "",
@@ -29,6 +30,13 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
       })
       .catch((err) => console.log(err));
   };
+
+  //Minimum eight characters, at least one letter and one number:
+  const handleValid = (e) =>{
+    const reg = new RegExp("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/");
+    setValid(reg.test(e.target.value));
+    setValues({...values, password: e.target.value});
+  }
 
   useEffect(() => {
     if (permission.user_create !== 1) {
@@ -63,6 +71,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             label="Tên người dùng"
             onChange={(e) => setValues({ ...values, username: e.target.value })}
             value={values.username}
+            required={true}
             name="username"
             sx={{ gridColumn: "span 4" }}
           />
@@ -70,6 +79,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             fullWidth
             variant="filled"
             type="text"
+            required={true}
             label="Họ thật"
             onChange={(e) =>
               setValues({ ...values, firstName: e.target.value })
@@ -83,6 +93,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             variant="filled"
             type="text"
             label="Tên thật"
+            required={true}
             onChange={(e) => setValues({ ...values, lastName: e.target.value })}
             value={values.lastName}
             name="lastName"
@@ -96,6 +107,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             onChange={(e) => setValues({ ...values, email: e.target.value })}
             value={values.email}
             name="email"
+            required={true}
             sx={{ gridColumn: "span 4" }}
           />
           <TextField
@@ -103,9 +115,10 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             variant="filled"
             type="password"
             label="Password"
-            onChange={(e) => setValues({ ...values, password: e.target.value })}
+            onChange={(e) => handleValid(e)}
             value={values.password}
             name="password"
+            error={!valid}
             sx={{ gridColumn: "span 4" }}
           />
           <TextField
@@ -137,6 +150,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             label="Quyền truy cập"
             onChange={(e) => setValues({ ...values, access: e.target.value })}
             value={values.access}
+            required={true}
             name="access"
             sx={{ gridColumn: "span 4" }}
           >
