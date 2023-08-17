@@ -1,6 +1,6 @@
 // ** React Imports
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
+import axios from "axios";
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -19,9 +19,19 @@ import FormControl from '@mui/material/FormControl'
 import Button from '@mui/material/Button'
 import img from '../../../assets/smug.png';
 import CloseIcon from '@mui/icons-material/Close';
-const UserProfile = () => {
+const UserProfile = ({id}) => {
     // ** State
   const [openAlert, setOpenAlert] = useState(true);
+  const [data, setData] = useState({
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    address: "",
+    contact: "",
+    access: "",
+  });
   const onChange = file => {
     const reader = new FileReader()
     const { files } = file.target
@@ -54,6 +64,25 @@ const UserProfile = () => {
       marginTop: theme.spacing(4)
     }
   }))
+
+  useEffect(() =>{
+    axios
+    .get(" https://node-service-ihr4.onrender.com/get/" + id)
+    .then((res) => {
+      setData({
+        ...data,
+        username: res.data.Result[0].username,
+        firstname: res.data.Result[0].firstname,
+        lastname: res.data.Result[0].lastname,
+        email: res.data.Result[0].email,
+        address: res.data.Result[0].address,
+        password: "",
+        contact: res.data.Result[0].phone,
+        access: res.data.Result[0].access,
+      });
+    })
+    .catch((err) => console.log(err));
+  }, [])
 
     return (
         <CardContent sx={{ width: "80%", mx: "auto", p: 2, height: "80%"}} >

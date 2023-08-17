@@ -123,7 +123,7 @@ function App() {
               />
               <Route 
                 path="/profile"
-                element={<UserProfile />}
+                element={<UserProfile id = {userdata.id} />}
               />
               
                 <Route
