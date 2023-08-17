@@ -115,7 +115,10 @@ const Warning = ({ userid, permission }) => {
   const handleDeleteMultiple = (selectedId) => {
     console.log(selectedId);
     axios
-      .post("https://node-service-ihr4.onrender.com/deleteMultipleWarning/", selectedId)
+      .post(
+        "https://node-service-ihr4.onrender.com/deleteMultipleWarning/",
+        selectedId
+      )
       .then((res) => {
         setSelectedId([]);
         if (res.data.Status === "Success") {
@@ -213,23 +216,28 @@ const Warning = ({ userid, permission }) => {
               gap: "10px",
             }}
           >
-            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}
-              onClick={(e) => {
-                setEditId(params.row.id);
-                setEditOpen(true);
-              }}
-            >             
-                <BuildIcon />
-            </IconButton>
-            <IconButton
-              onClick={(e) => handleDelete(params.row.id)}
-              className="btn"
-              sx={{ padding: "5px", m: 0, minWidth: 0, }}
-            >    
-                <DeleteIcon />
-            </IconButton>
-            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>       
-                <VisibilityIcon />
+            {(permission.warning_write) ?
+              (<div>
+                <IconButton
+                  sx={{ padding: "5px", m: 0, minWidth: 0 }}
+                  onClick={(e) => {
+                    setEditId(params.row.id);
+                    setEditOpen(true);
+                  }}
+                >
+                  <BuildIcon />
+                </IconButton>
+                <IconButton
+                  onClick={(e) => handleDelete(params.row.id)}
+                  className="btn"
+                  sx={{ padding: "5px", m: 0, minWidth: 0 }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </div>) : undefined
+              }
+            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>
+              <VisibilityIcon />
             </IconButton>
           </Box>
         );
@@ -282,11 +290,26 @@ const Warning = ({ userid, permission }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Box sx={{ display: "flex", width: "100%", justifyContent: "center", py:2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+                py: 2,
+              }}
+            >
               <Typography variant="h5">Chắc chắn xóa?</Typography>
             </Box>
-            <Box sx={{ justifyContent: "space-around", display: "flex", py:2 }}>
-              <Button variant="contained" color="secondary" onClick={(e) => {handleDeleteMultiple(selectedId)}}>
+            <Box
+              sx={{ justifyContent: "space-around", display: "flex", py: 2 }}
+            >
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={(e) => {
+                  handleDeleteMultiple(selectedId);
+                }}
+              >
                 Xác nhận
               </Button>
               <Button
@@ -306,7 +329,11 @@ const Warning = ({ userid, permission }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={editStyle}>
-            <WarningEdit id={editId} permission={permission} handleEditClose={handleEditClose}/>
+            <WarningEdit
+              id={editId}
+              permission={permission}
+              handleEditClose={handleEditClose}
+            />
           </Box>
         </Modal>
         <DataGrid
