@@ -21,7 +21,7 @@ import img from "../../../assets/smug.png";
 import CloseIcon from "@mui/icons-material/Close";
 const UserProfile = ({ id }) => {
   // ** State
-  const [openAlert, setOpenAlert] = useState(true);
+  const [openAlert, setOpenAlert] = useState(false);
   const [data, setData] = useState({
     username: "",
     firstname: "",

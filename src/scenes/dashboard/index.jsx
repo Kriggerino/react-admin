@@ -27,7 +27,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
     }
   }, []);
   return (
-    <Box m="20px">
+    <Box ml="20px">
       {/* HEADER */}
       <Box
         display="flex"
@@ -36,7 +36,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
       ></Box>
       {/* GRID & CHARTS */}
 
-      <Grid container spacing={6}>
+      <Grid container spacing={4}>
         {/* Congrats */}
         <Grid item xs={12} md={4}>
           <Card>

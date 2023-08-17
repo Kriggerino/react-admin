@@ -11,8 +11,9 @@ import CardContent from '@mui/material/CardContent'
 // // ** Icons Imports
 // import DotsVertical from 'mdi-material-ui/DotsVertical'
 
-// // ** Custom Components Imports
-// import ReactApexcharts from 'src/@core/components/react-apexcharts'
+// ** Custom Components Imports
+import Chart from 'react-apexcharts'
+
 
 const WeeklyOverview = () => {
   // ** Hook
@@ -48,12 +49,12 @@ const WeeklyOverview = () => {
     },
     dataLabels: { enabled: false },
     colors: [
-      theme.palette.background.default,
-      theme.palette.background.default,
-      theme.palette.background.default,
+        theme.palette.primary.main,
       theme.palette.primary.main,
-      theme.palette.background.default,
-      theme.palette.background.default
+      theme.palette.primary.main,
+      theme.palette.primary.main,
+      theme.palette.primary.main,
+      theme.palette.primary.main,
     ],
     states: {
       hover: {
@@ -94,7 +95,7 @@ const WeeklyOverview = () => {
         }
       /> */}
       <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
-        {/* <ReactApexcharts type='bar' height={205} options={options} series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]} /> */}
+        <Chart type='bar' height={205} options={options} series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]} />
         <Box sx={{ mb: 7, display: 'flex', alignItems: 'center' }}>
           <Typography variant='h5' sx={{ mr: 4 }}>
             45%
