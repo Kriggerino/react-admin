@@ -111,7 +111,6 @@ function App() {
             {isLoggedIn && <Topbar />}
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/pages/login" element={<Login />} />
               <Route
                 path="/dashboard"
                 element={
