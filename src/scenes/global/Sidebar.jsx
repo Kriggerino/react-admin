@@ -198,7 +198,7 @@ const Sidebar = (props) => {
             (
               <Item 
                 title="User Profile"
-                to="/"
+                to="/profile"
                 icon={<PeopleOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}

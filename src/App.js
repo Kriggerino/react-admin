@@ -20,6 +20,7 @@ import Permissions from "./scenes/permissions";
 import LoadingPage from "./components/LoadingPage";
 import VOS from "./scenes/warning/vos";
 import Email from "./scenes/mail";
+import UserProfile from "./scenes/user/profile";
 function App() {
   const navigate = useNavigate();
   const [theme, colorMode] = useMode();
@@ -120,6 +121,10 @@ function App() {
                     permission={permission}
                   />
                 }
+              />
+              <Route 
+                path="/profile"
+                element={<UserProfile />}
               />
               
                 <Route

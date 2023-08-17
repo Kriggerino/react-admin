@@ -1,9 +1,4 @@
-import {
-    Box,
-    TextField,
-    MenuItem,
-    Container,
-  } from "@mui/material";
+import { Box, TextField, MenuItem, Container } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -14,7 +9,7 @@ const CustomToolbar = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -88,14 +83,16 @@ const CustomToolbar = (props) => {
         >
           Tìm kiếm
         </Button>
-        <Button
-          color="secondary"
-          variant="contained"
-          onClick={handleOpen}
-          sx={{ pt: 2, pb: 2 }}
-        >
-          Tạo người dùng
-        </Button>
+        {(props.permission.usercreate) && (
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={handleOpen}
+            sx={{ pt: 2, pb: 2 }}
+          >
+            Tạo người dùng
+          </Button>
+        )}
       </Container>
       <Modal
         open={open}
@@ -104,7 +101,11 @@ const CustomToolbar = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Form permission={props.permission} handleClose={handleClose} setTableUpdate={props.setTableUpdate} />
+          <Form
+            permission={props.permission}
+            handleClose={handleClose}
+            setTableUpdate={props.setTableUpdate}
+          />
         </Box>
       </Modal>
     </GridToolbarContainer>
