@@ -4,9 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, TextField } from "@mui/material";
 import Header from "../../../components/Header";
 import axios from "axios";
-const UserEdit = ({access}) => {
+const UserEdit = ({access , id}) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const { id } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState({
     username: "",

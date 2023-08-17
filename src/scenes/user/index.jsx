@@ -12,15 +12,37 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomToolbar from "../../components/CustomToolbar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
-const User = ({ permission }) => {
+import Modal from "@mui/material/Modal";
+import UserEdit from "./useredit";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  height: "90%",
+  width: 700,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+
+};
+
+const User = ({ permission, access }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   const [apiData, setApiData] = useState([]);
+  const [editId, setEditId] = useState(0);
+  //Modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [filter, setFilter] = useState({
     accessFilter: "",
     usernameFilter: "",
   });
+
   const [tableUpdate, setTableUpdate] = useState(false);
   const handleDelete = (id) => {
     axios
@@ -127,22 +149,19 @@ const User = ({ permission }) => {
       renderCell: (params) => {
         return (
           <div>
-            <Button>
-              <Link
-                style={{ textDecoration: "none", color: "#423f3f" }}
-                to={`/user/userEdit/` + params.row._id}
-                className="btn"
-              >
-                <BuildIcon />
-              </Link>
+            <Button
+              onClick={(e) => {
+                setEditId(params.row._id);
+                handleOpen();
+              }}
+            >
+              <BuildIcon />
             </Button>
             <Button
               onClick={(e) => handleDelete(params.row._id)}
               className="btn"
             >
-              <Link style={{ textDecoration: "none", color: "#423f3f" }}>
-                <DeleteIcon />
-              </Link>
+              <DeleteIcon />
             </Button>
           </div>
         );
@@ -203,6 +222,16 @@ const User = ({ permission }) => {
           },
         }}
       >
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <UserEdit access={access} id={editId}/>
+          </Box>
+        </Modal>
         <DataGrid
           rows={apiData}
           getRowId={(row) => row._id}

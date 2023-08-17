@@ -83,7 +83,7 @@ const CustomToolbar = (props) => {
         >
           Tìm kiếm
         </Button>
-        {(props.permission.usercreate) && (
+        {props.permission.user_create && (
           <Button
             color="secondary"
             variant="contained"

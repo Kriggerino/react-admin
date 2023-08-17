@@ -128,7 +128,7 @@ function App() {
               
                 <Route
                   path="/user"
-                  element={<User permission={permission} />}
+                  element={<User permission={permission} access={userdata.access} />}
                 />
               
               <Route
