@@ -13,8 +13,8 @@ const BoxWrapper = styled(Box)(({ theme }) => ({
 
 const DenyAccess = () => {
   const navigate = useNavigate();
-  const navDashboard = () => {
-    navigate("/dashboard");
+  const navReturn = () => {
+    navigate(-1);
   };
   return (
     <Box className="content-center">
@@ -41,7 +41,7 @@ const DenyAccess = () => {
         </BoxWrapper>
         <Button
           component="a"
-          onClick={navDashboard}
+          onClick={navReturn}
           color="secondary"
           variant="contained"
           sx={{ px: 5.5 }}
