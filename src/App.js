@@ -13,7 +13,7 @@ import Calendar from "./scenes/calendar/calendar";
 import Login from "./auth/login.jsx";
 import "./index.css";
 import UserEdit from "./scenes/user/useredit";
-import WarningEdit from "./scenes/warningedit";
+import WarningEdit from "./scenes/warning/warningedit";
 import DenyAccess from "./scenes/global/denyaccess";
 import WarningDetails from "./scenes/warning/warningdetails";
 import Permissions from "./scenes/permissions";

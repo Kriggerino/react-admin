@@ -11,7 +11,7 @@ import Modal from "@mui/material/Modal";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
-import WarningEdit from "../warningedit";
+import WarningEdit from "./warningedit";
 
 const Warning = ({ userid, permission }) => {
   const theme = useTheme();

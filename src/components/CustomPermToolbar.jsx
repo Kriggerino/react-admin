@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { GridToolbarContainer } from "@mui/x-data-grid";
-import PermCreate from "../scenes/permissioncreate";
+import PermCreate from "../scenes/permissions/permissioncreate";
 const style = {
   position: "absolute",
   top: "50%",
