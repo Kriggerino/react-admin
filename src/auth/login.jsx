@@ -64,7 +64,7 @@ const Login = () => {
           await localStorage.setItem("token", res.data.token);
           await navigate("/dashboard");
         } else {
-          console.log("Incorrect data");
+          alert("Thông tin đăng nhập không chính xác");
         }
       })
       .catch((err) => console.log(err));
