@@ -18,10 +18,17 @@ import WeeklyOverview from "./weeklyoverview";
 const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [data, setData] = useState({
+    totalCount: 0,
+  });
   const navigate = useNavigate();
   useEffect(() => {
     if (permission) {
       setIsLoggedIn(true);
+      axios.get("https://node-service-ihr4.onrender.com/getCount")
+      .then((res) => {
+        setData({...data, totalCount: res.data.count});
+      })
     } else {
       navigate("/");
     }
@@ -46,7 +53,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
                 Best seller of the month
               </Typography>
               <Typography variant="h4" sx={{ my: 4, color: "primary.main" }}>
-                $42.8k
+                {data.totalCount}
               </Typography>
               <Button size="small" variant="contained">
                 View Sales
