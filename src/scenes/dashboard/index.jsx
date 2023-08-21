@@ -38,7 +38,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
     }
   }, []);
   return (
-    <Box ml="20px">
+    <Box ml="20px" mr="15px">
       {/* HEADER */}
       <Box
         display="flex"

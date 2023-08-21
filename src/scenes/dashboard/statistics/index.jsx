@@ -12,36 +12,32 @@ import CardContent from "@mui/material/CardContent";
 
 const salesData = [
   {
-    stats: "245k",
-    title: "Sales",
-    color: "primary",
+    stats: "Placeholder",
+    title: "Network",
   },
   {
-    stats: "12.5k",
-    title: "Customers",
-    color: "success",
+    stats: "Placeholder",
+    title: "VOS",
   },
   {
-    stats: "1.54k",
-    color: "warning",
-    title: "Products",
+    stats: "Placeholder",
+    title: "Hardware",
   },
   {
-    stats: "$88k",
-    color: "info",
-    title: "Revenue",
+    stats: "Placeholder",
+    title: "Khác",
   },
 ];
 
 const renderStats = () => {
   return salesData.map((item, index) => (
-    <Grid item xs={12} sm={3} key={index} >
-      <Box key={index} sx={{ alignItems: "center", ml:"30%" }}>
+    <Grid container xs={12} sm={3} key={index} >
+      <Grid item key={index} sx={{ alignItems: "center" }}>
         <Box sx={{ width: "100%" }}>
-          <Typography variant="h4" >{item.title}</Typography>
+          <Typography variant="h4" sx={{pb: 1.5}} >{item.title}</Typography>
           <Typography variant="h3" >{item.stats}</Typography>
         </Box>
-      </Box>
+      </Grid>
     </Grid>
   ));
 };
