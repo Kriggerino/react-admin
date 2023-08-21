@@ -13,10 +13,19 @@ import CardContent from '@mui/material/CardContent'
 
 // ** Custom Components Imports
 import Chart from 'react-apexcharts'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 
 const WeeklyOverview = () => {
   // ** Hook
+  useEffect = (() => {
+    axios.get("https://node-service-ihr4.onrender.com/getStats")
+    .then((res) => {
+      console.log(res);
+    })
+  }, [])
+  
   const theme = useTheme()
 
   const options = {
