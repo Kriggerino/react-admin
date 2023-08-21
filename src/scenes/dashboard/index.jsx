@@ -48,10 +48,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h4">Congratulations John! 🥳</Typography>
-              <Typography variant="body2" sx={{ letterSpacing: "0.25px" }}>
-                Best seller of the month
-              </Typography>
+              <Typography variant="h4">Tổng số cảnh báo</Typography>
               <Typography variant="h4" sx={{ my: 4, color: "primary.main" }}>
                 {data.totalCount}
               </Typography>
