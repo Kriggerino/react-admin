@@ -17,6 +17,7 @@ import StatisticsCards from "./statistics";
 import WeeklyOverview from "./weeklyoverview";
 import DeadLine from "./deadline";
 import Total from "./total";
+import BigTable from "./bigtable/bigtable";
 const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -53,6 +54,9 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
         </Grid>
         <Grid item xs={12} md={8}>
           <DeadLine/>
+        </Grid>
+        <Grid item xs={12} md={12} lg={12}>
+          <BigTable />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Grid container spacing={6}>
