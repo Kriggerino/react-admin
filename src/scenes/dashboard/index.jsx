@@ -30,6 +30,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
       .then((res) => {
         setData({...data, totalCount: res.data.count[0].sl});
       })
+      .catch((err) => console.log(err));
     } else {
       navigate("/");
     }

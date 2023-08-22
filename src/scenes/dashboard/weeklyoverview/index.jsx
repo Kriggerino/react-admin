@@ -32,7 +32,8 @@ const WeeklyOverview = () => {
         HardwareCount: res.data.Result[1].HardwareCount,
         NetworkCount: res.data.Result[2].NetworkCount,
       });
-    });
+    })
+    .catch((err) => console.log(err));
   }, []);
 
   const options = {
