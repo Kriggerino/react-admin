@@ -16,21 +16,15 @@ import { useNavigate } from "react-router-dom";
 import StatisticsCards from "./statistics";
 import WeeklyOverview from "./weeklyoverview";
 import DeadLine from "./deadline";
+import Total from "./total";
 const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [data, setData] = useState({
-    totalCount: 0,
-  });
+  
   const navigate = useNavigate();
   useEffect(() => {
     if (permission) {
       setIsLoggedIn(true);
-      axios.get("https://node-service-ihr4.onrender.com/getCount")
-      .then((res) => {
-        setData({...data, totalCount: res.data.count[0].sl});
-      })
-      .catch((err) => console.log(err));
     } else {
       navigate("/");
     }
@@ -48,17 +42,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
       <Grid container spacing={4}>
         {/* Congrats */}
         <Grid item xs={12} md={4}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent>
-              <Typography variant="h4">Tổng số cảnh báo</Typography>
-              <Typography variant="h4" sx={{ my: 4, color: "primary.main" }}>
-                {data.totalCount}
-              </Typography>
-              <Button size="small" variant="contained">
-                View Sales
-              </Button>
-            </CardContent>
-          </Card>
+          <Total/>
         </Grid>
         {/* Short Stats */}
         <Grid item xs={12} md={8}>

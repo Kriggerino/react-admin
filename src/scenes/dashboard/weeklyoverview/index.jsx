@@ -43,6 +43,14 @@ const WeeklyOverview = () => {
     },
     dataLabels: { enabled: true },
     legend: { show: true },
+    states: {
+      hover: {
+        filter: { type: 'none' }
+      },
+      active: {
+        filter: { type: 'none' }
+      }
+    },
     xaxis: {
       categories: ["VOS", "Network", "Hardware"],
       tickPlacement: 'on',

@@ -28,7 +28,7 @@ const renderStats = () => {
   return salesData.map((item, index) => (
     <Grid item xs={12} sm={3} key={index}>
       <Box key={index} sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <Typography variant="h4">{item.title}</Typography>
           <Typography variant="h3">{item.stats}</Typography>
         </Box>
@@ -42,7 +42,7 @@ const StatisticsCard = () => {
   useEffect(() => {
     axios.get("https://node-service-ihr4.onrender.com/getUrgent")
     .then((res) => {
-
+      console.log(res);
     })
     .catch((err) => console.log(err));
   }, [])
@@ -58,11 +58,6 @@ const StatisticsCard = () => {
             className="card-more-options"
             sx={{ color: "text.secondary" }}
           ></IconButton>
-        }
-        subheader={
-          <Typography variant="body2">
-            Subheader nghiêm trọng
-          </Typography>
         }
         titleTypographyProps={{
           sx: {

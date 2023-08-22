@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "../../../components/Header";
 import { Box, Button, TextField, MenuItem } from "@mui/material";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const WarningEdit = ({ permission, id, handleEditClose }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();

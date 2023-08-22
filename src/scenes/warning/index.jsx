@@ -1,10 +1,10 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import Header from "../../components/Header";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomWarningToolbar from "../../components/CustomWarningToolbar";
 import Modal from "@mui/material/Modal";
 //Icons
@@ -222,7 +222,7 @@ const Warning = ({ userid, permission }) => {
                   sx={{ padding: "5px", m: 0, minWidth: 0 }}
                   onClick={(e) => {
                     setEditId(params.row.id);
-                    setEditOpen(true);
+                    handleEditOpen();
                   }}
                 >
                   <BuildIcon />

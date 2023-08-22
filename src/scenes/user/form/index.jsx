@@ -1,7 +1,6 @@
 import { Box, Button, MenuItem, TextField } from "@mui/material";
-import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "../../../components/Header";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -33,7 +32,7 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
 
   //Minimum eight characters, at least one letter and one number:
   const handleValid = (e) =>{
-    const reg = new RegExp("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/");
+    const reg = new RegExp("/^(?=.*[A-Za-z])(?=.*)[A-Za-z]{8,}$/");
     setValid(reg.test(e.target.value));
     setValues({...values, password: e.target.value});
   }
