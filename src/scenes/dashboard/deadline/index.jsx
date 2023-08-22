@@ -21,17 +21,17 @@ const DeadLine = () => {
   const dgColumn = [
     {
       field: "message",
-      headerName: "Canh bao",
+      headerName: "Cảnh báo",
       flex: 1,
     },
     {
       field: "contact",
-      headerName: "Lien lac",
+      headerName: "Liên lạc",
       flex: 1,
     },
     {
       field: "system_name",
-      headerName: "He thong",
+      headerName: "Hệ thống",
     },
   ];
   return (
