@@ -212,8 +212,7 @@ const Warning = ({ userid, permission }) => {
               WebkitBoxAlign: "center",
               alignItems: "center",
               width: "100%",
-              justifyContent: "center",
-              gap: "10px",
+              justifyContent: "space-evenly",
             }}
           >
             {(permission.warning_write) ?

@@ -40,8 +40,8 @@ const WarningEdit = ({ permission, id, handleEditClose }) => {
       .put(" https://node-service-ihr4.onrender.com/updateWarning/" + id, data)
       .then((res) => {
         if (res.data.Status === "success") {
-          console.log("Data edited");
-          navigate("/warning");
+          alert("Thay đổi thành công");
+          handleEditClose();
         }
       })
       .catch((err) => console.log(err));

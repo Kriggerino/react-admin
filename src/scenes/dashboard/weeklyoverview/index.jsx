@@ -78,7 +78,7 @@ const WeeklyOverview = () => {
       >
         <Chart
           type="bar"
-          height={205}
+          height={265}
           options={options}
           series={[
             {
