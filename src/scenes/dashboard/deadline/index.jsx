@@ -49,7 +49,17 @@ const DeadLine = () => {
         sx={{ pb: 0}}
       />
       <CardContent sx={{ px: "16px"}}>
-        <Grid container spacing={[5, 0]}>
+        <Grid container spacing={[5, 0]} sx={{
+          "& .MuiDataGrid-cell": {
+            borderBottom: "none",
+            fontSize: "0.85rem",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: "rgba(244, 245, 250, 0.78)",
+            borderBottom: "1px grey solid",
+            fontSize: "0.85rem",
+          },
+        }}>
           <DataGrid
             rows={apiData}
             getRowId={apiData.id}
