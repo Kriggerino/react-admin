@@ -24,7 +24,7 @@ const WeeklyOverview = () => {
   }
 
   return (
-    <Card sx={{width:"100%", height: "100%"}}>
+    <Card>
       {/* <CardHeader
         title='Weekly Overview'
         titleTypographyProps={{
@@ -36,8 +36,14 @@ const WeeklyOverview = () => {
           </IconButton>
         }
       /> */}
-      <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 }, display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
-        <Chart type='donut' height={205} options={options} series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]} />
+      <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
+        <Chart type='bar' height={205} options={options} series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]} />
+        <Box sx={{ mb: 7, display: 'flex', alignItems: 'center' }}>
+          <Typography variant='h5' sx={{ mr: 4 }}>
+            45%
+          </Typography>
+          <Typography variant='body2'>Your sales performance is 45% 😎 better compared to last month</Typography>
+        </Box>
         <Button fullWidth variant='contained'>
           Details
         </Button>

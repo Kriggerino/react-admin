@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 // ** MUI Imports
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -9,7 +8,6 @@ import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-
 const salesData = [
   {
     stats: "Placeholder",
@@ -31,31 +29,22 @@ const salesData = [
 
 const renderStats = () => {
   return salesData.map((item, index) => (
-    <Grid container xs={12} sm={3} key={index} >
-      <Grid item key={index} sx={{ alignItems: "center" }}>
-        <Box sx={{ width: "100%" }}>
-          <Typography variant="h4" sx={{pb: 1.5}} >{item.title}</Typography>
-          <Typography variant="h3" >{item.stats}</Typography>
+    <Grid item xs={12} sm={3} key={index}>
+      <Box key={index} sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Typography variant="caption">{item.title}</Typography>
+          <Typography variant="h6">{item.stats}</Typography>
         </Box>
-      </Grid>
+      </Box>
     </Grid>
   ));
 };
 
 const StatisticsCard = () => {
-
-  useEffect(() => {
-    axios.get("https://node-service-ihr4.onrender.com/getStats")
-    .then((res) => {
-
-    })
-    .catch((err) => console.log(err));
-  }, [])
-
   return (
-    <Card sx={{ height: "100%"}}>
+    <Card>
       <CardHeader
-        title="Chi tiết số lượng "
+        title="Statistics Card"
         action={
           <IconButton
             size="small"
@@ -65,6 +54,17 @@ const StatisticsCard = () => {
           >
           </IconButton>
         }
+        subheader={
+          <Typography variant="body2">
+            <Box
+              component="span"
+              sx={{ fontWeight: 600, color: "text.primary" }}
+            >
+              Total 48.5% growth
+            </Box>{" "}
+            😎 this month
+          </Typography>
+        }
         titleTypographyProps={{
           sx: {
             mb: 2.5,
@@ -73,8 +73,8 @@ const StatisticsCard = () => {
           },
         }}
       />
-      <CardContent >
-        <Grid container spacing={[3, 0]} >
+      <CardContent sx={{ pt: (theme) => `${theme.spacing(3)} !important` }}>
+        <Grid container spacing={[5, 0]}>
           {renderStats()}
         </Grid>
       </CardContent>
