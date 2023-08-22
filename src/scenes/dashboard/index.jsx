@@ -15,6 +15,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import StatisticsCards from "./statistics";
 import WeeklyOverview from "./weeklyoverview";
+import DeadLine from "./deadline";
 const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -27,7 +28,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
       setIsLoggedIn(true);
       axios.get("https://node-service-ihr4.onrender.com/getCount")
       .then((res) => {
-        setData({...data, totalCount: res.data.count});
+        setData({...data, totalCount: res.data.count[0].sl});
       })
     } else {
       navigate("/");
@@ -65,7 +66,9 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
         <Grid item xs={12} md={6} lg={4}>
           <WeeklyOverview />
         </Grid>
-        <Grid item xs={12} md={6} lg={4}></Grid>
+        <Grid item xs={12} md={8}>
+          <DeadLine/>
+        </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Grid container spacing={6}>
             <Grid item xs={6}></Grid>
