@@ -11,19 +11,15 @@ import CardContent from "@mui/material/CardContent";
 const salesData = [
   {
     stats: "Placeholder",
-    title: "Network",
+    title: "Khẩn cấp",
   },
   {
     stats: "Placeholder",
-    title: "VOS",
+    title: "Trung bình",
   },
   {
     stats: "Placeholder",
-    title: "Hardware",
-  },
-  {
-    stats: "Placeholder",
-    title: "Khác",
+    title: "Nhẹ ",
   },
 ];
 
@@ -32,8 +28,8 @@ const renderStats = () => {
     <Grid item xs={12} sm={3} key={index}>
       <Box key={index} sx={{ display: "flex", alignItems: "center" }}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography variant="caption">{item.title}</Typography>
-          <Typography variant="h6">{item.stats}</Typography>
+          <Typography variant="h4">{item.title}</Typography>
+          <Typography variant="h3">{item.stats}</Typography>
         </Box>
       </Box>
     </Grid>
@@ -42,27 +38,20 @@ const renderStats = () => {
 
 const StatisticsCard = () => {
   return (
-    <Card>
+    <Card sx={{ height: "100%" }}>
       <CardHeader
-        title="Statistics Card"
+        title="Độ nghiêm trọng"
         action={
           <IconButton
             size="small"
             aria-label="settings"
             className="card-more-options"
             sx={{ color: "text.secondary" }}
-          >
-          </IconButton>
+          ></IconButton>
         }
         subheader={
           <Typography variant="body2">
-            <Box
-              component="span"
-              sx={{ fontWeight: 600, color: "text.primary" }}
-            >
-              Total 48.5% growth
-            </Box>{" "}
-            😎 this month
+            Subheader nghiêm trọng
           </Typography>
         }
         titleTypographyProps={{
@@ -74,7 +63,11 @@ const StatisticsCard = () => {
         }}
       />
       <CardContent sx={{ pt: (theme) => `${theme.spacing(3)} !important` }}>
-        <Grid container spacing={[5, 0]}>
+        <Grid
+          container
+          spacing={[5, 0]}
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
           {renderStats()}
         </Grid>
       </CardContent>
@@ -82,4 +75,4 @@ const StatisticsCard = () => {
   );
 };
 
-export default StatisticsCard
+export default StatisticsCard;

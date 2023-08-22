@@ -14,7 +14,6 @@ const DeadLine = () => {
     axios
       .get("https://node-service-ihr4.onrender.com/dbwarning")
       .then((res) => {
-        console.log(res);
         setApiData(res.data.Result);
       })
       .catch((err) => console.log(err));

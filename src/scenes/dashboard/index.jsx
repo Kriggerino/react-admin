@@ -47,7 +47,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
       <Grid container spacing={4}>
         {/* Congrats */}
         <Grid item xs={12} md={4}>
-          <Card>
+          <Card sx={{ height: "100%" }}>
             <CardContent>
               <Typography variant="h4">Tổng số cảnh báo</Typography>
               <Typography variant="h4" sx={{ my: 4, color: "primary.main" }}>
