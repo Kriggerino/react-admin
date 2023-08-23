@@ -9,8 +9,6 @@ import CardContent from "@mui/material/CardContent";
 import Chart from "react-apexcharts";
 import axios from "axios";
 
-
-
 const series = [
   {
     name: "TEAM A",
@@ -88,8 +86,13 @@ const options = {
 };
 
 const BigTable = () => {
-
-  
+  const handleChart = () => {
+    axios
+      .get("https://node-service-ihr4.onrender.com/dailychart")
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return (
     <Card sx={{ height: "100%" }}>
@@ -103,7 +106,7 @@ const BigTable = () => {
         }}
       >
         <Chart height={360} options={options} series={series} />
-        <Button fullWidth variant="contained" >
+        <Button fullWidth variant="contained" onClick ={(e) => {handleChart()}}>
           Details
         </Button>
       </CardContent>

@@ -41,33 +41,28 @@ const Dashboard = ({
   useEffect(() => {
     if (permission) {
       setIsLoggedIn(true);
-      axios
-        .get("https://node-service-ihr4.onrender.com/getStats")
-        .then((res) => {
-          setErrorCount({
-            ...errorCount,
-            VOSCount: res.data.Result[0].VOSCount,
-            HardwareCount: res.data.Result[1].HardwareCount,
-            NetworkCount: res.data.Result[2].NetworkCount,
-          });
-        })
-        .catch((err) => console.log(err));
-      axios
-        .get("https://node-service-ihr4.onrender.com/getUrgent")
-        .then((res) => {
-          setAlertData({
-            ...alertData,
-            KCCount: res.data.Result[0].KCCount,
-            TBCount: res.data.Result[1].TBCount,
-            NCount: res.data.Result[2].NCount,
-          });
-        })
-        .catch((err) => console.log(err));
-      axios
-        .get("https://node-service-ihr4.onrender.com/dailychart")
-        .then((res) => {
-          console.log(res);
-        });
+      // axios
+      //   .get("https://node-service-ihr4.onrender.com/getStats")
+      //   .then((res) => {
+      //     setErrorCount({
+      //       ...errorCount,
+      //       VOSCount: res.data.Result[0].VOSCount,
+      //       HardwareCount: res.data.Result[1].HardwareCount,
+      //       NetworkCount: res.data.Result[2].NetworkCount,
+      //     });
+      //   })
+      //   .catch((err) => console.log(err));
+      // axios
+      //   .get("https://node-service-ihr4.onrender.com/getUrgent")
+      //   .then((res) => {
+      //     setAlertData({
+      //       ...alertData,
+      //       KCCount: res.data.Result[0].KCCount,
+      //       TBCount: res.data.Result[1].TBCount,
+      //       NCount: res.data.Result[2].NCount,
+      //     });
+      //   })
+      //   .catch((err) => console.log(err));
     } else {
       navigate("/");
     }

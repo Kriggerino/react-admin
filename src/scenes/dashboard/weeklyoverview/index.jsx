@@ -71,7 +71,7 @@ const WeeklyOverview = ({ errorCount }) => {
             },
           ]}
         />
-        <Button fullWidth variant="contained">
+        <Button fullWidth variant="contained" >
           Details
         </Button>
       </CardContent>
