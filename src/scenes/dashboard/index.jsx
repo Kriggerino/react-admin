@@ -63,10 +63,11 @@ const Dashboard = ({
           });
         })
         .catch((err) => console.log(err));
-      axios.get("https://node-service-ihr4.onrender.com/dailychart")
-      .then((res) => {
-        console.log(res);
-      })
+      axios
+        .get("https://node-service-ihr4.onrender.com/dailychart")
+        .then((res) => {
+          console.log(res);
+        });
     } else {
       navigate("/");
     }
