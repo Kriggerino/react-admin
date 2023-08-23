@@ -22,6 +22,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   
+  
   const navigate = useNavigate();
   useEffect(() => {
     if (permission) {
@@ -30,6 +31,13 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
       navigate("/");
     }
   }, []);
+
+  const dailyTest = () => {
+    axios.get("https://node-service-ihr4.onrender.com/dailytest")
+    .then((res) => {
+      console.log(res);
+    });
+  }
   return (
     <Box ml="20px" mr="15px">
       {/* HEADER */}
@@ -56,7 +64,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
           <DeadLine/>
         </Grid>
         <Grid item xs={12} md={12} lg={12}>
-          <BigTable />
+          <BigTable dailyTest={dailyTest()} />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Grid container spacing={6}>

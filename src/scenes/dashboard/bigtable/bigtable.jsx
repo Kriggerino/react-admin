@@ -7,6 +7,9 @@ import CardContent from "@mui/material/CardContent";
 
 //Custom Component
 import Chart from "react-apexcharts";
+import axios from "axios";
+
+
 
 const series = [
   {
@@ -21,13 +24,8 @@ const series = [
   },
   {
     name: "TEAM B",
-    type: "area",
+    type: "column",
     data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
-  },
-  {
-    name: "TEAM C",
-    type: "line",
-    data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
   },
 ];
 const options = {
@@ -35,9 +33,10 @@ const options = {
     height: 350,
     type: "line",
     stacked: false,
+    toolbar: { show: false },
   },
   stroke: {
-    width: [0, 2, 5],
+    width: [0, 2, 2],
     curve: "smooth",
   },
   plotOptions: {
@@ -47,7 +46,7 @@ const options = {
   },
 
   fill: {
-    opacity: [0.85, 0.85, 0.25, 1],
+    opacity: [0.85, 0.85, 0.85],
     gradient: {
       inverseColors: false,
       shade: "light",
@@ -88,7 +87,10 @@ const options = {
   },
 };
 
-const BigTable = () => {
+const BigTable = ({dailyTest}) => {
+
+  
+
   return (
     <Card sx={{ height: "100%" }}>
       <CardContent
@@ -101,7 +103,7 @@ const BigTable = () => {
         }}
       >
         <Chart height={360} options={options} series={series} />
-        <Button fullWidth variant="contained">
+        <Button fullWidth variant="contained" onClick={dailyTest}>
           Details
         </Button>
       </CardContent>
