@@ -9,12 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 
-const StatisticsCard = () => {
-  const [alertData, setAlertData] = useState({
-    KCCount: 0,
-    TBCount: 0,
-    NCount: 0,
-  });
+const StatisticsCard = ({alertData}) => {
+  
   const salesData = [
     {
       stats: alertData.KCCount,
@@ -41,19 +37,6 @@ const StatisticsCard = () => {
       </Grid>
     ));
   };
-  useEffect(() => {
-    axios
-      .get("https://node-service-ihr4.onrender.com/getUrgent")
-      .then((res) => {
-        setAlertData({
-          ...alertData,
-          KCCount: res.data.Result[0].KCCount,
-          TBCount: res.data.Result[1].TBCount,
-          NCount: res.data.Result[2].NCount,
-        });
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <Card sx={{ height: "100%" }}>

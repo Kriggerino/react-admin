@@ -12,25 +12,10 @@ import Chart from "react-apexcharts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const WeeklyOverview = () => {
+const WeeklyOverview = ({ errorCount }) => {
   // ** Hook
   const theme = useTheme();
-  const [errorCount, setErrorCount] = useState({
-    VOSCount: 0,
-    NetworkCount: 0,
-    HardwareCount: 0,
-  });
-  useEffect(() => {
-    axios.get("https://node-service-ihr4.onrender.com/getStats").then((res) => {
-      setErrorCount({
-        ...errorCount,
-        VOSCount: res.data.Result[0].VOSCount,
-        HardwareCount: res.data.Result[1].HardwareCount,
-        NetworkCount: res.data.Result[2].NetworkCount,
-      });
-    })
-    .catch((err) => console.log(err));
-  }, []);
+  
 
   const options = {
     chart: {
