@@ -17,7 +17,7 @@ import StatisticsCards from "./statistics";
 import WeeklyOverview from "./weeklyoverview";
 import DeadLine from "./deadline";
 import Total from "./total";
-import BigTable from "./bigtable/bigtable";
+import BigTable from "./bigtable";
 const Dashboard = ({
   setIsLoggedIn,
   handleUserData,
@@ -63,6 +63,10 @@ const Dashboard = ({
           });
         })
         .catch((err) => console.log(err));
+      axios.get("https://node-service-ihr4.onrender.com/dailychart")
+      .then((res) => {
+        console.log(res);
+      })
     } else {
       navigate("/");
     }

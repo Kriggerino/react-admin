@@ -10,12 +10,7 @@ import Chart from "react-apexcharts";
 import axios from "axios";
 
 
-const dailyTest = () => {
-  axios.get("https://node-service-ihr4.onrender.com/dailytest")
-  .then((res) => {
-    console.log(res);
-  });
-}
+
 const series = [
   {
     name: "TEAM A",
@@ -108,7 +103,7 @@ const BigTable = () => {
         }}
       >
         <Chart height={360} options={options} series={series} />
-        <Button fullWidth variant="contained" onClick={(e) => {dailyTest()}}>
+        <Button fullWidth variant="contained" >
           Details
         </Button>
       </CardContent>
