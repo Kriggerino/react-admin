@@ -18,7 +18,7 @@ import WeeklyOverview from "./weeklyoverview";
 import DeadLine from "./deadline";
 import Total from "./total";
 import BigTable from "./bigtable/bigtable";
-const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
+const Dashboard = ({ setIsLoggedIn, handleUserData, permission, isLoggedIn }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   
@@ -32,12 +32,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
     }
   }, []);
 
-  const dailyTest = () => {
-    axios.get("https://node-service-ihr4.onrender.com/dailytest")
-    .then((res) => {
-      console.log(res);
-    });
-  }
+  
   return (
     <Box ml="20px" mr="15px">
       {/* HEADER */}
@@ -51,7 +46,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
       <Grid container spacing={4}>
         {/* Congrats */}
         <Grid item xs={12} md={4}>
-          <Total/>
+          <Total />
         </Grid>
         {/* Short Stats */}
         <Grid item xs={12} md={8}>
@@ -64,7 +59,7 @@ const Dashboard = ({ setIsLoggedIn, handleUserData, permission }) => {
           <DeadLine/>
         </Grid>
         <Grid item xs={12} md={12} lg={12}>
-          <BigTable dailyTest={dailyTest()} />
+          <BigTable />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Grid container spacing={6}>

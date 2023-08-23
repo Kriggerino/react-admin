@@ -116,6 +116,7 @@ function App() {
                     setIsLoggedIn={setIsLoggedIn}
                     handleUserData={handleUserData}
                     permission={permission}
+                    isLoggedIn ={isLoggedIn}
                   />
                 }
               />
