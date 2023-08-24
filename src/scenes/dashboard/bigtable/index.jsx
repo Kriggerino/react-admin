@@ -51,7 +51,7 @@ const BigTable = () => {
     },
     plotOptions: {
       bar: {
-        columnWidth: "30%",
+        columnWidth: "70%",
         barHeight: "70%",
       },
     },
