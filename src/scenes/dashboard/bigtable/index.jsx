@@ -17,7 +17,7 @@ const BigTable = () => {
     axios
       .get("https://node-service-ihr4.onrender.com/dailychart")
       .then((res) => {
-        setData(res.data.Result);
+        setData(res.data.Result.reverse());
       });
   },[]);
 
