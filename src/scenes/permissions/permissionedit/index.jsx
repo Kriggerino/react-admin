@@ -10,7 +10,7 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const PermEdit = ({permission, id}) => {
+const PermEdit = ({permission, id, handleClose}) => {
   const [data, setData] = useState({
     access_name: "",
     user_create: 0,
@@ -23,7 +23,23 @@ const PermEdit = ({permission, id}) => {
     permission_read: 0,
     permission_write: 0,
   });
+  const [updateTable, setUpdateTable] = useState(false);
   const navigate = useNavigate();
+  const handleSubmit = () =>{
+    axios.put("https://node-service-ihr4.onrender.com/updatePerm" + id, data)
+    .then((res) => {
+        if(res.data.Status === "Success"){
+            alert("Cập nhật thành công");
+            handleClose();
+            
+        } else {
+            alert("Lỗi");
+        }
+        setUpdateTable(true);
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     if (!permission.permission_read) {
       navigate("/denyaccess");
@@ -33,13 +49,14 @@ const PermEdit = ({permission, id}) => {
         .then((res) => {
           if (res.data.Status === "Success") {
             setData(res.data.Result[0]);
+            setUpdateTable(false);
           } else {
             alert("Error");
           }
         })
         .catch((err) => console.log(err));
     }
-  });
+  }, [updateTable]);
   return (
     <Box sx={{ width: "100%", justifyContent: "center", display: "flex" }}>
       <Box sx={{ p: 1, mt: 2, width: "100%" }}>
@@ -174,7 +191,7 @@ const PermEdit = ({permission, id}) => {
             justifyContent: "center",
           }}
         >
-          <Button color="secondary" variant="contained">
+          <Button color="secondary" variant="contained" onClick={(e) => handleSubmit()}>
             Cập nhật
           </Button>
         </Box>

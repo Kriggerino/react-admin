@@ -63,7 +63,6 @@ const Permissions = ({ permission }) => {
       .catch((err) => console.log(err));
   };
 
-  
   const [permissionTable, setPermissionTable] = useState({
     id: 0,
     access_name: "",
@@ -184,27 +183,21 @@ const Permissions = ({ permission }) => {
               gap: "10px",
             }}
           >
-            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}
+            <IconButton
+              sx={{ padding: "5px", m: 0, minWidth: 0 }}
               onClick={(e) => {
                 setEditId(params.row.id);
                 handleOpen();
               }}
             >
-              <Link
-                className="btn"
-                style={{ textDecoration: "none", color: "#423f3f" }}
-              >
-                <BuildIcon />
-              </Link>
+              <BuildIcon />
             </IconButton>
             <IconButton
               className="btn"
               sx={{ padding: "5px", m: 0, minWidth: 0, color: "#423f3f" }}
               onClick={(e) => handleDelete(params.row.id)}
             >
-              <Link style={{ textDecoration: "none", color: "#423f3f" }}>
-                <DeleteIcon />
-              </Link>
+              <DeleteIcon />
             </IconButton>
           </Box>
         );
@@ -265,7 +258,7 @@ const Permissions = ({ permission }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <PermEdit id={editId} permission={permission} />
+          <PermEdit id={editId} permission={permission} handleClose={handleClose} />
         </Box>
       </Modal>
       <Box
