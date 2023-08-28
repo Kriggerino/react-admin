@@ -32,7 +32,7 @@ const PermEdit = ({permission, id}) => {
         .get("https://node-service-ihr4.onrender.com/getPermEdit" + id)
         .then((res) => {
           if (res.data.Status === "Success") {
-            console.log(res.data.Result);
+            setData(res.data.Result[0]);
           } else {
             alert("Error");
           }
@@ -175,7 +175,7 @@ const PermEdit = ({permission, id}) => {
           }}
         >
           <Button color="secondary" variant="contained">
-            Thêm
+            Cập nhật
           </Button>
         </Box>
       </Box>

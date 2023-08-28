@@ -37,7 +37,6 @@ const PermCreate = ({handleClose, setTableUpdate, permission}) => {
     axios
       .post(" https://node-service-ihr4.onrender.com/newPermission", newPermission)
       .then((res) => {
-        console.log(res);
         handleClose();
         setTableUpdate(true);
       })
