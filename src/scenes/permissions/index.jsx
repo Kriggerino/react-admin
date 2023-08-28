@@ -10,7 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 import CustomPermToolbar from "../../components/CustomPermToolbar";
-import PermEdit from "./permissionedit";
+import PermEdit from "./permission";
 const style = {
   position: "absolute",
   top: "50%",
