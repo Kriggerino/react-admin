@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Modal, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { useEffect, useState } from "react";
@@ -10,11 +10,28 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 import CustomPermToolbar from "../../components/CustomPermToolbar";
+import PermEdit from "./permissionedit";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 500,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 const Permissions = ({ permission }) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [tableUpdate, setTableUpdate] = useState(false);
+  //Modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [editId, setEditId] = useState(0);
   useEffect(() => {
     if (!permission.permission_read) {
       navigate("/denyaccess");
@@ -46,6 +63,7 @@ const Permissions = ({ permission }) => {
       .catch((err) => console.log(err));
   };
 
+  
   const [permissionTable, setPermissionTable] = useState({
     id: 0,
     access_name: "",
@@ -166,7 +184,12 @@ const Permissions = ({ permission }) => {
               gap: "10px",
             }}
           >
-            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>
+            <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}
+              onClick={(e) => {
+                setEditId(params.row.id);
+                handleOpen();
+              }}
+            >
               <Link
                 className="btn"
                 style={{ textDecoration: "none", color: "#423f3f" }}
@@ -235,6 +258,16 @@ const Permissions = ({ permission }) => {
 
   return (
     <Box m="20px">
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <PermEdit id={editId} permission={permission} />
+        </Box>
+      </Modal>
       <Box
         m="10px 0 0 0"
         height="85vh"
