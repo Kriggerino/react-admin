@@ -13,10 +13,8 @@ import Grid from "@mui/material/Grid";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import StatisticsCards from "./statistics";
 import WeeklyOverview from "./weeklyoverview";
 import DeadLine from "./deadline";
-import Total from "./total";
 import BigTable from "./bigtable";
 const Dashboard = ({
   setIsLoggedIn,
@@ -33,25 +31,22 @@ const Dashboard = ({
     NetworkCount: 0,
     HardwareCount: 0,
   });
-  const [alertData, setAlertData] = useState({
-    KCCount: 0,
-    TBCount: 0,
-    NCount: 0,
-  });
+  
   useEffect(() => {
     if (permission) {
       setIsLoggedIn(true);
-      // axios
-      //   .get("https://node-service-ihr4.onrender.com/getStats")
-      //   .then((res) => {
-      //     setErrorCount({
-      //       ...errorCount,
-      //       VOSCount: res.data.Result[0].VOSCount,
-      //       HardwareCount: res.data.Result[1].HardwareCount,
-      //       NetworkCount: res.data.Result[2].NetworkCount,
-      //     });
-      //   })
-      //   .catch((err) => console.log(err));
+      axios
+        .get("https://node-service-ihr4.onrender.com/getStats")
+        .then((res) => {
+          setErrorCount({
+            ...errorCount,
+            VOSCount: res.data.Result[0].VOSCount,
+            HardwareCount: res.data.Result[1].HardwareCount,
+            NetworkCount: res.data.Result[2].NetworkCount,
+          });
+          console.log(errorCount);
+        })
+        .catch((err) => console.log(err));
       // axios
       //   .get("https://node-service-ihr4.onrender.com/getUrgent")
       //   .then((res) => {
@@ -80,13 +75,9 @@ const Dashboard = ({
 
       <Grid container spacing={4}>
         {/* Congrats */}
-        <Grid item xs={12} md={4}>
-          <Total />
-        </Grid>
+        
         {/* Short Stats */}
-        <Grid item xs={12} md={8}>
-          <StatisticsCards alertData={alertData} />
-        </Grid>
+        
         <Grid item xs={12} md={6} lg={4}>
           <WeeklyOverview errorCount={errorCount} />
         </Grid>

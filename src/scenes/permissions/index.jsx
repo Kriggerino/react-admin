@@ -10,7 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 import CustomPermToolbar from "../../components/CustomPermToolbar";
-import PermEdit from "./permission";
+import PermEdit from "./permissionedit";
 const style = {
   position: "absolute",
   top: "50%",
@@ -258,7 +258,11 @@ const Permissions = ({ permission }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <PermEdit id={editId} permission={permission} handleClose={handleClose} />
+          <PermEdit
+            id={editId}
+            permission={permission}
+            handleClose={handleClose}
+          />
         </Box>
       </Modal>
       <Box
