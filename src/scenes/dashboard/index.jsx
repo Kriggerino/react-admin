@@ -13,9 +13,11 @@ import Grid from "@mui/material/Grid";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import WeeklyOverview from "./weeklyoverview";
 import DeadLine from "./deadline";
 import BigTable from "./bigtable";
+import PieChart from "./pie";
+import Urgent from "./urgent";
+import PlaceholderCard from "./smallcards/placeholder";
 const Dashboard = ({
   setIsLoggedIn,
   handleUserData,
@@ -31,7 +33,12 @@ const Dashboard = ({
     NetworkCount: 0,
     HardwareCount: 0,
   });
-  
+  const [alertData, setAlertData] = useState({
+    KCCount: 0,
+    TBCount: 0,
+    NCount: 0,
+  });
+
   useEffect(() => {
     if (permission) {
       setIsLoggedIn(true);
@@ -47,17 +54,17 @@ const Dashboard = ({
           console.log(errorCount);
         })
         .catch((err) => console.log(err));
-      // axios
-      //   .get("https://node-service-ihr4.onrender.com/getUrgent")
-      //   .then((res) => {
-      //     setAlertData({
-      //       ...alertData,
-      //       KCCount: res.data.Result[0].KCCount,
-      //       TBCount: res.data.Result[1].TBCount,
-      //       NCount: res.data.Result[2].NCount,
-      //     });
-      //   })
-      //   .catch((err) => console.log(err));
+      axios
+        .get("https://node-service-ihr4.onrender.com/getUrgent")
+        .then((res) => {
+          setAlertData({
+            ...alertData,
+            KCCount: res.data.Result[0].KCCount,
+            TBCount: res.data.Result[1].TBCount,
+            NCount: res.data.Result[2].NCount,
+          });
+        })
+        .catch((err) => console.log(err));
     } else {
       navigate("/");
     }
@@ -75,27 +82,42 @@ const Dashboard = ({
 
       <Grid container spacing={4}>
         {/* Congrats */}
-        
+
         {/* Short Stats */}
-        
-        <Grid item xs={12} md={6} lg={4}>
-          <WeeklyOverview errorCount={errorCount} />
+        <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
+          <Grid container spacing={6}>
+            <Grid item md={4} xs={6}>
+              <PlaceholderCard />
+            </Grid>
+            <Grid item md={4} xs={6}>
+              <PlaceholderCard />
+            </Grid>
+            <Grid item md={4} xs={6}>
+              <PlaceholderCard />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={8}>
-          <DeadLine />
+        <Grid item xs={12} md={6} lg={4}>
+          <Urgent alertData={alertData} />
+        </Grid>
+        <Grid item xs={12} md={6} lg={4}>
+          <PieChart errorCount={errorCount} />
         </Grid>
         <Grid item xs={12} md={12} lg={12}>
           <BigTable />
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
+        <Grid item xs={12} md={6} lg={4}></Grid>
+        {/* <Grid item xs={12} md={6} lg={4}>
           <Grid container spacing={6}>
             <Grid item xs={6}></Grid>
             <Grid item xs={6}></Grid>
             <Grid item xs={6}></Grid>
             <Grid item xs={6}></Grid>
           </Grid>
+        </Grid> */}
+        <Grid item xs={12} md={12}>
+          <DeadLine />
         </Grid>
-        <Grid item xs={12} md={6} lg={4}></Grid>
         <Grid item xs={12} md={12} lg={8}></Grid>
         <Grid item xs={12}></Grid>
       </Grid>
