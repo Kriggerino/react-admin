@@ -18,6 +18,8 @@ import BigTable from "./bigtable";
 import PieChart from "./pie";
 import Urgent from "./urgent";
 import PlaceholderCard from "./smallcards/placeholder";
+import TotalWarning from "./smallcards/totalwarning";
+import TotalUser from "./smallcards/totalusers";
 const Dashboard = ({
   setIsLoggedIn,
   handleUserData,
@@ -87,10 +89,10 @@ const Dashboard = ({
         <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
           <Grid container spacing={6}>
             <Grid item md={4} xs={6}>
-              <PlaceholderCard />
+              <TotalWarning />
             </Grid>
             <Grid item md={4} xs={6}>
-              <PlaceholderCard />
+              <TotalUser />
             </Grid>
             <Grid item md={4} xs={6}>
               <PlaceholderCard />

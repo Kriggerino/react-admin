@@ -6,10 +6,10 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import WarningIcon from '@mui/icons-material/Warning';
 import React from "react";
 
-const PlaceholderCard = () => {
+const TotalWarning = () => {
   return (
     <Card sx={{ height: "100%" }}>
       <CardContent>
@@ -21,9 +21,9 @@ const PlaceholderCard = () => {
         >
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="h5">
-              Budget
+                Tổng số lượng cảnh báo
             </Typography>
-            <Typography variant="h3">Test Value</Typography>
+            <Typography variant="h3">Placeholder Value</Typography>
           </Stack>
           <Avatar
             sx={{
@@ -33,7 +33,7 @@ const PlaceholderCard = () => {
             }}
           >
             <SvgIcon>
-              <AttachMoneyIcon />
+              <WarningIcon />
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -42,4 +42,4 @@ const PlaceholderCard = () => {
   );
 };
 
-export default PlaceholderCard;
+export default TotalWarning;

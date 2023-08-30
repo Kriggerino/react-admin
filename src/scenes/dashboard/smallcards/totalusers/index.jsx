@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Avatar,
   Card,
@@ -6,10 +7,8 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import React from "react";
-
-const PlaceholderCard = () => {
+import PersonIcon from '@mui/icons-material/Person';
+const TotalUser = () => {
   return (
     <Card sx={{ height: "100%" }}>
       <CardContent>
@@ -21,9 +20,9 @@ const PlaceholderCard = () => {
         >
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="h5">
-              Budget
+              Tổng số lượng người dùng
             </Typography>
-            <Typography variant="h3">Test Value</Typography>
+            <Typography variant="h3">Placeholder Value</Typography>
           </Stack>
           <Avatar
             sx={{
@@ -33,7 +32,7 @@ const PlaceholderCard = () => {
             }}
           >
             <SvgIcon>
-              <AttachMoneyIcon />
+              <PersonIcon />
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -42,4 +41,4 @@ const PlaceholderCard = () => {
   );
 };
 
-export default PlaceholderCard;
+export default TotalUser;

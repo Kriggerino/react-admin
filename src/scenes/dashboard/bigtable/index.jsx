@@ -97,12 +97,6 @@ const BigTable = () => {
         }}
       >
         <Chart height={360} options={options} series={series} />
-        <Button
-          fullWidth
-          variant="contained"
-        >
-          Details
-        </Button>
       </CardContent>
     </Card>
   );
