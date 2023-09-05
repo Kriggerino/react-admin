@@ -20,6 +20,7 @@ import Urgent from "./urgent";
 import PlaceholderCard from "./smallcards/placeholder";
 import TotalWarning from "./smallcards/totalwarning";
 import TotalUser from "./smallcards/totalusers";
+import UserUpdate from "./update";
 const Dashboard = ({
   setIsLoggedIn,
   handleUserData,
@@ -99,12 +100,20 @@ const Dashboard = ({
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <Urgent alertData={alertData} />
+        <Grid item xs={12} sx={{ display: "flex", flexDirection: "row", }}>
+          <Grid container spacing={6}>
+            <Grid item xs={12} md={6} lg={4}>
+              <Urgent alertData={alertData} />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <PieChart errorCount={errorCount} />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <UserUpdate />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <PieChart errorCount={errorCount} />
-        </Grid>
+
         <Grid item xs={12} md={12} lg={12}>
           <BigTable />
         </Grid>

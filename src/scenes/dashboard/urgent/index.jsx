@@ -26,20 +26,22 @@ const Urgent = ({ alertData }) => {
       },
       dataLabels: {
         enabled: true,
-        position: 'top',
       },
       xaxis: {
-        categories: [
-          "Khẩn cấp",
-          "Trung bình",
-          "Nhẹ",
-        ],
+        categories: ["Khẩn cấp", "Trung bình", "Nhẹ"],
       },
     },
   };
   return (
     <Card sx={{ height: "100%" }}>
-      <CardContent>
+      <CardContent
+        sx={{
+          height: "100%",
+          justifyContent: "space-between",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <Chart
           options={chart_data.options}
           series={chart_data.series}
