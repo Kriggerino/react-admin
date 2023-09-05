@@ -7,7 +7,7 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomToolbar from "../../components/CustomToolbar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
@@ -24,7 +24,6 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-
 };
 
 const User = ({ permission, access }) => {
@@ -228,7 +227,7 @@ const User = ({ permission, access }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <UserEdit access={access} id={editId}/>
+            <UserEdit access={access} id={editId} />
           </Box>
         </Modal>
         <DataGrid
@@ -281,6 +280,7 @@ const User = ({ permission, access }) => {
             filterOperatorIsNotEmpty: "Không rỗng",
             filterOperatorIsAnyOf: "Có bất kỳ",
           }}
+          hideFooter
         />
       </Box>
     </Box>

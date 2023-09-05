@@ -12,7 +12,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 import WarningEdit from "./warningedit";
-
+//Datepicker
+import { addDays } from "date-fns";
 const Warning = ({ userid, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -27,6 +28,9 @@ const Warning = ({ userid, permission }) => {
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
   const [editId, setEditId] = useState(0);
+
+  const [dateFilterClick, setDateFilterClick] = useState(false);
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -64,6 +68,11 @@ const Warning = ({ userid, permission }) => {
     status: "",
     name: "",
     system: "",
+    dateRange: {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 7),
+      key: "selection",
+    },
   });
   const navigate = useNavigate();
   //On load, get data
@@ -215,8 +224,8 @@ const Warning = ({ userid, permission }) => {
               justifyContent: "space-evenly",
             }}
           >
-            {(permission.warning_write) ?
-              (<div>
+            {permission.warning_write ? (
+              <div>
                 <IconButton
                   sx={{ padding: "5px", m: 0, minWidth: 0 }}
                   onClick={(e) => {
@@ -233,8 +242,8 @@ const Warning = ({ userid, permission }) => {
                 >
                   <DeleteIcon />
                 </IconButton>
-              </div>) : undefined
-              }
+              </div>
+            ) : undefined}
             <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>
               <VisibilityIcon />
             </IconButton>
@@ -352,6 +361,8 @@ const Warning = ({ userid, permission }) => {
               permission: permission,
               userid: userid,
               warningSearch: warningSearch,
+              dateFilterClick: dateFilterClick,
+              setDateFilterClick: setDateFilterClick,
             },
           }}
           localeText={{

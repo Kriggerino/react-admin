@@ -1,19 +1,28 @@
-import { Box, TextField, Container, MenuItem } from "@mui/material";
+import { Box, TextField, Container, MenuItem, IconButton } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import WarningForm from "../scenes/warning/warningform";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import CloseIcon from "@mui/icons-material/Close";
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+
 const CustomWarningToolbar = ({
   filter,
   setFilter,
   permission,
   userid,
   warningSearch,
+  dateFilterClick,
+  setDateFilterClick,
 }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -92,6 +101,9 @@ const CustomWarningToolbar = ({
           value={filter.name}
           onChange={(e) => setFilter({ ...filter, name: e.target.value })}
         />
+        <IconButton onClick={(e) => setDateFilterClick(true)}>
+          <CalendarMonthIcon />
+        </IconButton>
       </Container>
       <Container
         sx={{
@@ -108,7 +120,7 @@ const CustomWarningToolbar = ({
           color="secondary"
           variant="contained"
           onClick={warningSearch}
-          sx={{  fontSize: 12, fontWeight: "bold", py: 2 }}
+          sx={{ fontSize: 12, fontWeight: "bold", py: 2 }}
         >
           Tìm kiếm
         </Button>
@@ -118,7 +130,7 @@ const CustomWarningToolbar = ({
         <GridToolbarExport
           color="secondary"
           variant="contained"
-          sx={{  fontSize: 12, fontWeight: "bold", py: 2 }}
+          sx={{ fontSize: 12, fontWeight: "bold", py: 2 }}
           csvOptions={{
             fileName: "Cảnh báo",
             utf8WithBom: true,
@@ -137,6 +149,33 @@ const CustomWarningToolbar = ({
             permission={permission}
             handleClose={handleClose}
           />
+        </Box>
+      </Modal>
+      <Modal
+        open={dateFilterClick}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <DateRangePicker
+            onChange={(item) =>
+              setFilter({ ...filter, dateRange: item.selection })
+            }
+            showSelectionPreview={true}
+            moveRangeOnFirstSelection={false}
+            months={2}
+            ranges={[filter.dateRange]}
+            preventSnapRefocus={true}
+            calendarFocus="backwards"
+          />
+          <IconButton
+            sx={{ p: 2 }}
+            onClick={(e) => {
+              setDateFilterClick(false);
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
         </Box>
       </Modal>
     </GridToolbarContainer>
