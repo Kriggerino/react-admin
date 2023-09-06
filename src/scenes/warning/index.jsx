@@ -28,9 +28,8 @@ const Warning = ({ userid, permission }) => {
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
   const [editId, setEditId] = useState(0);
-
   const [dateFilterClick, setDateFilterClick] = useState(false);
-
+  let currentDate = new Date();
   const style = {
     position: "absolute",
     top: "50%",
@@ -69,8 +68,8 @@ const Warning = ({ userid, permission }) => {
     name: "",
     system: "",
     dateRange: {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      startDate: currentDate,
+      endDate: currentDate.setDate(currentDate.getDate() - 7),
       key: "selection",
     },
   });
