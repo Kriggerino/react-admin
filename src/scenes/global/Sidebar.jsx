@@ -126,7 +126,7 @@ const Sidebar = (props) => {
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0 20px 0",
+              margin: "10px 0 10px 0",
               color: `#e0e0e0`,
             }}
           >
@@ -181,12 +181,12 @@ const Sidebar = (props) => {
             <Typography
               variant="h6"
               color={"#a3a3a3"}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 0 5px 10px" }}
             >
               Data
             </Typography>
-            {(props.permission.access_name === "admin") &&
-              (<Item
+            {props.permission.access_name === "admin" && (
+              <Item
                 title="Manage User"
                 to="/user"
                 icon={<PeopleOutlinedIcon />}
@@ -194,18 +194,15 @@ const Sidebar = (props) => {
                 setSelected={setSelected}
               />
             )}
-            {(props.permission.access_name !== "admin") &&
-            (
-              <Item 
+            {props.permission.access_name !== "admin" && (
+              <Item
                 title="User Profile"
                 to="/profile"
                 icon={<PeopleOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
-            )
-
-            }
+            )}
             <Box sx={{ display: "flex" }}>
               <Item
                 title={isCollapsed ? "" : "Warning"}
@@ -234,19 +231,19 @@ const Sidebar = (props) => {
                 setSelected={setSelected}
               />
             </Collapse>
-          {(props.permission.access_name === "admin") &&
-            (<Item
-              title="Permissions"
-              to="/permission"
-              icon={<SecurityIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />)
-          }
+            {props.permission.access_name === "admin" && (
+              <Item
+                title="Permissions"
+                to="/permission"
+                icon={<SecurityIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            )}
             <Typography
               variant="h6"
               color={"#a3a3a3"}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 0 5px 10px" }}
             >
               Pages
             </Typography>
