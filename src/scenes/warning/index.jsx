@@ -13,7 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 import WarningEdit from "./warningedit";
 //Datepicker
-import { addDays } from "date-fns";
+import { subDays } from "date-fns";
 const Warning = ({ userid, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -69,7 +69,7 @@ const Warning = ({ userid, permission }) => {
     system: "",
     dateRange: {
       startDate: currentDate,
-      endDate: currentDate.setDate(currentDate.getDate() - 7),
+      endDate: subDays(currentDate, 7),
       key: "selection",
     },
   });
