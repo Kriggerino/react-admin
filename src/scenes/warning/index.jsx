@@ -68,8 +68,8 @@ const Warning = ({ userid, permission }) => {
     name: "",
     system: "",
     dateRange: {
-      startDate: currentDate,
-      endDate: subDays(currentDate, 7),
+      startDate: subDays(currentDate, 7),
+      endDate: currentDate,
       key: "selection",
     },
   });
