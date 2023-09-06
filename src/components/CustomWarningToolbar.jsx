@@ -64,6 +64,7 @@ const CustomWarningToolbar = ({
           value={filter.type}
           onChange={(e) => setFilter({ ...filter, type: e.target.value })}
         >
+          <MenuItem> Không lọc </MenuItem>
           <MenuItem value={1}>Khẩn cấp</MenuItem>
           <MenuItem value={2}>Trung bình</MenuItem>
           <MenuItem value={3}>Nhẹ</MenuItem>
@@ -77,6 +78,7 @@ const CustomWarningToolbar = ({
           value={filter.status}
           onChange={(e) => setFilter({ ...filter, status: e.target.value })}
         >
+          <MenuItem> Không lọc </MenuItem>
           <MenuItem value={0}>Chờ xử lý</MenuItem>
           <MenuItem value={1}>Đã xử lý</MenuItem>
         </TextField>
@@ -89,6 +91,7 @@ const CustomWarningToolbar = ({
           value={filter.system}
           onChange={(e) => setFilter({ ...filter, system: e.target.value })}
         >
+          <MenuItem> Không lọc </MenuItem>
           <MenuItem value={1}>VO Service</MenuItem>
           <MenuItem value={2}>Hardware</MenuItem>
           <MenuItem value={3}>Network</MenuItem>
