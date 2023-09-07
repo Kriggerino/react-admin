@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 import CustomPermToolbar from "../../components/CustomPermToolbar";
 import PermEdit from "./permissionedit";
+import CustomNoRowsOverlay from "../../components/NoRowsOverlay";
 const style = {
   position: "absolute",
   top: "50%",
@@ -305,7 +306,10 @@ const Permissions = ({ permission }) => {
           getRowId={permissionTable.id}
           columns={dgColumns}
           columnGroupingModel={dgColumnsGroup}
-          slots={{ toolbar: CustomPermToolbar }}
+          slots={{
+            toolbar: CustomPermToolbar,
+            noRowsOverlay: CustomNoRowsOverlay,
+          }}
           slotProps={{
             toolbar: {
               setTableUpdate: setTableUpdate,
