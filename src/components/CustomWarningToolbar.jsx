@@ -9,7 +9,22 @@ import CloseIcon from "@mui/icons-material/Close";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-
+//Daterange time calc
+import {
+  addDays,
+  endOfDay,
+  startOfDay,
+  startOfYear,
+  startOfMonth,
+  endOfMonth,
+  endOfYear,
+  addMonths,
+  addYears,
+  startOfWeek,
+  endOfWeek,
+  isSameDay,
+  differenceInCalendarDays,
+} from "date-fns";
 const CustomWarningToolbar = ({
   filter,
   setFilter,
@@ -169,7 +184,37 @@ const CustomWarningToolbar = ({
             months={2}
             ranges={[filter.dateRange]}
             preventSnapRefocus={true}
-            calendarFocus="backwards"
+            calendarFocus="forwards"
+            staticRanges={[
+              {
+                label: "Tháng trước",
+                range: () => ({
+                  startDate: startOfMonth(addMonths(new Date(), -1)),
+                  endDate: endOfMonth(addMonths(new Date(), -1)),
+                }),
+                isSelected(range) {
+                  const definedRange = this.range();
+                  return (
+                    isSameDay(range.startDate, definedRange.startDate) &&
+                    isSameDay(range.endDate, definedRange.endDate)
+                  );
+                },
+              },
+              {
+                label: "Tháng này",
+                range: () => ({
+                  startDate: startOfMonth(new Date()),
+                  endDate: endOfDay(new Date()),
+                }),
+                isSelected(range) {
+                  const definedRange = this.range();
+                  return (
+                    isSameDay(range.startDate, definedRange.startDate) &&
+                    isSameDay(range.endDate, definedRange.endDate)
+                  );
+                },
+              },
+            ]}
           />
           <IconButton
             sx={{ p: 2 }}
