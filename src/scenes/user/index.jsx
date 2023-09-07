@@ -5,9 +5,11 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import { useEffect, useState } from "react";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import LoadingPage from "../../components/LoadingPage";
 import CustomToolbar from "../../components/CustomToolbar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
@@ -184,6 +186,16 @@ const User = ({ permission, access }) => {
         .catch((err) => console.log(err));
     }
   }, [tableUpdate]);
+
+  if (!apiData) {
+    return (
+      <ThemeProvider theme={theme}>
+        <div className="app">
+          <LoadingPage />
+        </div>
+      </ThemeProvider>
+    );
+  }
 
   return (
     <Box m="20px">

@@ -14,6 +14,9 @@ import BuildIcon from "@mui/icons-material/Build";
 import WarningEdit from "./warningedit";
 //Datepicker
 import { subDays } from "date-fns";
+//Loading page
+import { ThemeProvider } from "@mui/material";
+import LoadingPage from "../../components/LoadingPage";
 const Warning = ({ userid, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -251,6 +254,17 @@ const Warning = ({ userid, permission }) => {
       },
     },
   ];
+
+  if (!apiData) {
+    return (
+      <ThemeProvider theme={theme}>
+        <div className="app">
+          <LoadingPage />
+        </div>
+      </ThemeProvider>
+    );
+  }
+
   return (
     <Box m="20px">
       <Box
