@@ -227,7 +227,7 @@ const Warning = ({ userid, permission }) => {
             }}
           >
             {permission.warning_write ? (
-              <div>
+              <Box>
                 <IconButton
                   sx={{ padding: "5px", m: 0, minWidth: 0 }}
                   onClick={(e) => {
@@ -237,6 +237,11 @@ const Warning = ({ userid, permission }) => {
                 >
                   <BuildIcon />
                 </IconButton>
+              </Box>
+            ) : undefined}
+
+            {permission.warning_write ? (
+              <Box>
                 <IconButton
                   onClick={(e) => handleDelete(params.row.id)}
                   className="btn"
@@ -244,8 +249,9 @@ const Warning = ({ userid, permission }) => {
                 >
                   <DeleteIcon />
                 </IconButton>
-              </div>
+              </Box>
             ) : undefined}
+
             <IconButton sx={{ padding: "5px", m: 0, minWidth: 0 }}>
               <VisibilityIcon />
             </IconButton>
