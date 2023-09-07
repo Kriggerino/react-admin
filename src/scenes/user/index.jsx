@@ -15,6 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BuildIcon from "@mui/icons-material/Build";
 import Modal from "@mui/material/Modal";
 import UserEdit from "./useredit";
+import CustomNoRowsOverlay from "../../components/NoRowsOverlay";
 const style = {
   position: "absolute",
   top: "50%",
@@ -246,7 +247,7 @@ const User = ({ permission, access }) => {
           rows={apiData}
           getRowId={(row) => row._id}
           columns={columns}
-          slots={{ toolbar: CustomToolbar }}
+          slots={{ toolbar: CustomToolbar, noRowsOverlay: CustomNoRowsOverlay }}
           slotProps={{
             toolbar: {
               handleSearch: handleSearch,

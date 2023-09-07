@@ -17,6 +17,7 @@ import { subDays } from "date-fns";
 //Loading page
 import { ThemeProvider } from "@mui/material";
 import LoadingPage from "../../components/LoadingPage";
+import CustomNoRowsOverlay from "../../components/NoRowsOverlay";
 const Warning = ({ userid, permission }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -372,7 +373,10 @@ const Warning = ({ userid, permission }) => {
           onRowSelectionModelChange={(ids) => {
             setSelectedId(ids);
           }}
-          slots={{ toolbar: CustomWarningToolbar }}
+          slots={{
+            toolbar: CustomWarningToolbar,
+            noRowsOverlay: CustomNoRowsOverlay,
+          }}
           slotProps={{
             toolbar: {
               filter: filter,

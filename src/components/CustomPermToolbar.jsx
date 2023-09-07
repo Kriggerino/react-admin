@@ -11,6 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import { GridToolbarContainer } from "@mui/x-data-grid";
 import PermCreate from "../scenes/permissions/permissioncreate";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -23,7 +24,7 @@ const style = {
   p: 4,
 };
 
-const CustomPermToolbar = ({setTableUpdate, permission}) => {
+const CustomPermToolbar = ({ setTableUpdate, permission }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -52,13 +53,18 @@ const CustomPermToolbar = ({setTableUpdate, permission}) => {
           pt: 2,
           pb: 2,
           justifyContent: "end",
-          gap:"30px",
+          gap: "30px",
         }}
       >
-        <Button color="secondary" variant="contained" sx={{pt: 1, pb: 1}}>
+        <Button color="secondary" variant="contained" sx={{ pt: 1, pb: 1 }}>
           Tìm kiếm
         </Button>
-        <Button color="secondary" variant="contained" onClick={handleOpen} sx={{ pt: 1, pb: 1 }}>
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={handleOpen}
+          sx={{ pt: 1, pb: 1 }}
+        >
           Tạo mới
         </Button>
       </Container>
@@ -69,14 +75,25 @@ const CustomPermToolbar = ({setTableUpdate, permission}) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <Box sx={{display: "flex", width: "100%", mx: "auto"}}>
-              <PermCreate handleClose={handleClose} setTableUpdate={setTableUpdate} permission={permission}/>
-            </Box>
-            <Box sx={{display: "flex", justifyContent:"center", p:1, gap: "20px" }}>
-                <Button color="secondary" variant="contained" onClick={handleClose} >
-                    Hủy
-                </Button>
-            </Box>
+          <Box sx={{ display: "flex", width: "100%", mx: "auto" }}>
+            <PermCreate
+              handleClose={handleClose}
+              setTableUpdate={setTableUpdate}
+              permission={permission}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              p: 1,
+              gap: "20px",
+            }}
+          >
+            <Button color="secondary" variant="contained" onClick={handleClose}>
+              Hủy
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </GridToolbarContainer>
