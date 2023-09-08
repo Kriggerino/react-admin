@@ -149,8 +149,8 @@ const Warning = ({ userid, permission }) => {
     {
       field: "message",
       headerName: "Cảnh báo",
-      flex: 1,
       width: 350,
+      flex: 2,
       cellClassName: "name-column--cell",
     },
     {
