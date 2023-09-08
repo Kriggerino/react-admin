@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Paper, Typography, useTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Avatar from "@mui/material/Avatar";
@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { tokens } from "../theme";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import splash from "../assets/pexels-rostislav-uzunov-5011647.jpg";
+import splash from "../assets/pexels-luis-del-río-15286.jpg";
 //Backend
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -85,62 +85,82 @@ const Login = () => {
     <>
       <Box
         sx={{
-          my: 8,
-          mx: 4,
           display: "flex",
-          flexDirection: "column",
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          backgroundImage: `url(${splash})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
           alignItems: "center",
-          justifyItems: "center",
+          justifyContent: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <Box noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoFocus
-              sx={textFieldStyle}
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              sx={textFieldStyle}
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-          </Box>
-        </form>
+        <Box
+          sx={{
+            mx: "auto",
+            my: "5rem",
+            width: "50%",
+            height: "60%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyItems: "center",
+            backgroundColor: "#EEEADE",
+            p: 3,
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form autoComplete="off" onSubmit={handleSubmit}>
+            <Box noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoFocus
+                sx={textFieldStyle}
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                border="1px solid black"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                sx={textFieldStyle}
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                border="1px solid black"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 5, mb: 2 }}
+              >
+                Sign In
+              </Button>
+            </Box>
+          </form>
+        </Box>
       </Box>
     </>
   );

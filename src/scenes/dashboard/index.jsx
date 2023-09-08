@@ -13,7 +13,6 @@ import Grid from "@mui/material/Grid";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import DeadLine from "./deadline";
 import BigTable from "./bigtable";
 import PieChart from "./pie";
 import Urgent from "./urgent";
@@ -122,9 +121,7 @@ const Dashboard = ({
             <Grid item xs={6}></Grid>
           </Grid>
         </Grid> */}
-        <Grid item xs={12} md={12}>
-          <DeadLine />
-        </Grid>
+        <Grid item xs={12} md={12}></Grid>
         <Grid item xs={12} md={12} lg={8}></Grid>
         <Grid item xs={12}></Grid>
       </Grid>

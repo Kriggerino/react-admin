@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, Collapse } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import image from "../../assets/oil-spill.png";
+import image from "../../assets/full-logo_thumbnail.png";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -21,7 +21,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     <MenuItem
       active={selected === title}
       style={{
-        color: `#e0e0e0`,
+        color: `#330000`,
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -37,7 +37,7 @@ const SubItem = ({ title, to, icon, selected, setSelected }) => {
     <MenuItem
       active={selected === title}
       style={{
-        color: `#e0e0e0`,
+        color: `#330000`,
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -99,7 +99,7 @@ const Sidebar = (props) => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          background: `#1F2A40 !important`,
+          background: `#EEEADE !important`,
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -111,7 +111,7 @@ const Sidebar = (props) => {
           color: "#868dfb !important",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: "#000033 !important",
         },
       }}
     >
@@ -123,7 +123,7 @@ const Sidebar = (props) => {
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 10px 0",
-              color: `#e0e0e0`,
+              color: `#330000`,
             }}
           >
             {!isCollapsed && (
@@ -135,13 +135,13 @@ const Sidebar = (props) => {
               >
                 <img
                   alt="logo"
-                  width="50px"
-                  height="50px"
+                  width="70%"
+                  height="10%"
                   src={image}
                   style={{ cursor: "pointer" }}
                 />
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon style={{ color: `#e0e0e0` }} />
+                  <MenuOutlinedIcon style={{ color: `#330000` }} />
                 </IconButton>
               </Box>
             )}
@@ -152,13 +152,13 @@ const Sidebar = (props) => {
               <Box textAlign="center">
                 <Typography
                   variant="h2"
-                  color={`#e0e0e0`}
+                  color={`#330000`}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0", pb: 2 }}
                 >
                   {props.username}
                 </Typography>
-                <Typography variant="h5" color={"#4cceac"}>
+                <Typography variant="h5" color={"#330000"}>
                   {props.access}
                 </Typography>
               </Box>
@@ -183,7 +183,7 @@ const Sidebar = (props) => {
             </Typography>
             {props.permission.access_name === "admin" && (
               <Item
-                title="Manage User"
+                title="Người dùng"
                 to="/user"
                 icon={<PeopleOutlinedIcon />}
                 selected={selected}
@@ -192,7 +192,7 @@ const Sidebar = (props) => {
             )}
             {props.permission.access_name !== "admin" && (
               <Item
-                title="User Profile"
+                title="Tài khoản"
                 to="/profile"
                 icon={<PeopleOutlinedIcon />}
                 selected={selected}
@@ -201,14 +201,14 @@ const Sidebar = (props) => {
             )}
             <Box sx={{ display: "flex" }}>
               <Item
-                title={isCollapsed ? "" : "Warning"}
+                title={isCollapsed ? "" : "Cảnh báo"}
                 to="/warning"
                 icon={<ReceiptOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <IconButton onClick={handleChange}>
-                <KeyboardArrowDownIcon style={{ color: `#e0e0e0` }} />
+                <KeyboardArrowDownIcon style={{ color: `#330000` }} />
               </IconButton>
             </Box>
             <Collapse in={checked}>
@@ -229,7 +229,7 @@ const Sidebar = (props) => {
             </Collapse>
             {props.permission.access_name === "admin" && (
               <Item
-                title="Permissions"
+                title="Nhóm"
                 to="/permission"
                 icon={<SecurityIcon />}
                 selected={selected}
@@ -243,35 +243,15 @@ const Sidebar = (props) => {
             >
               Pages
             </Typography>
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Email"
-              to="/mailing"
-              icon={<EmailIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
             <MenuItem
               style={{
-                color: `#e0e0e0`,
+                color: `#330000`,
               }}
               onClick={handleLogout}
               icon={<ExitToAppIcon />}
             >
-              <Typography variant="h5">Logout</Typography>
+              <Typography variant="h5">Thoát</Typography>
             </MenuItem>
           </Box>
         </Menu>

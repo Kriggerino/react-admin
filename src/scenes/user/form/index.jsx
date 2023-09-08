@@ -11,8 +11,6 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
   const [valid, setValid] = useState(false);
   const [values, setValues] = useState({
     username: "",
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
     contact: "",
@@ -31,11 +29,11 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
   };
 
   //Minimum eight characters, at least one letter and one number:
-  const handleValid = (e) =>{
+  const handleValid = (e) => {
     const reg = new RegExp("/^(?=.*[A-Za-z])(?=.*)[A-Za-z]{8,}$/");
     setValid(reg.test(e.target.value));
-    setValues({...values, password: e.target.value});
-  }
+    setValues({ ...values, password: e.target.value });
+  };
 
   useEffect(() => {
     if (permission.user_create !== 1) {
@@ -53,7 +51,6 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
 
   return (
     <Box m="20px">
-
       <form>
         <Box
           display="grid"
@@ -73,30 +70,6 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
             required={true}
             name="username"
             sx={{ gridColumn: "span 4" }}
-          />
-          <TextField
-            fullWidth
-            variant="filled"
-            type="text"
-            required={true}
-            label="Họ thật"
-            onChange={(e) =>
-              setValues({ ...values, firstName: e.target.value })
-            }
-            value={values.firstName}
-            name="firstName"
-            sx={{ gridColumn: "span 2" }}
-          />
-          <TextField
-            fullWidth
-            variant="filled"
-            type="text"
-            label="Tên thật"
-            required={true}
-            onChange={(e) => setValues({ ...values, lastName: e.target.value })}
-            value={values.lastName}
-            name="lastName"
-            sx={{ gridColumn: "span 2" }}
           />
           <TextField
             fullWidth
