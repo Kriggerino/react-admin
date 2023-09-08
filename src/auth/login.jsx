@@ -4,13 +4,12 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Avatar from "@mui/material/Avatar";
 import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import { tokens } from "../theme";
-import splash from "../assets/login_splash.jpg";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import splash from "../assets/pexels-rostislav-uzunov-5011647.jpg";
 //Backend
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -84,7 +83,6 @@ const Login = () => {
 
   return (
     <>
-      <CssBaseline />
       <Box
         sx={{
           my: 8,
@@ -92,6 +90,7 @@ const Login = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          justifyItems: "center",
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
