@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Box, Button, TextField } from "@mui/material";
 
 import axios from "axios";
-const UserEdit = ({access , id}) => {
+const UserEdit = ({ access, id }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const [data, setData] = useState({
     username: "",
-    firstname: "",
-    lastname: "",
     email: "",
     password: "",
     address: "",
@@ -19,25 +17,23 @@ const UserEdit = ({access , id}) => {
   });
 
   useEffect(() => {
-    if(!(access === "admin")){
-      navigate("/denyaccess")
+    if (!(access === "admin")) {
+      navigate("/denyaccess");
     } else {
       axios
-      .get(" https://node-service-ihr4.onrender.com/get/" + id)
-      .then((res) => {
-        setData({
-          ...data,
-          username: res.data.Result[0].username,
-          firstname: res.data.Result[0].firstname,
-          lastname: res.data.Result[0].lastname,
-          email: res.data.Result[0].email,
-          address: res.data.Result[0].address,
-          password: "",
-          contact: res.data.Result[0].phone,
-          access: res.data.Result[0].access,
-        });
-      })
-      .catch((err) => console.log(err));
+        .get(" https://node-service-ihr4.onrender.com/get/" + id)
+        .then((res) => {
+          setData({
+            ...data,
+            username: res.data.Result[0].username,
+            email: res.data.Result[0].email,
+            address: res.data.Result[0].address,
+            password: "",
+            contact: res.data.Result[0].phone,
+            access: res.data.Result[0].access,
+          });
+        })
+        .catch((err) => console.log(err));
     }
   }, []);
 
@@ -55,7 +51,6 @@ const UserEdit = ({access , id}) => {
   };
   return (
     <Box m="20px">
-
       <form onSubmit={handleSubmit}>
         <Box
           display="grid"
@@ -73,24 +68,6 @@ const UserEdit = ({access , id}) => {
             sx={{ gridColumn: "span 4" }}
             onChange={(e) => setData({ ...data, username: e.target.value })}
             value={data.username}
-          />
-          <TextField
-            fullWidth
-            variant="filled"
-            type="text"
-            label="Họ"
-            sx={{ gridColumn: "span 2" }}
-            onChange={(e) => setData({ ...data, firstname: e.target.value })}
-            value={data.firstname}
-          />
-          <TextField
-            fullWidth
-            variant="filled"
-            type="text"
-            label="Tên"
-            sx={{ gridColumn: "span 2" }}
-            onChange={(e) => setData({ ...data, lastname: e.target.value })}
-            value={data.lastname}
           />
           <TextField
             fullWidth
