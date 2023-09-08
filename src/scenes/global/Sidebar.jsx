@@ -52,6 +52,7 @@ const Sidebar = (props) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [checked, setChecked] = useState(false);
+  const [checked2, setChecked2] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -90,6 +91,9 @@ const Sidebar = (props) => {
 
   const handleChange = () => {
     setChecked((prev) => !prev);
+  };
+  const handleChange2 = () => {
+    setChecked2((prev) => !prev);
   };
 
   useEffect(() => {
@@ -182,13 +186,29 @@ const Sidebar = (props) => {
               Data
             </Typography>
             {props.permission.access_name === "admin" && (
-              <Item
-                title="Người dùng"
-                to="/user"
-                icon={<PeopleOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
+              <>
+                <Box sx={{ display: "flex" }}>
+                  <Item
+                    title="Người dùng"
+                    to="/user"
+                    icon={<PeopleOutlinedIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <IconButton onClick={handleChange}>
+                    <KeyboardArrowDownIcon style={{ color: `#330000` }} />
+                  </IconButton>
+                </Box>
+                <Collapse in={checked}>
+                  <SubItem
+                    title="Nhóm"
+                    to="/permission"
+                    icon={<SecurityIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </Collapse>
+              </>
             )}
             {props.permission.access_name !== "admin" && (
               <Item
@@ -207,11 +227,11 @@ const Sidebar = (props) => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <IconButton onClick={handleChange}>
+              <IconButton onClick={handleChange2}>
                 <KeyboardArrowDownIcon style={{ color: `#330000` }} />
               </IconButton>
             </Box>
-            <Collapse in={checked}>
+            <Collapse in={checked2}>
               <SubItem
                 title="VOS"
                 to=""
@@ -227,15 +247,7 @@ const Sidebar = (props) => {
                 setSelected={setSelected}
               />
             </Collapse>
-            {props.permission.access_name === "admin" && (
-              <Item
-                title="Nhóm"
-                to="/permission"
-                icon={<SecurityIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            )}
+
             <Typography
               variant="h6"
               color={"#a3a3a3"}

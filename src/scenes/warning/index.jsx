@@ -1,7 +1,14 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  IconButton,
+  Typography,
+  useTheme,
+  MenuItem,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -23,17 +30,28 @@ const Warning = ({ userid, permission }) => {
   const colors = tokens(theme.palette.mode);
   const [tableUpdate, setTableUpdate] = useState(false);
   const [selectedId, setSelectedId] = useState([]);
+
   //Create modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   //Edit Modal
   const [editOpen, setEditOpen] = useState(false);
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
   const [editId, setEditId] = useState(0);
+
+  //Daterange
   const [dateFilterClick, setDateFilterClick] = useState(false);
   let currentDate = new Date();
+
+  //Multi Edit
+  const [multiEditOpen, setMultiEditOpen] = useState(false);
+  const [multiEditState, setMultiEditState] = useState(-1);
+  const handleMultiEditOpen = () => setMultiEditOpen(true);
+  const handleMultiEditClose = () => setMultiEditOpen(false);
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -139,6 +157,19 @@ const Warning = ({ userid, permission }) => {
         } else {
           alert("Error");
         }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleEditMultiple = (selectedId) => {
+    console.log(selectedId);
+    axios
+      .post("https://node-service-ihr4.onrender.com/editMultipleWarning/", {
+        id: selectedId,
+        value: multiEditState,
+      })
+      .then((res) => {
+        console.log(res);
       })
       .catch((err) => console.log(err));
   };
@@ -308,9 +339,19 @@ const Warning = ({ userid, permission }) => {
           },
         }}
       >
-        <Button onClick={handleOpen} variant="contained" color="error">
-          Delete Selected
-        </Button>
+        <Box sx={{ display: "flex", gap: "30px" }}>
+          <Button
+            onClick={handleMultiEditOpen}
+            variant="contained"
+            color="secondary"
+          >
+            Edit Selected
+          </Button>
+
+          <Button onClick={handleOpen} variant="contained" color="error">
+            Delete Selected
+          </Button>
+        </Box>
 
         <Modal
           open={open}
@@ -330,7 +371,12 @@ const Warning = ({ userid, permission }) => {
               <Typography variant="h5">Chắc chắn xóa?</Typography>
             </Box>
             <Box
-              sx={{ justifyContent: "space-around", display: "flex", py: 2 }}
+              sx={{
+                justifyContent: "flex-end",
+                display: "flex",
+                py: 2,
+                gap: "20px",
+              }}
             >
               <Button
                 variant="contained"
@@ -365,6 +411,69 @@ const Warning = ({ userid, permission }) => {
             />
           </Box>
         </Modal>
+        <Modal
+          open={multiEditOpen}
+          onClose={handleMultiEditClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                py: 2,
+              }}
+            >
+              <Typography variant="h5">
+                Chỉnh sửa trạng thái cảnh báo thành:
+              </Typography>
+              <TextField
+                type="text"
+                select
+                label="Trạng thái"
+                name="status"
+                sx={{ width: "60%", mt: 2, mb: 2, p: 2 }}
+                value={multiEditState}
+                onChange={(e) => setMultiEditState(e.target.value)}
+              >
+                <MenuItem value={-1}>... </MenuItem>
+                <MenuItem value={0}>Chờ xử lý</MenuItem>
+                <MenuItem value={1}>Đã xử lý</MenuItem>
+              </TextField>
+            </Box>
+
+            <Box
+              sx={{
+                justifyContent: "flex-end",
+                display: "flex",
+                py: 2,
+                gap: "20px",
+              }}
+            >
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={(e) => {
+                  handleEditMultiple(selectedId);
+                }}
+              >
+                Xác nhận
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleMultiEditClose}
+                color="secondary"
+              >
+                Đóng
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
+
         <DataGrid
           rows={apiData}
           getRowId={apiData.id}
