@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { tokens } from "../theme";
-import splash from '../assets/login_splash.jpg';
+import splash from "../assets/login_splash.jpg";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 //Backend
 import { Link, useNavigate } from "react-router-dom";
@@ -33,7 +33,7 @@ const Login = () => {
     },
   };
   const navigate = useNavigate();
-  
+
   //Email regex from https://regexr.com/3e48o
   // const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   // const basicSchema = yup.object().shape({
@@ -49,11 +49,11 @@ const Login = () => {
   //     .required("Required"),
   // });
 
-  useEffect(() =>{
-    if((localStorage.getItem("token") !== null)){
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
       navigate("/dashboard");
     }
-  }, [])
+  }, []);
 
   const onSubmit = (values, actions) => {
     axios
@@ -90,9 +90,24 @@ const Login = () => {
         display: "flex",
       }}
     >
-      <Grid container component="main" sx={{ height: "100vh", justifyContent: "center",  }}>
+      <Grid
+        container
+        component="main"
+        sx={{
+          height: "100%",
+          justifyContent: "center",
+        }}
+      >
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          elevation={6}
+          square
+          alignItems="center"
+        >
           <Box
             sx={{
               my: 8,
@@ -148,26 +163,6 @@ const Login = () => {
                 >
                   Sign In
                 </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link
-                      href="#"
-                      variant="body2"
-                      color={colors.blueAccent[300]}
-                    >
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link
-                      href="#"
-                      variant="body2"
-                      color={colors.blueAccent[300]}
-                    >
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid>
               </Box>
             </form>
           </Box>
