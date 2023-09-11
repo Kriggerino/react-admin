@@ -43,7 +43,6 @@ const Warning = ({ userid, permission }) => {
   const [editId, setEditId] = useState(0);
 
   //Daterange
-  const [dateFilterClick, setDateFilterClick] = useState(false);
   let currentDate = new Date();
 
   //Multi Edit
@@ -494,8 +493,6 @@ const Warning = ({ userid, permission }) => {
               permission: permission,
               userid: userid,
               warningSearch: warningSearch,
-              dateFilterClick: dateFilterClick,
-              setDateFilterClick: setDateFilterClick,
             },
           }}
           localeText={{

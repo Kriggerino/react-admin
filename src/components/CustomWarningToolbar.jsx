@@ -1,6 +1,15 @@
-import { Box, TextField, Container, MenuItem, IconButton } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Container,
+  MenuItem,
+  IconButton,
+  Popover,
+} from "@mui/material";
+import Menu from "@mui/material/Menu";
 import Modal from "@mui/material/Modal";
 import { GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
+import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import WarningForm from "../scenes/warning/warningform";
@@ -11,45 +20,53 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 //Daterange time calc
 import {
-  addDays,
+  //addDays,
+  //startOfDay,
+  //startOfYear,
+  //endOfYear,
+  // addYears,
+  // startOfWeek,
+  // endOfWeek,
+  addMonths,
   endOfDay,
-  startOfDay,
-  startOfYear,
+  isSameDay,
   startOfMonth,
   endOfMonth,
-  endOfYear,
-  addMonths,
-  addYears,
-  startOfWeek,
-  endOfWeek,
-  isSameDay,
   differenceInCalendarDays,
 } from "date-fns";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 700,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 const CustomWarningToolbar = ({
   filter,
   setFilter,
   permission,
   userid,
   warningSearch,
-  dateFilterClick,
-  setDateFilterClick,
 }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 700,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
+  //Dropdown
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleDropdownOpen = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
+  const handleDropdownClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <GridToolbarContainer
       sx={{ justifyContent: "space-between", display: "inline-flex", p: 0 }}
@@ -75,7 +92,7 @@ const CustomWarningToolbar = ({
           select
           label="Mức độ"
           name="type"
-          sx={{ width: "25%", mt: 2, mb: 2, p: 0 }}
+          sx={{ width: "15%", mt: 2, mb: 2, p: 0 }}
           value={filter.type}
           onChange={(e) => setFilter({ ...filter, type: e.target.value })}
         >
@@ -89,7 +106,7 @@ const CustomWarningToolbar = ({
           select
           label="Trạng thái"
           name="status"
-          sx={{ width: "25%", mt: 2, mb: 2, p: 0 }}
+          sx={{ width: "15%", mt: 2, mb: 2, p: 0 }}
           value={filter.status}
           onChange={(e) => setFilter({ ...filter, status: e.target.value })}
         >
@@ -102,7 +119,7 @@ const CustomWarningToolbar = ({
           select
           label="Hệ thống"
           name="system"
-          sx={{ width: "25%", mt: 2, mb: 2, p: 0 }}
+          sx={{ width: "15%", mt: 2, mb: 2, p: 0 }}
           value={filter.system}
           onChange={(e) => setFilter({ ...filter, system: e.target.value })}
         >
@@ -115,13 +132,29 @@ const CustomWarningToolbar = ({
           type="text"
           label="Tên cảnh báo"
           name="name"
-          sx={{ width: "25%", mt: 2, mb: 2, p: 0 }}
+          sx={{ width: "15%", mt: 2, mb: 2, p: 0 }}
           value={filter.name}
           onChange={(e) => setFilter({ ...filter, name: e.target.value })}
         />
-        <IconButton onClick={(e) => setDateFilterClick(true)}>
+        <IconButton onClick={handleDropdownOpen}>
           <CalendarMonthIcon />
         </IconButton>
+        <TextField
+          type="text"
+          label="Ngày bắt đầu"
+          name="name"
+          sx={{ width: "15%", mt: 2, mb: 2, p: 0 }}
+          defaultValue=""
+          value={filter.dateRange.startDate.toDateString()}
+        />
+        <TextField
+          type="text"
+          label="Ngày kết thúc"
+          name="name"
+          sx={{ width: "15%", mt: 2, mb: 2, p: 0 }}
+          defaultValue=""
+          value={filter.dateRange.endDate.toDateString()}
+        />
       </Container>
       <Container
         sx={{
@@ -169,63 +202,58 @@ const CustomWarningToolbar = ({
           />
         </Box>
       </Modal>
-      <Modal
-        open={dateFilterClick}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <Popover
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleDropdownClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Box sx={style}>
-          <DateRangePicker
-            onChange={(item) =>
-              setFilter({ ...filter, dateRange: item.selection })
-            }
-            showSelectionPreview={true}
-            moveRangeOnFirstSelection={false}
-            months={2}
-            ranges={[filter.dateRange]}
-            preventSnapRefocus={true}
-            calendarFocus="forwards"
-            staticRanges={[
-              {
-                label: "Tháng trước",
-                range: () => ({
-                  startDate: startOfMonth(addMonths(new Date(), -1)),
-                  endDate: endOfMonth(addMonths(new Date(), -1)),
-                }),
-                isSelected(range) {
-                  const definedRange = this.range();
-                  return (
-                    isSameDay(range.startDate, definedRange.startDate) &&
-                    isSameDay(range.endDate, definedRange.endDate)
-                  );
-                },
+        <DateRangePicker
+          onChange={(item) =>
+            setFilter({ ...filter, dateRange: item.selection })
+          }
+          showSelectionPreview={true}
+          moveRangeOnFirstSelection={false}
+          months={2}
+          ranges={[filter.dateRange]}
+          preventSnapRefocus={true}
+          calendarFocus="forwards"
+          staticRanges={[
+            {
+              label: "Tháng trước",
+              range: () => ({
+                startDate: startOfMonth(addMonths(new Date(), -1)),
+                endDate: endOfMonth(addMonths(new Date(), -1)),
+              }),
+              isSelected(range) {
+                const definedRange = this.range();
+                return (
+                  isSameDay(range.startDate, definedRange.startDate) &&
+                  isSameDay(range.endDate, definedRange.endDate)
+                );
               },
-              {
-                label: "Tháng này",
-                range: () => ({
-                  startDate: startOfMonth(new Date()),
-                  endDate: endOfDay(new Date()),
-                }),
-                isSelected(range) {
-                  const definedRange = this.range();
-                  return (
-                    isSameDay(range.startDate, definedRange.startDate) &&
-                    isSameDay(range.endDate, definedRange.endDate)
-                  );
-                },
+            },
+            {
+              label: "Tháng này",
+              range: () => ({
+                startDate: startOfMonth(new Date()),
+                endDate: endOfDay(new Date()),
+              }),
+              isSelected(range) {
+                const definedRange = this.range();
+                return (
+                  isSameDay(range.startDate, definedRange.startDate) &&
+                  isSameDay(range.endDate, definedRange.endDate)
+                );
               },
-            ]}
-          />
-          <IconButton
-            sx={{ p: 2 }}
-            onClick={(e) => {
-              setDateFilterClick(false);
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Box>
-      </Modal>
+            },
+          ]}
+        />
+        <IconButton sx={{ ml: 2 }} nClick={handleDropdownClose}>
+          <CloseIcon />
+        </IconButton>
+      </Popover>
     </GridToolbarContainer>
   );
 };
