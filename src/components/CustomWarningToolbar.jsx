@@ -67,6 +67,16 @@ const CustomWarningToolbar = ({
   const handleDropdownClose = () => {
     setAnchorEl(null);
   };
+
+  function formatDate(date = new Date()) {
+    const year = date.toLocaleString("default", { year: "numeric" });
+    const month = date.toLocaleString("default", {
+      month: "2-digit",
+    });
+    const day = date.toLocaleString("default", { day: "2-digit" });
+
+    return [year, month, day].join("-");
+  }
   return (
     <GridToolbarContainer
       sx={{ justifyContent: "space-between", display: "inline-flex", p: 0 }}
@@ -145,7 +155,7 @@ const CustomWarningToolbar = ({
           name="name"
           sx={{ width: "15%", mt: 2, mb: 2, p: 0 }}
           defaultValue=""
-          value={filter.dateRange.startDate.toDateString()}
+          value={formatDate(new Date(filter.dateRange.startDate))}
         />
         <TextField
           type="text"
@@ -153,7 +163,7 @@ const CustomWarningToolbar = ({
           name="name"
           sx={{ width: "15%", mt: 2, mb: 2, p: 0 }}
           defaultValue=""
-          value={filter.dateRange.endDate.toDateString()}
+          value={formatDate(new Date(filter.dateRange.endDate))}
         />
       </Container>
       <Container

@@ -44,7 +44,6 @@ const Form = ({ permission, handleClose, setTableUpdate }) => {
         .then((res) => {
           //const resultArray = res.data.Result.map((obj) => obj.access_name);
           setPermDDList(res.data.Result);
-          console.log(permDDList);
         });
     }
   }, []);

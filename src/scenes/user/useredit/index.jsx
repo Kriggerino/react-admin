@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, TextField } from "@mui/material";
 
 import axios from "axios";
-const UserEdit = ({ access, id }) => {
+const UserEdit = ({ access, id, handleClose }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -65,7 +65,7 @@ const UserEdit = ({ access, id }) => {
             variant="filled"
             type="text"
             label="Tên người dùng"
-            sx={{ gridColumn: "span 4" }}
+            sx={{ gridColumn: "span 2" }}
             onChange={(e) => setData({ ...data, username: e.target.value })}
             value={data.username}
           />
@@ -74,7 +74,7 @@ const UserEdit = ({ access, id }) => {
             variant="filled"
             type="text"
             label="Email"
-            sx={{ gridColumn: "span 4" }}
+            sx={{ gridColumn: "span 2" }}
             onChange={(e) => setData({ ...data, email: e.target.value })}
             value={data.email}
           />
@@ -83,7 +83,7 @@ const UserEdit = ({ access, id }) => {
             variant="filled"
             type="text"
             label="Địa chỉ"
-            sx={{ gridColumn: "span 4" }}
+            sx={{ gridColumn: "span 2" }}
             onChange={(e) => setData({ ...data, address: e.target.value })}
             value={data.address}
           />
@@ -92,7 +92,7 @@ const UserEdit = ({ access, id }) => {
             variant="filled"
             type="text"
             label="Liên lạc"
-            sx={{ gridColumn: "span 4" }}
+            sx={{ gridColumn: "span 2" }}
             onChange={(e) => setData({ ...data, contact: e.target.value })}
             value={data.contact}
           />
@@ -101,7 +101,7 @@ const UserEdit = ({ access, id }) => {
             variant="filled"
             type="text"
             label="Mật khẩu"
-            sx={{ gridColumn: "span 4" }}
+            sx={{ gridColumn: "span 2" }}
             onChange={(e) => setData({ ...data, password: e.target.value })}
             value={data.password}
           />
@@ -110,14 +110,17 @@ const UserEdit = ({ access, id }) => {
             variant="filled"
             type="text"
             label="Quyền truy cập"
-            sx={{ gridColumn: "span 4" }}
+            sx={{ gridColumn: "span 2" }}
             onChange={(e) => setData({ ...data, access: e.target.value })}
             value={data.access}
           />
         </Box>
-        <Box display="flex" justifyContent="end" mt="20px">
+        <Box display="flex" justifyContent="flex-end" mt="20px" gap="20px">
           <Button type="submit" color="secondary" variant="contained">
             Cập nhật
+          </Button>
+          <Button color="secondary" variant="contained" onClick={handleClose}>
+            Đóng
           </Button>
         </Box>
       </form>

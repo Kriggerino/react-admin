@@ -21,7 +21,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  height: "40%",
+  height: "50%",
   width: 700,
   bgcolor: "background.paper",
   border: "2px solid #000",
@@ -224,7 +224,7 @@ const User = ({ permission, access }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <UserEdit access={access} id={editId} />
+            <UserEdit access={access} id={editId} handleClose={handleClose} />
           </Box>
         </Modal>
         <DataGrid

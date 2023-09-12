@@ -48,7 +48,6 @@ const WarningEdit = ({ permission, id, handleEditClose }) => {
   };
   return (
     <Box m="20px">
-
       <form>
         <Box
           display="grid"
@@ -73,7 +72,6 @@ const WarningEdit = ({ permission, id, handleEditClose }) => {
             select
             label="Mức độ"
             sx={{ gridColumn: "span 2" }}
-            defaultValue={1}
             value={data.message_type}
             onChange={(e) => setData({ ...data, message_type: e.target.value })}
           >
@@ -96,7 +94,6 @@ const WarningEdit = ({ permission, id, handleEditClose }) => {
             select
             label="Trạng thái"
             sx={{ gridColumn: "span 2" }}
-            defaultValue={0}
             value={data.status}
             onChange={(e) => setData({ ...data, status: e.target.value })}
           >
@@ -109,7 +106,6 @@ const WarningEdit = ({ permission, id, handleEditClose }) => {
             select
             label="Hệ thống"
             sx={{ gridColumn: "span 2" }}
-            defaultValue={0}
             value={data.system}
             onChange={(e) => setData({ ...data, system: e.target.value })}
           >
@@ -118,7 +114,7 @@ const WarningEdit = ({ permission, id, handleEditClose }) => {
             <MenuItem value={3}>Network</MenuItem>
           </TextField>
         </Box>
-        <Box display="flex" justifyContent="space-between"  mt="30px">
+        <Box display="flex" justifyContent="flex-end" gap="30px" mt="30px">
           <Button
             type="submit"
             onClick={handleSubmit}
