@@ -9,8 +9,6 @@ import CardContent from "@mui/material/CardContent";
 import Chart from "react-apexcharts";
 import axios from "axios";
 
-
-
 const BigTable = () => {
   const [data, setData] = useState();
   useEffect(() => {
@@ -19,23 +17,23 @@ const BigTable = () => {
       .then((res) => {
         setData(res.data.Result.reverse());
       });
-  },[]);
+  }, []);
 
   const series = [
     {
       name: "VOS",
       type: "column",
-      data: data?.map(data => data.vosCount),
+      data: data?.map((data) => data.vosCount),
     },
     {
       name: "Hardware",
       type: "column",
-      data: data?.map(data => data.hwCount),
+      data: data?.map((data) => data.hwCount),
     },
     {
       name: "Network",
       type: "column",
-      data: data?.map(data => data.nwCount),
+      data: data?.map((data) => data.nwCount),
     },
   ];
 
@@ -55,7 +53,7 @@ const BigTable = () => {
         barHeight: "70%",
       },
     },
-  
+
     fill: {
       opacity: [0.85, 0.85, 0.85],
       gradient: {
@@ -67,7 +65,7 @@ const BigTable = () => {
         stops: [0, 100, 100, 100],
       },
     },
-    labels: data?.map(data => data.date),
+    labels: data?.map((data) => data.date),
     markers: {
       size: 0,
     },
@@ -79,6 +77,8 @@ const BigTable = () => {
         text: "Points",
       },
       min: 0,
+      tickAmount: 5,
+      forceNiceScale: true,
     },
     tooltip: {
       shared: true,
