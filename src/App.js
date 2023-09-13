@@ -6,10 +6,8 @@ import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import User from "./scenes/user";
 import Warning from "./scenes/warning";
-import FAQ from "./scenes/faq";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import Calendar from "./scenes/calendar/calendar";
 import Login from "./auth/login.jsx";
 import "./index.css";
 import DenyAccess from "./scenes/global/denyaccess";
@@ -76,7 +74,6 @@ function App() {
       setIsLoggedIn(false);
       navigate("/");
     }
-    
   }, [isLoggedIn]);
   if (loadingState) {
     return (
@@ -117,20 +114,22 @@ function App() {
                     setIsLoggedIn={setIsLoggedIn}
                     handleUserData={handleUserData}
                     permission={permission}
-                    isLoggedIn ={isLoggedIn}
+                    isLoggedIn={isLoggedIn}
                   />
                 }
               />
-              <Route 
+              <Route
                 path="/profile"
-                element={<UserProfile id = {userdata.id} />}
+                element={<UserProfile id={userdata.id} />}
               />
-              
-                <Route
-                  path="/user"
-                  element={<User permission={permission} access={userdata.access} />}
-                />
-              
+
+              <Route
+                path="/user"
+                element={
+                  <User permission={permission} access={userdata.access} />
+                }
+              />
+
               <Route
                 path="/warning"
                 element={
@@ -145,8 +144,6 @@ function App() {
                 path="/warning/warningDetails/:id"
                 element={<WarningDetails permission={permission} />}
               />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
               <Route
                 path="/permission"
                 element={<Permissions permission={permission} />}
